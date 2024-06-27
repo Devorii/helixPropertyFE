@@ -1,0 +1,45 @@
+#dashboard-container {
+    display: flex;
+    flex-direction: row;
+}
+
+#content-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+}
+#formTitle{
+margin-bottom: 20px;
+}
+#dash-viewer {
+    padding: 70px;
+}
+
+#cardsHolder {
+    display: flex;
+    padding-bottom: 25px;
+    margin-top: 40px;
+}
+
+#BacktoReports {
+    font-weight: 300;
+    margin-top: 0px;
+    margin-bottom: 10px;
+    margin-top: 40px;
+}
+
+#BacktoReports:hover{
+    cursor: pointer;
+}
+
+#viewReports {
+    font-weight: 300;
+    margin-top: 0px;
+    margin-bottom: 10px;
+}
+#reviewReports {
+    font-weight: 300;
+    margin-top: 80px;
+    margin-bottom: 10px;
+}

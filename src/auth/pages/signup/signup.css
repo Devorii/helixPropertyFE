@@ -1,0 +1,15 @@
+/* svg#landlord_house{
+    margin-right: 10px;
+} */
+#info-container{
+    width: 600px;
+text-align: center;
+margin-bottom: 10rem;
+}
+#logo-wrapper{
+    display: flex;
+    justify-content: center;
+}
+.signup-btn{
+    width: 150px;
+}

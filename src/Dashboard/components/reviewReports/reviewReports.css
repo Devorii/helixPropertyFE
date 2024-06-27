@@ -1,0 +1,32 @@
+.back-to-reports{
+    padding: 10px 25px 10px 25px;
+}
+
+#meta-header-wrapper{
+    display: flex;
+    width: 50%;
+}
+
+#id-container{
+    display: flex;
+    margin-right: 100px;
+    flex-direction: column;
+    text-align: left;
+}
+#title-container{
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.ntm{
+    margin-top: 0px
+}
+
+#reportContainer{
+    width: 70%;
+}
+.closeBtn{
+    background: #5bb3e0 !important;
+    margin-left: 20px;
+}

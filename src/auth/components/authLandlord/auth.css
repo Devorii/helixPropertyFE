@@ -1,0 +1,49 @@
+#formik_layout{
+    display: flex;
+    flex-direction: column;
+}
+#name_wrapper{
+    display: flex;
+}
+.stack_info{
+    display: flex;
+    flex-direction: column;
+}
+.nameField{
+    width: 90%;
+}
+#nameField1{
+    margin-left: 5%;
+}
+.intro-message{
+    text-align: right;
+    opacity: 0;
+    transition: opacity 2s ease-in-out;
+}
+
+.intro-message.show-msg{
+    text-align: left;
+    opacity: 1;
+}
+
+input {
+    padding: 6px 0 6px 0;
+    border: 1px solid #000033;
+    padding-left: 2%;
+    border-radius: 4px;
+    outline: none;
+    font-size: 15px;
+    color: #333;
+    transition: border-color 0.3s ease-in-out;
+  }
+  
+  /* Hover effect */
+  input:hover {
+    border-color: #7c49ec;
+  }
+  
+  /* Focus effect */
+  input:focus {
+    border-color: #080863;
+    box-shadow: 0 0 10px rgba(197, 207, 227, 0.442);
+  }

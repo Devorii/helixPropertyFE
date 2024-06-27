@@ -1,0 +1,48 @@
+#sidebar-container{
+    height: 100vh;
+    width: 250px;
+    /* background-color: aqua; */
+    border-width: 0px 1px 0px 0px;
+    border-style: solid;
+    border-color: rgb(192, 203, 222);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#sidebar-logo{
+    margin-top: 25px;
+    margin-bottom: 67px;
+}
+
+#sidebar-logo #sb-logo{
+    width: 150px;
+}
+
+
+#profile-container{
+    position:absolute;
+    bottom: 70px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#logout-btn{
+    width: 150px;
+    font-size: small;
+}
+
+.navItems{
+    display: flex;
+    align-items: center;
+}
+.navItems a{
+    margin-left: 5px;
+    text-decoration: none;
+    color: black;
+
+}
+.navItems a:hover{
+    cursor: pointer;
+}

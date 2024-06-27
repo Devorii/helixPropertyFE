@@ -1,0 +1,91 @@
+.form-wrapper {
+    background-color: white;
+    border-radius: 5px;
+    padding: 15px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    width: 320px; /* Adjusted width */
+    margin: auto; /* Center the form */
+  }
+
+
+  .form-wrapper label {
+    text-align: left;
+    margin-bottom: 6px; /* Reduced margin */
+    font-size: 14px; /* Reduced font size */
+    width: 100%; /* Make labels take full width */
+  }
+  
+
+  
+  .form-wrapper .field-wrapper {
+    display: flex;
+    flex-direction: column;
+    color: black;
+  }
+  
+  .form-wrapper .field-wrapper input {
+    border-radius: 4px;
+    padding: 8px;
+    font-size: 14px; /* Reduced font size */
+    width: calc(100% - 16px); /* Adjusted width */
+  }
+  
+  .form-wrapper .form-buttons {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+
+  .form-wrapper .form-buttons button {
+    flex-grow: 1; /* Allow buttons to grow and fill the space */
+    padding: 8px 16px; /* Reduced padding */
+    margin-top: 10px; /* Reduced margin */
+    font-size: 14px; /* Reduced font size */
+  }
+
+  .form-wrapper .form-links {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px; /* Adjusted margin */
+  }
+  
+  .form-wrapper .form-links a {
+    font-size: 12px; /* Reduced font size */
+    color: #007bff; /* Blue color */
+    text-decoration: none;
+    margin: 0 13px; /* Adjusted margin for equal spacing */
+  }
+  
+  .form-wrapper .form-links a:hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+
+
+
+  #alertModal{
+    margin-top: 40px;
+    display: flex;
+    text-align: left;
+    width: 400px;
+  }
+
+  #alertWrapper{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+
+  .alertModalWrapper {
+    position: relative;
+    transform: translateY(100px);
+    opacity: 0;
+    transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+  }
+  
+  .alertModalWrapper.show {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  

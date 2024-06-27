@@ -1,13 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
+import Routing from "./Routing"
 import reportWebVitals from './reportWebVitals';
+import { FormProvider } from './auth/context/authContext';
+import { IssueProvider } from './Dashboard/context/issueContext';
+import { ReportProvider } from './Dashboard/context/reviewReportContext';
+// Set a theme for the material UI
+// Theme provider
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <ReportProvider>
+    <IssueProvider>
+    <FormProvider>
+    <Routing />
+    </FormProvider>
+    </IssueProvider>
+    </ReportProvider>
   </React.StrictMode>
 );
 

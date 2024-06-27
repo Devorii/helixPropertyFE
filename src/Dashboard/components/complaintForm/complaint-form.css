@@ -1,0 +1,22 @@
+#issueForm{
+    display: flex;
+    flex-direction: column;
+    width: 620px;
+}
+#fullname{
+    padding: 8px 0px 8px 10px;
+}
+#elementsWrapper{
+    display: flex;
+    width: 100%;
+}
+
+.ew-c{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+#reportIssueArea{
+    padding: 10px;
+}
