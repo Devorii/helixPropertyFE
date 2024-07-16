@@ -4,3 +4,24 @@
 #rows:hover{
 cursor: pointer;
 }
+.dt-picker-tag{
+margin-top: 40px !important;
+}
+.dt-picker{
+    width: 180px !important;
+}
+
+.css-nxo287-MuiInputBase-input-MuiOutlinedInput-input{
+    padding: 9px !important;
+    font-size: small !important;
+}
+
+#arrangeDateComponents{
+    display: flex;
+    flex-direction: row;
+    width: 400px;
+    margin-bottom: 30px;
+}
+#arrangeDateComponents #mg-15{
+margin-right: 15px;
+}
