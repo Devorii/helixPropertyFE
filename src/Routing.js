@@ -15,6 +15,7 @@ const Routing = () => {
     <Route path='/home' element={<Home />}/>
     <Route path='/sign-up' element={<SignUp/>}/>
     <Route path='/personal-information' element={<UserInformation/>}/>
+    {/* <Route path='/o/home' element={<p>owner's home</p>} /> */}
     </Routes>
     </BrowserRouter>
   )

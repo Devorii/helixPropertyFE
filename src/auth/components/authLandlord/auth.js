@@ -13,6 +13,7 @@ const AuthLandlord = () => {
   const { formHeaderText, formIdentity, formState, dispatch } = useFormInformation()
 
 
+
   // const onChangeHandler = (e) => {
   //   const { name, value } = e.target;
   //   setInitFormState(prevValues => ({
@@ -33,6 +34,8 @@ const AuthLandlord = () => {
   useEffect(() => {
     const userSelection = localStorage.getItem('userStatus')
     const userInfoState = localStorage.getItem("signupState")
+
+    
     if (userInfoState) {
       const uis = JSON.parse(userInfoState)
       setInitFormState(uis)

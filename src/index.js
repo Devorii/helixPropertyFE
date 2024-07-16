@@ -6,6 +6,8 @@ import reportWebVitals from './reportWebVitals';
 import { FormProvider } from './auth/context/authContext';
 import { IssueProvider } from './Dashboard/context/issueContext';
 import { ReportProvider } from './Dashboard/context/reviewReportContext';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 // Set a theme for the material UI
 // Theme provider
 
@@ -13,6 +15,7 @@ import { ReportProvider } from './Dashboard/context/reviewReportContext';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+     <LocalizationProvider dateAdapter={AdapterDayjs}>
     <ReportProvider>
     <IssueProvider>
     <FormProvider>
@@ -20,6 +23,7 @@ root.render(
     </FormProvider>
     </IssueProvider>
     </ReportProvider>
+    </LocalizationProvider>
   </React.StrictMode>
 );
 
