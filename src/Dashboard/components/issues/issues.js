@@ -117,9 +117,16 @@ const StickyHeadTable = () => {
 
 
   useEffect(()=>{
-    if((updateSelect == 'All') && (startDate == null || endDate == null)){
-      window.location.reload()
+    // if((updateSelect == 'All') && (startDate == null || endDate == null)){
+    //   window.location.reload()
+    // }
+    if(updateSelect =='All' && startDate !=null && endDate != null){
+      let setFilteresData=mocLs.filter(items=> (items.date >= startDate) && (items.date <=endDate))
+      setNRows(setFilteresData)
+    } else if(updateSelect =='All' && startDate ==null && endDate == null){
+      setNRows(mocLs)
     }
+    
  
   },[updateSelect])
 
@@ -140,16 +147,14 @@ const StickyHeadTable = () => {
     if(![null, 1].includes(start)){
       const selectValue = e.target.innerHTML;
       setUpdateSelect(selectValue)
-      // Need to check if end date have been captured.
 
-      if ((selectValue == 'All') && (startDate != null && endDate != null)){
-        filteredData = mocLs.filter(items => (items.date >= startDate) && (items.date <= endDate));
-        setNRows(filteredData)
-      }
-      if((!endDate) || (!startDate)){
+      // Need to check if end date have been captured.
+      // console.log(`Select Value -> ${selectValue} | Start Date -> ${startDate} | End Date -> ${endDate}`
+
+      if((!endDate) || (!startDate) && selectValue != 'All'){
         filteredData = mocLs.filter(items => items.status == selectValue);
       }
-      else{
+      if((endDate) || (startDate) && selectValue != 'All'){
         filteredData = mocLs.filter(items => (items.date >= startDate) && (items.date <= date) && (items.status == selectValue));
       }
       setNRows(filteredData)
@@ -157,6 +162,10 @@ const StickyHeadTable = () => {
 
     // validates start date aka From is selected.
     else if (![null,2].includes(start)) {
+      if((endDate)){
+        filteredData = mocLs.filter(items => (items.date >= date) && (items.date <= endDate))
+        setNRows(filteredData)
+      }
       setIsError(false)
       setStartDate(date)
     }
