@@ -56,22 +56,22 @@ export const Landlord = ({ isSubmitting, handleChange, values }) => {
           <div id="name_wrapper">
             <div className="stack_info">
               <label htmlFor="firstname">Firstname</label>
-              <Field className="nameField" onChange={handleChange} type="text" name="firstname" value={values.firstname} />
+              <Field className="nameField" onChange={handleChange} type="text" name="firstname" value={values.firstname} placeholder='Firstname'/>
               <ErrorMessage className='inputError' name="firstname" component="div" />
             </div>
 
             <div className="stack_info">
               <label htmlFor="lastname">Lastname</label>
-              <Field className="nameField" onChange={handleChange} id="nameField1" type="text" name="lastname" value={values.lastname} />
+              <Field className="nameField" onChange={handleChange} id="nameField1" type="text" name="lastname" value={values.lastname} placeholder='Lastname'/>
               <ErrorMessage className='inputError' name="lastname" component="div" />
             </div>
           </div>
           <label htmlFor="email">Email</label>
-          <Field type="email" onChange={handleChange} name="email" value={values.email} />
+          <Field type="email" onChange={handleChange} name="email" value={values.email} placeholder='example@gmail.com'/>
           <ErrorMessage className='inputError' name="email" component="div" />
 
           <label htmlFor="phone">Phone</label>
-          <Field type="text" onChange={handleChange} name="phone" value={values.phone} />
+          <Field type="text" onChange={handleChange} name="phone" value={values.phone} placeholder='000-000-0000'/>
           <ErrorMessage className='inputError' name="phone" component="div" />
           {formIdentity != "TE1" ?
             <>
@@ -114,17 +114,17 @@ export const Landlord = ({ isSubmitting, handleChange, values }) => {
               </div>
 
               <label htmlFor="city">City</label>
-              <Field type="text" onChange={handleChange} name="city" value={values.city} />
+              <Field type="text" onChange={handleChange} name="city" value={values.city} placeholder='Toronto' />
               <ErrorMessage className='inputError' name="city" component="div" />
 
               <label htmlFor="address">Address</label>
-              <Field type="text" onChange={handleChange} name="address" value={values.address} />
+              <Field type="text" onChange={handleChange} name="address" value={values.address} placeholder='111 address dr'/>
               <ErrorMessage className='inputError' name="address" component="div" />
             </>
             :
             <>
               <label htmlFor="dob">Date of Birth</label>
-              <Field type="text" onChange={handleChange} name="dob" value={values.dob} />
+              <Field type="text" onChange={handleChange} name="dob" value={values.dob} placeholder='yyyy-mm-dd'/>
               <ErrorMessage className='inputError' name="dob" component="div" />
 
               <label htmlFor="occupation">Occupation</label>
@@ -136,7 +136,7 @@ export const Landlord = ({ isSubmitting, handleChange, values }) => {
               <ErrorMessage className='inputError' name="company" component="div" />
 
               <label htmlFor="salary">Annual Salary</label>
-              <Field type="text" onChange={handleChange} name="salary" value={values.salary} />
+              <Field type="text" onChange={handleChange} name="salary" value={values.salary} placeholder='10000000' />
               <ErrorMessage className='inputError' name="salary" component="div" />
 
               <label htmlFor="code">Enter code Provided by Property Owner</label>
