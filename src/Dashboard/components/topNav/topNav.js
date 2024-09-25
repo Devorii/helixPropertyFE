@@ -1,13 +1,18 @@
 import "./topNav.css"
+import {useEffect} from "react"
 
 
 
 const TopNav = () =>{
+    const userInitials = localStorage.getItem('userInit')
+    useEffect(()=>{
+    },[userInitials])
+    
     return(
         <div id="topNav">
             {/* More navigation can go here in the future */}
         <div id="initViewer">
-          DH
+          {userInitials?userInitials:"~"}
         </div>
         </div>
     )

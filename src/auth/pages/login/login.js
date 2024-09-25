@@ -27,6 +27,7 @@ const LoginPage = () => {
                 body: JSON.stringify(values),
             });
 
+
             if (!response.ok) {
                 const errorDetail = await response.json();
                 setErrorDetails(errorDetail.detail)
@@ -38,7 +39,8 @@ const LoginPage = () => {
             // If response is okay (status code 200), proceed with parsing response
             setPopUpErrorState(false)
             const data = await response.json();
-            console.log('Sign in successful:', data);
+            console.log(data['user_initials']['initials'])
+            localStorage.setItem('userInit', data['user_initials']['initials'])
             navigateTo('/home')
 
         } catch (error) {
@@ -53,6 +55,7 @@ const LoginPage = () => {
 
     // Function to handle sign in as owner
     const signInAsOwner = (values) => {
+        localStorage.setItem('userStatus', 'OW1')
         values["account"] = process.env.REACT_APP_OWNER_ACC
         signIn(values)
 
@@ -60,6 +63,7 @@ const LoginPage = () => {
 
     // Function to handle sign in as tenant
     const signInAsTenant = (values) => {
+        localStorage.setItem('userStatus', 'TE1')
         values["account"] = process.env.REACT_APP_TENANT_ACC
         signIn(values)
 

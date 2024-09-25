@@ -70,7 +70,7 @@ const AuthLandlord = () => {
     province: '',
     city: '',
     address: '',
-    unit: '',
+    unit: 0,
     propCountry: 'Canada',
     propProvince: '',
     propCity: '',
@@ -169,8 +169,21 @@ const AuthLandlord = () => {
             onSubmit={(values, { setSubmitting }) => {
               // validate if its tenants of owners
                 console.log(values)
+                values['account']=localStorage.getItem('userStatus')
                 setSubmitting(true)
-                alert("Your application has been submitted.")
+                try {
+                      fetch(`${process.env.REACT_APP_HELIX_API}/admin/create-account`, {
+                          method: 'POST',
+                          headers: {
+                              'Content-Type': 'application/json',
+                          },
+                          body: JSON.stringify(values),
+                      });
+          
+                  } catch (error) {
+                      console.error('Error signing up:', error.message);
+                      // Add error handling as needed
+                  }
               
             }}>
               
