@@ -8,11 +8,123 @@ import mainfloor from '../../../artifacts/mainFloor.svg'
 import { useIssueInformation } from "../../context/issueContext";
 import { useReportInformation } from "../../context/reviewReportContext";
 import ReviewReports from "../../components/reviewReports/reviewReports";
+import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
+import ChangeCircleIcon from '@mui/icons-material/ChangeCircle';
 import "./home.css"
 import { useEffect, useState } from "react";
-
+import { useNavigate } from "react-router-dom";
+import UnstyledSelectBasic from '../../../Dashboard/components/select/editSelectionElement';
+import Alert from '@mui/material/Alert';
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import Stack from '@mui/material/Stack';
 
 const Home = () => {
+    const navigate = useNavigate()
+    const [show, setShow]=useState(null)
+
+    const change = (start, e) => {
+        // {
+        //     "title": "Water Tank Leaking",
+        //     "author": "Decory",
+        //     "ticket_num": 89091,
+        //     "property_id":"d3a6603efbb2",
+        //     "status": "Open"
+        // }
+
+        if (![null, 1].includes(start)) {
+            const selectValue = e.target.innerHTML;
+            const cellData = JSON.parse(localStorage.getItem('cellData'))
+            // Need to set conditions for if values are missing
+            // from the body.
+
+
+            const createTicket = async () => {
+                const body_info = {
+                    title: cellData['issue'],
+                    author: localStorage.getItem('fullname'),
+                    ticket_num: cellData['id'],
+                    property_id: localStorage.getItem('pid'),
+                    status: selectValue
+                }
+
+                const token = localStorage.getItem('token')
+                try {
+                    const response = await fetch(`${process.env.REACT_APP_HELIX_API}/management/update-ticket`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'x-access-token': token,
+                        },
+                        body: JSON.stringify(body_info)
+                    });
+
+                    // Check if the response status is 200 OK
+                    if (response.status === 200) {
+                        setShow(true)
+
+                        setTimeout(()=>{
+                            setShow(null)
+                        }, 1500)
+
+                    }
+                    // Handle other non-200 responses (optional)
+                    else {
+                        console.error(`Unexpected status: ${response.status}`);
+                    }
+                } catch (error) {
+                    console.error('Error during the request:', error.message);
+                }
+            };
+
+            // Call the async function
+            createTicket();
+
+
+        }
+    }
+
+
+    useEffect(() => {
+        const token = localStorage.getItem('token')
+        if (!token) {
+            navigate('/')
+        }
+
+        // Define an async function to fetch data
+        const validateHome = async () => {
+            try {
+                const response = await fetch(`${process.env.REACT_APP_HELIX_API}/admin/validate-home`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'x-access-token': token,
+                    },
+                });
+
+                // Check if the response status is 200 OK
+                if (response.status === 200) {
+                    const data = await response.json();  // Parse response body as JSON
+                    console.log("Response Data:", data);  // Process the data as needed
+                }
+                // Check if the response status is 403 Forbidden
+                else if (response.status === 403) {
+                    navigate('/')
+                    console.error("Forbidden: You don't have permission to access this resource.");
+                }
+                // Handle other non-200 responses (optional)
+                else {
+                    console.error(`Unexpected status: ${response.status}`);
+                }
+            } catch (error) {
+                console.error('Error during the request:', error.message);
+            }
+        };
+
+        // Call the async function
+        validateHome();
+    }, [])
+
+
     const cellData = JSON.parse(localStorage.getItem('cellData'))
     const userStatus = localStorage.getItem('userStatus')
 
@@ -50,7 +162,7 @@ const Home = () => {
                     We need a way to identify if the user is lanlord or tenant.
                     So that we can change the Application's behaviour to suite.
                     For now getting it from local storage should be fine.
-                    
+    
                     */}
 
 
@@ -64,8 +176,6 @@ const Home = () => {
                                 ''
                                 :
                                 <>
-
-
                                     <h1 style={{ marginBottom: '0px' }}>Issues Reported</h1>
                                     {/* <p id="viewReports" style={{ color: 'rgb(0 113 183)' }}></p> */}
 
@@ -118,19 +228,48 @@ const Home = () => {
                             <>
                                 <p id="formTitle">{`Report a ${formName} Issue`}</p>
                                 {test}
-                                <p id="BacktoReports" onClick={viewReports}>Back to Reports</p>
+                                <p id="BacktoReports" onClick={viewReports}><KeyboardBackspaceIcon />Back to Reports</p>
                             </>
                             :
                             isReport ?
                                 <>
+
                                     <p id="reviewReports">Status report</p>
-                                    <p style={{ color: colorMap[reportStatus] }}>{reportStatus}</p>
+                                    <div className="changeStatus">
+                                        {/* <ChangeCircleIcon/> */}
+                                        {
+                                            userStatus == 'OW1' && reportStatus != 'Closed' &&
+                                            <div>
+                                                <p>Status</p>
+                                                {
+                                                    show &&
+                                                    <Stack style={{ 'marginTop': '15px' }} sx={{ width: '236px', marginBottom:'10px' }} spacing={9}>
+                                                        <Alert
+                                                            iconMapping={{
+                                                                success: <CheckCircleOutlineIcon fontSize="inherit" />,
+                                                            }}
+                                                        >
+                                                            Status succefully updated.
+                                                        </Alert>
+                                                    </Stack>
+                                                }
+                                                <UnstyledSelectBasic default={reportStatus} updateSelect={(e) => change(2, e)} />
+                                            </div>
+
+                                        }
+                                        {
+                                            userStatus == 'TE1' || reportStatus == 'Closed' &&
+                                            <p style={{ color: colorMap[reportStatus] }}>{reportStatus}</p>
+                                        }
+
+                                    </div>
+
                                     <ReviewReports />
                                 </>
                                 :
                                 // if it is not a form then we want to check if report instead else just return list of reports.
                                 <>
-                                    <p id="viewReports">Active Tickets</p>
+                                    {/* <p id="viewReports">Active Tickets</p> */}
                                     <StickyHeadTable />
                                 </>
 

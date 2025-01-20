@@ -32,17 +32,34 @@
     width: 150px;
     font-size: small;
 }
+#logout-btn:hover{
+cursor: pointer;
+}
 
 .navItems{
     display: flex;
-    align-items: center;
+    align-items: left;
+    padding-left: 10px;
+    flex-direction: column;
 }
 .navItems a{
-    margin-left: 5px;
     text-decoration: none;
     color: black;
 
 }
 .navItems a:hover{
     cursor: pointer;
+}
+.navIcon{ 
+    margin-right: 10px;
+}
+.issueReport{ 
+    display: flex;
+    align-items: center;
+}
+.inviteTenant{
+    width: 100%;
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
 }

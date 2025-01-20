@@ -20,7 +20,27 @@
 }
 
 .ntm{
-    margin-top: 0px
+    margin-top: 0px;
+}
+.nmrgn{
+    margin-bottom: 0px;
+}
+.ntm1{
+    margin-top: 20px;
+}
+.mrgn7{
+    margin-top:7px;
+}
+.descriptionElement{
+    max-width: 600px;
+    word-wrap: break-word;
+    white-space: normal;
+    /* margin: 0 auto; */
+    /* padding: 10px; */
+}
+
+.labelname{
+    color: #3d8aab;
 }
 
 #reportContainer{
