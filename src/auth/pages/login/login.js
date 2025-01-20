@@ -39,8 +39,10 @@ const LoginPage = () => {
             // If response is okay (status code 200), proceed with parsing response
             setPopUpErrorState(false)
             const data = await response.json();
-            console.log(data['user_initials']['initials'])
-            localStorage.setItem('userInit', data['user_initials']['initials'])
+            localStorage.setItem('token', data['token'])
+            localStorage.setItem('pid', data['property_id'])
+            localStorage.setItem('fullname', data['name'])
+            localStorage.setItem('userInit', data['user_initials'])
             navigateTo('/home')
 
         } catch (error) {

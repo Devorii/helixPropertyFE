@@ -11,22 +11,7 @@ const AuthLandlord = () => {
   const navigate = useNavigate()
   // const [landlordNext, setLandlordNext] = useState(null)
   const { formHeaderText, formIdentity, formState, dispatch } = useFormInformation()
-
-
-
-  // const onChangeHandler = (e) => {
-  //   const { name, value } = e.target;
-  //   setInitFormState(prevValues => ({
-  //     ...prevValues,
-  //     [name]: value
-  //   }));
-
-  //   // Also, you might want to update the local storage here
-  //   localStorage.setItem('signupState', JSON.stringify({
-  //     ...initFormState,
-  //     [name]: value
-  //   }));
-  // }
+  const [submissionState, setSubmissionState]=useState(false)
 
 
 
@@ -172,22 +157,37 @@ const AuthLandlord = () => {
                 values['account']=localStorage.getItem('userStatus')
                 setSubmitting(true)
                 try {
-                      fetch(`${process.env.REACT_APP_HELIX_API}/admin/create-account`, {
-                          method: 'POST',
-                          headers: {
-                              'Content-Type': 'application/json',
-                          },
-                          body: JSON.stringify(values),
-                      });
-          
+                  const response = fetch(`${process.env.REACT_APP_HELIX_API}/admin/create-account`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(values),
+                  });
+              
+                  if (!response.ok) {
+                    throw new Error('Failed to submit form');
+                  }
+              
+                  setSubmissionState(true);
                   } catch (error) {
                       console.error('Error signing up:', error.message);
                       // Add error handling as needed
                   }
-              
+                  finally {
+                    setTimeout(() => {
+                      navigate('/');
+                    }, 1000);
+                  }
+
             }}>
               
             {({ isSubmitting, values, handleChange }) => (
+              submissionState ? 
+              <div style={{width:'100%', height:'100%', display:'flex', justifyContent:'center', alignItems:'center'}}>
+                  <div style={{width: '40%', height: 'auto', backgroundColor:'white', borderRadius:'4px'}}>
+                    <p style={{color: 'green', width: '100%', textAlign:'center'}}>Successfully Submitted</p>
+                  </div>
+              </div>
+              :
               <Form id="formik_layout">
                 {Landlord({isSubmitting,  handleChange, values})}
               </Form>

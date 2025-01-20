@@ -27,6 +27,8 @@ margin-bottom: 20px;
     margin-top: 0px;
     margin-bottom: 10px;
     margin-top: 40px;
+    display: flex;
+    align-items: center;
 }
 
 #BacktoReports:hover{
@@ -42,4 +44,8 @@ margin-bottom: 20px;
     font-weight: 300;
     margin-top: 80px;
     margin-bottom: 10px;
+}
+.changeStatus{
+    display: flex;
+    align-items: center;
 }

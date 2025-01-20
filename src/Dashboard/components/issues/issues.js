@@ -38,36 +38,6 @@ const formatDate = (e) => {
 }
 
 
-const mocLs = [{
-  'id': '32126',
-  'issue': 'Dry wall crack',
-  'date': '2024-07-06',
-  'category': 'Main unit - Bedroom',
-  'status': 'Pending...'
-},
-{
-  'id': '5287',
-  'issue': 'Dry wall crack',
-  'date': '2024-08-20',
-  'category': 'Basement - Hallway',
-  'status': 'Open'
-},
-{
-  'id': '8575',
-  'issue': 'Flooring water',
-  'date': '2024-07-14',
-  'category': 'Main unit - Garage',
-  'status': 'Reviewing...'
-},
-{
-  'id': '5852',
-  'issue': 'Kitechen counter broken',
-  'date': '2024-07-26',
-  'category': 'Main unit - Kitchen',
-  'status': 'Closed'
-}]
-
-
 const columns = [
   { id: 'id', label: 'ID', minWidth: 170 },
   { id: 'issue', label: 'Issue', minWidth: 100 },
@@ -92,10 +62,17 @@ const columns = [
     align: 'right',
     format: (value) => value.toLocaleString('en-US'),
   },
+  {
+    id: 'created_by',
+    label: 'Created by',
+    minWidth: 170,
+    align: 'right',
+    format: (value) => value.toLocaleString('en-US'),
+  },
 ];
 
-function createData(id, issue, date, category, status) {
-  return { id, issue, date, category, status };
+function createData(id, issue, date, category, status, created_by, description) {
+  return { id, issue, date, category, status, created_by, description };
 }
 
 
@@ -104,7 +81,7 @@ function createData(id, issue, date, category, status) {
 
 const StickyHeadTable = () => {
   const [endDate, setEndDate] = useState(null)
-  const [updateSelect, setUpdateSelect]=useState(null)
+  const [updateSelect, setUpdateSelect] = useState(null)
   const [endateMessage, setEndateMessage] = useState(null)
   const [isError, setIsError] = useState(null)
   const [isEndDateError, setIsEndDateError] = useState(null)
@@ -114,21 +91,81 @@ const StickyHeadTable = () => {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const { dispatch } = useReportInformation()
+  const [mocLs, setMocLs] = useState({
+    'id': 'N/A',
+    'issue': 'N/A',
+    'date': 'N/A',
+    'category': 'N/A',
+    'status': 'N/A', 
+    'created_by':'N/A'
+  })
 
 
-  useEffect(()=>{
+
+useEffect(()=>{
+  const token = localStorage.getItem('token')
+  const property_id=localStorage.getItem('pid')
+
+  const getCellData = async () => {
+    try {
+      const response = await fetch(`${process.env.REACT_APP_HELIX_API}/support/all-tickets`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-access-token': token,
+        },
+        body: JSON.stringify({"property_id":property_id})
+      });
+
+      // Check if the response status is 200 OK
+      if (response.status === 200) {
+        const data = await response.json();  // Parse response body as JSON
+        const apiResp  = data.map(item => ({
+          id: item.ticket_num.toString() || "N/A",               // Convert id to string
+          issue: item.title || "N/A",                    // Rename 'title' to 'issue'
+          date: item.created_date || "N/A",     // Use created_date, default to "N/A" if null
+          category: item.category || "N/A",              // Keep category as is
+          status: item.status || "N/A",                  // Keep status as is
+          created_by: item.author.toLowerCase() || "N/A", // Normalize 'author' to lowercase for 'created_by'
+          description: item.description || "N/A"
+        }));
+        setMocLs(apiResp)
+        const updatedRows = apiResp.map((dataSet) =>
+          createData(dataSet.id, dataSet.issue, dataSet.date, dataSet.category, dataSet.status, dataSet.created_by, dataSet.description)
+        );
+        setNRows(updatedRows);
+
+
+        console.log("Response Data:", data);  // Process the data as needed
+      } 
+
+      // Handle other non-200 responses (optional)
+      else {
+        console.error(`Unexpected status: ${response.status}`);
+      }
+    } catch (error) {
+      console.error('Error during the request:', error.message);
+    }
+  };
+
+  // Call the async function
+  getCellData();
+},[])
+
+
+  useEffect(() => {
     // if((updateSelect == 'All') && (startDate == null || endDate == null)){
     //   window.location.reload()
     // }
-    if(updateSelect =='All' && startDate !=null && endDate != null){
-      let setFilteresData=mocLs.filter(items=> (items.date >= startDate) && (items.date <=endDate))
+    if (updateSelect == 'All' && startDate != null && endDate != null) {
+      let setFilteresData = mocLs.filter(items => (items.date >= startDate) && (items.date <= endDate))
       setNRows(setFilteresData)
-    } else if(updateSelect =='All' && startDate ==null && endDate == null){
+    } else if (updateSelect == 'All' && startDate == null && endDate == null) {
       setNRows(mocLs)
     }
-    
- 
-  },[updateSelect])
+
+
+  }, [updateSelect])
 
   const change = (start, e) => {
     /**
@@ -144,25 +181,25 @@ const StickyHeadTable = () => {
 
 
     // Checks conditions are met for selection even
-    if(![null, 1].includes(start)){
+    if (![null, 1].includes(start)) {
       const selectValue = e.target.innerHTML;
       setUpdateSelect(selectValue)
 
       // Need to check if end date have been captured.
       // console.log(`Select Value -> ${selectValue} | Start Date -> ${startDate} | End Date -> ${endDate}`
 
-      if((!endDate) || (!startDate) && selectValue != 'All'){
+      if ((!endDate) || (!startDate) && selectValue != 'All') {
         filteredData = mocLs.filter(items => items.status == selectValue);
       }
-      if((endDate) || (startDate) && selectValue != 'All'){
+      if ((endDate) || (startDate) && selectValue != 'All') {
         filteredData = mocLs.filter(items => (items.date >= startDate) && (items.date <= date) && (items.status == selectValue));
       }
       setNRows(filteredData)
     }
 
     // validates start date aka From is selected.
-    else if (![null,2].includes(start)) {
-      if((endDate)){
+    else if (![null, 2].includes(start)) {
+      if ((endDate)) {
         filteredData = mocLs.filter(items => (items.date >= date) && (items.date <= endDate))
         setNRows(filteredData)
       }
@@ -172,7 +209,7 @@ const StickyHeadTable = () => {
 
     // Triggeres end date filtration.
     else {
-      if(!updateSelect){
+      if (!updateSelect) {
         filteredData = mocLs.filter(items => (items.date >= startDate) && (items.date <= date));
       } else {
         filteredData = mocLs.filter(items => (items.date >= startDate) && (items.date <= date) && (items.status == updateSelect));
@@ -183,17 +220,6 @@ const StickyHeadTable = () => {
     }
 
   }
-
-
-  useEffect(() => {
-    const updatedRows = mocLs.map((dataSet) =>
-      createData(dataSet.id, dataSet.issue, dataSet.date, dataSet.category, dataSet.status)
-    );
-    setNRows(updatedRows);
-  }, [])
-
-  console.log(nrows)
-
 
   const OpenRowInformation = (cellData) => {
     dispatch({ type: 'review' })
@@ -211,15 +237,14 @@ const StickyHeadTable = () => {
     setPage(0);
   };
 
-
+console.log(mocLs)
   return (
-
     <>
       <p className='dt-picker-tag'>View reports</p>
       <div id='arrangeDateComponents'>
         <div>
-        <p>Status</p>
-        <UnstyledSelectBasic updateSelect={(e) => change(2, e)}/>
+          <p>Status</p>
+          <UnstyledSelectBasic updateSelect={(e) => change(2, e)} />
         </div>
         <div id='mg-15'>
           <p>From</p>
