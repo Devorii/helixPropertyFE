@@ -54,8 +54,6 @@ const Sidebar = () => {
 
       </div>
 
-
-
       <div id="profile-container">
 
         <button id="logout-btn" onClick={logout}>
