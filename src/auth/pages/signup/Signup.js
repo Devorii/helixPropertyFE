@@ -1,4 +1,4 @@
-import Button from '@mui/material-next/Button';
+import Button from '@mui/material/Button';
 import MapsHomeWorkIcon from '@mui/icons-material/MapsHomeWork';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import { useNavigate } from 'react-router';
