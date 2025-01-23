@@ -18,38 +18,41 @@ const LoginPage = () => {
     };
 
     const signIn = async (values) => {
-        try {
-            const response = await fetch(`${process.env.REACT_APP_HELIX_API}/admin/login`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                mode: 'cors',
-                body: JSON.stringify(values),
-            });
 
-
-            if (!response.ok) {
-                const errorDetail = await response.json();
-                setErrorDetails(errorDetail.detail)
-                setPopUpErrorState(true)
-                throw new Error('Failed to sign in'); // Throw an error to handle in the catch block
+        const run_signin = async () => {
+            try {
+                const response = await fetch(`${process.env.REACT_APP_HELIX_API}/admin/login`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(values)
+                });
+                if (!response.ok) {
+                    const errorDetail = await response.json();
+                    setErrorDetails(errorDetail.detail)
+                    setPopUpErrorState(true)
+                    throw new Error('Failed to sign in'); // Throw an error to handle in the catch block
+                }
+    
+                
+                // If response is okay (status code 200), proceed with parsing response
+                setPopUpErrorState(false)
+                const data = await response.json();
+                localStorage.setItem('token', data['token'])
+                localStorage.setItem('pid', data['property_id'])
+                localStorage.setItem('fullname', data['name'])
+                localStorage.setItem('userInit', data['user_initials'])
+                navigateTo('/home')
+    
+            } catch (error) {
+                console.error('Error signing in:', error.message);
+                // Add error handling as needed
             }
-
-            
-            // If response is okay (status code 200), proceed with parsing response
-            setPopUpErrorState(false)
-            const data = await response.json();
-            localStorage.setItem('token', data['token'])
-            localStorage.setItem('pid', data['property_id'])
-            localStorage.setItem('fullname', data['name'])
-            localStorage.setItem('userInit', data['user_initials'])
-            navigateTo('/home')
-
-        } catch (error) {
-            console.error('Error signing in:', error.message);
-            // Add error handling as needed
         }
+
+        run_signin()
+
     }
 
 
