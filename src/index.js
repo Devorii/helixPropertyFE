@@ -14,17 +14,16 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-     <LocalizationProvider dateAdapter={AdapterDayjs}>
+  // <React.StrictMode> is removed here for testing purposes
+  <LocalizationProvider dateAdapter={AdapterDayjs}>
     <ReportProvider>
-    <IssueProvider>
-    <FormProvider>
-    <Routing />
-    </FormProvider>
-    </IssueProvider>
+      <IssueProvider>
+        <FormProvider>
+          <Routing />
+        </FormProvider>
+      </IssueProvider>
     </ReportProvider>
-    </LocalizationProvider>
-  </React.StrictMode>
+  </LocalizationProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function

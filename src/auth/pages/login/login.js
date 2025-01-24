@@ -3,7 +3,7 @@ import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./login.css";
 
 const LoginPage = () => {
@@ -11,7 +11,41 @@ const LoginPage = () => {
     const [popUpErrorState, setPopUpErrorState] = useState(false)
     const [errorDetails, setErrorDetails] = useState("")
     const navigateTo = useNavigate();
-
+    const validateHome = async (token) => {
+        try {
+          const response = await fetch(`${process.env.REACT_APP_HELIX_API}/admin/validate-home`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'x-access-token': token,
+            },
+          });
+    
+          if (response.ok) {
+            navigateTo('/home')
+          } else if (response.status === 403) {
+            // Redirect if 403 Forbidden response
+            navigateTo('/');
+          } else {
+            console.error(`Unexpected status: ${response.status}`);
+          }
+        } catch (error) {
+          console.error('Error during the request:', error.message);
+        }
+      };
+    
+      useEffect(() => {
+        // Getting the token from localStorage
+        const token = localStorage.getItem('token');
+    
+        if (!token) {
+          // If there's no token, navigate to the login page
+          return;
+        } else {
+          // Validate the token with the backend
+          validateHome(token);
+        }
+      }, [navigateTo]);
 
     const signup = () => {
         navigateTo("/sign-up");

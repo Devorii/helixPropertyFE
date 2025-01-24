@@ -150,22 +150,24 @@ useEffect(()=>{
 
   // Call the async function
   getCellData();
-},[])
+
+  if (updateSelect == 'All' && startDate != null && endDate != null) {
+    let setFilteresData = mocLs.filter(items => (items.date >= startDate) && (items.date <= endDate))
+    setNRows(setFilteresData)
+  } else if (updateSelect == 'All' && startDate == null && endDate == null) {
+    setNRows(mocLs)
+  }
+
+},[updateSelect])
 
 
-  useEffect(() => {
-    // if((updateSelect == 'All') && (startDate == null || endDate == null)){
-    //   window.location.reload()
-    // }
-    if (updateSelect == 'All' && startDate != null && endDate != null) {
-      let setFilteresData = mocLs.filter(items => (items.date >= startDate) && (items.date <= endDate))
-      setNRows(setFilteresData)
-    } else if (updateSelect == 'All' && startDate == null && endDate == null) {
-      setNRows(mocLs)
-    }
+  // useEffect(() => {
+  //   // if((updateSelect == 'All') && (startDate == null || endDate == null)){
+  //   //   window.location.reload()
+  //   // }
 
 
-  }, [updateSelect])
+  // }, )
 
   const change = (start, e) => {
     /**

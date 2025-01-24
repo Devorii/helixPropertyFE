@@ -23,13 +23,7 @@ const Home = () => {
     const [show, setShow]=useState(null)
 
     const change = (start, e) => {
-        // {
-        //     "title": "Water Tank Leaking",
-        //     "author": "Decory",
-        //     "ticket_num": 89091,
-        //     "property_id":"d3a6603efbb2",
-        //     "status": "Open"
-        // }
+ 
 
         if (![null, 1].includes(start)) {
             const selectValue = e.target.innerHTML;
@@ -83,46 +77,42 @@ const Home = () => {
         }
     }
 
-
-    useEffect(() => {
-        const token = localStorage.getItem('token')
-        if (!token) {
-            navigate('/')
+    const validateHome = async (token) => {
+        try {
+          const response = await fetch(`${process.env.REACT_APP_HELIX_API}/admin/validate-home`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'x-access-token': token,
+            },
+          });
+    
+          if (response.ok) {
+            const data = await response.json();
+            console.log("Response Data:", data);
+          } else if (response.status === 403) {
+            // Redirect if 403 Forbidden response
+            navigate('/');
+          } else {
+            console.error(`Unexpected status: ${response.status}`);
+          }
+        } catch (error) {
+          console.error('Error during the request:', error.message);
         }
-
-        // Define an async function to fetch data
-        const validateHome = async () => {
-            try {
-                const response = await fetch(`${process.env.REACT_APP_HELIX_API}/admin/validate-home`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'x-access-token': token,
-                    },
-                });
-
-                // Check if the response status is 200 OK
-                if (response.status === 200) {
-                    const data = await response.json();  // Parse response body as JSON
-                    console.log("Response Data:", data);  // Process the data as needed
-                }
-                // Check if the response status is 403 Forbidden
-                else if (response.status === 403) {
-                    navigate('/')
-                    console.error("Forbidden: You don't have permission to access this resource.");
-                }
-                // Handle other non-200 responses (optional)
-                else {
-                    console.error(`Unexpected status: ${response.status}`);
-                }
-            } catch (error) {
-                console.error('Error during the request:', error.message);
-            }
-        };
-
-        // Call the async function
-        validateHome();
-    }, [])
+      };
+    
+      useEffect(() => {
+        // Getting the token from localStorage
+        const token = localStorage.getItem('token');
+    
+        if (!token) {
+          // If there's no token, navigate to the login page
+          navigate('/');
+        } else {
+          // Validate the token with the backend
+          validateHome(token);
+        }
+      }, [navigate]);
 
 
     const cellData = JSON.parse(localStorage.getItem('cellData'))
