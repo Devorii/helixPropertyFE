@@ -12,7 +12,7 @@ const Verification = () => {
 
     const verify_account = async () => {
         try {
-            const response = await fetch(`${process.env.REACT_APP_HELIX_API}/verify-account/${code}/${account}/${token}`, {
+            const response = await fetch(`${process.env.REACT_APP_HELIX_API}/admin/verify-account/${code}/${account}/${token}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
