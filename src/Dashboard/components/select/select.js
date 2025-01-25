@@ -22,8 +22,8 @@ export default function UnstyledSelectBasic({updateSelect}) {
     <Select defaultValue={'All'} onChange={updateSelect}>
     <Option value='All'>All</Option>
       <Option value='Open'>Open</Option>
-      <Option value='Pending...'>Pending...</Option>
-      <Option value='Reviewing...'>Reviewing...</Option>
+      <Option value='Processing'>Processing</Option>
+      <Option value='Reviewing'>Reviewing</Option>
       <Option value='Closed'>Closed</Option>
     </Select>
   );

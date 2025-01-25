@@ -1,0 +1,22 @@
+.account-verification{
+    background-color: rgb(246, 246, 246);
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.verImg{
+    width:250px;
+    height: 200px;
+}
+.va{
+    color: rgb(0, 115, 160);
+}
+.v-alignItems{
+display: flex;
+align-items: center;
+flex-direction: column;
+color: green;
+}
