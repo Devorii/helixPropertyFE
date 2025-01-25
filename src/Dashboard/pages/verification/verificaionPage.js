@@ -20,11 +20,12 @@ const Verification = () => {
             });
 
             if (response.ok) {
+                setVerificationMessage('Congratulaions, Your accoun has been verified')
                 setTimeout(() => {
-                    setVerificationMessage('Congratulaions, Your accoun has been verified')
+                    setVerificationMessage(null)
+                    navigate('/')
                 }, 3000)
-                setVerificationMessage(null)
-                navigate('/')
+
 
 
             } else if (response.status === 403) {
