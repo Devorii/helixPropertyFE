@@ -9,11 +9,15 @@ margin-top: 40px !important;
 }
 .dt-picker{
     width: 180px !important;
-}
 
+}
+.MuiInputBase-input.MuiOutlinedInput-input.MuiInputBase-inputAdornedEnd.css-1dune0f-MuiInputBase-input-MuiOutlinedInput-input{
+    padding: 8.5px 14px !important;
+}
 .css-nxo287-MuiInputBase-input-MuiOutlinedInput-input{
     padding: 9px !important;
     font-size: small !important;
+    
 }
 
 #arrangeDateComponents{

@@ -16,6 +16,11 @@ import Stack from '@mui/material/Stack';
 import { Select } from '@mui/base/Select';
 import { Option } from '@mui/base/Option';
 import UnstyledSelectBasic from '../select/select';
+import dayjs from 'dayjs';
+import { parseISO } from 'date-fns';
+import dayjsPluginUTC from 'dayjs-plugin-utc'
+ 
+dayjs.extend(dayjsPluginUTC)
 
 
 
@@ -81,16 +86,18 @@ function createData(id, issue, date, category, status, created_by, description) 
 
 const StickyHeadTable = () => {
   const [endDate, setEndDate] = useState(null)
+  const [startDate, setStartDate] = useState(null)
+  const [status, setStatus] = useState('All')
   const [updateSelect, setUpdateSelect] = useState(null)
   const [endateMessage, setEndateMessage] = useState(null)
   const [isError, setIsError] = useState(null)
   const [isEndDateError, setIsEndDateError] = useState(null)
   const [nrows, setNRows] = useState([])
-  const [startDate, setStartDate] = useState(null)
+
   const [dateValue, _] = React.useState(null)
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  const { dispatch } = useReportInformation()
+  const { dispatch, state: selectState } = useReportInformation()
   const [mocLs, setMocLs] = useState({
     'id': 'N/A',
     'issue': 'N/A',
@@ -99,6 +106,10 @@ const StickyHeadTable = () => {
     'status': 'N/A', 
     'created_by':'N/A'
   })
+  // let startDate = null
+  // let endDate = null
+
+
 
 
 
@@ -134,9 +145,6 @@ useEffect(()=>{
           createData(dataSet.id, dataSet.issue, dataSet.date, dataSet.category, dataSet.status, dataSet.created_by, dataSet.description)
         );
         setNRows(updatedRows);
-
-
-        console.log("Response Data:", data);  // Process the data as needed
       } 
 
       // Handle other non-200 responses (optional)
@@ -150,78 +158,53 @@ useEffect(()=>{
 
   // Call the async function
   getCellData();
+},[])
 
-  if (updateSelect == 'All' && startDate != null && endDate != null) {
-    let setFilteresData = mocLs.filter(items => (items.date >= startDate) && (items.date <= endDate))
-    setNRows(setFilteresData)
-  } else if (updateSelect == 'All' && startDate == null && endDate == null) {
-    setNRows(mocLs)
+
+
+const statusChange = (e) =>{
+  let data = null
+  if (e?.target?.textContent === 'All' ||
+    e?.target?.textContent === 'Open' ||
+    e?.target?.textContent === 'Processing' ||
+    e?.target?.textContent === 'Reviewing' ||
+    e?.target?.textContent === 'Closed') {
+      setStatus(e.target.textContent)
+
+  if (!startDate && !endDate){
+    data =  e.target.textContent === 'All' ?  mocLs : mocLs.filter(items => (items.status === e.target.textContent))
+  }
+  else if((startDate, endDate) && e?.target?.textContent === 'All'){
+    data = mocLs.filter(items => (dayjs(items.date).isBetween(startDate, endDate)))
+  }
+  else{
+    data = mocLs.filter(items => (items.status === e.target.textContent) && (dayjs(items.date).isBetween(startDate, endDate)))
   }
 
-},[updateSelect])
-
-
-  // useEffect(() => {
-  //   // if((updateSelect == 'All') && (startDate == null || endDate == null)){
-  //   //   window.location.reload()
-  //   // }
-
-
-  // }, )
-
-  const change = (start, e) => {
-    /**
-     * Manages the state ouf our filters;
-     * From & to dates and status selection.
-     * @params @int start.
-     * @params @event e --> captured event.
-     */
-
-    // Change Global Variable
-    const date = formatDate(e)
-    let filteredData;
-
-
-    // Checks conditions are met for selection even
-    if (![null, 1].includes(start)) {
-      const selectValue = e.target.innerHTML;
-      setUpdateSelect(selectValue)
-
-      // Need to check if end date have been captured.
-      // console.log(`Select Value -> ${selectValue} | Start Date -> ${startDate} | End Date -> ${endDate}`
-
-      if ((!endDate) || (!startDate) && selectValue != 'All') {
-        filteredData = mocLs.filter(items => items.status == selectValue);
-      }
-      if ((endDate) || (startDate) && selectValue != 'All') {
-        filteredData = mocLs.filter(items => (items.date >= startDate) && (items.date <= date) && (items.status == selectValue));
-      }
-      setNRows(filteredData)
-    }
-
-    // validates start date aka From is selected.
-    else if (![null, 2].includes(start)) {
-      if ((endDate)) {
-        filteredData = mocLs.filter(items => (items.date >= date) && (items.date <= endDate))
-        setNRows(filteredData)
-      }
-      setIsError(false)
-      setStartDate(date)
-    }
-
-    // Triggeres end date filtration.
-    else {
-      if (!updateSelect) {
-        filteredData = mocLs.filter(items => (items.date >= startDate) && (items.date <= date));
-      } else {
-        filteredData = mocLs.filter(items => (items.date >= startDate) && (items.date <= date) && (items.status == updateSelect));
-      }
-
-      setIsEndDateError(false)
-      setNRows(filteredData)
-    }
-
+     setNRows(data)
   }
+}
+
+  
+  const change = (eventDate) => {
+    let filteredData=null
+    if (startDate && status !== "All") {
+      console.log(status,'status no ALL')
+        filteredData = mocLs.filter(items => (dayjs(items.date).isBetween(startDate, eventDate)) && (items.status==status));
+      }
+      else if(startDate && status === "All"){
+        console.log(status,'status ALL')
+        filteredData = mocLs.filter(items => dayjs(items.date).isBetween(startDate, eventDate));
+      }
+      setNRows(filteredData)
+  }
+
+
+
+
+
+
+
 
   const OpenRowInformation = (cellData) => {
     dispatch({ type: 'review' })
@@ -246,20 +229,16 @@ console.log(mocLs)
       <div id='arrangeDateComponents'>
         <div>
           <p>Status</p>
-          <UnstyledSelectBasic updateSelect={(e) => change(2, e)} />
+          <UnstyledSelectBasic updateSelect={(e) => statusChange(e)} />
+
         </div>
         <div id='mg-15'>
           <p>From</p>
-          <DatePicker className='dt-picker' value={dateValue} onChange={(e) => {
-            const pickedDate = formatDate(e)
-            if (pickedDate > getCurrentDate()) {
-              setIsError(true)
-            }
-            else {
-              change(1, e)
-            }
-
-
+          <DatePicker className='dt-picker' value={startDate} onChange={(e) => {
+            // console.log('start', e.utc().format('DD-MM-YYYY'), e.utc().format('DD-MM-YYYY'))
+            setStartDate(dayjs(e.utc()))
+            // startDate = dayjs(e.utc())
+  
           }} />
           {isError ?
             <Stack sx={{ width: '88%' }} spacing={2}>
@@ -271,20 +250,11 @@ console.log(mocLs)
         </div>
         <div>
           <p>To</p>
-          <DatePicker className='dt-picker' value={dateValue} onChange={(e) => {
-            const pickedDate = formatDate(e)
-            if (pickedDate < startDate) {
-              setIsEndDateError(true)
-              setEndateMessage("From date can't be greater than To.")
-            }
-            else if (!startDate) {
-              setIsEndDateError(true)
-              setEndateMessage("Set a from date.")
-            }
-            else {
-              setEndDate(pickedDate)
-              change(null, e)
-            }
+          <DatePicker className='dt-picker' value={endDate} onChange={(e) => {
+            setEndDate(dayjs(e.utc()))
+            // endDate = dayjs(e.utc())
+            console.log('enddate', endDate)
+            change(dayjs(e.utc()))
           }
 
           } />

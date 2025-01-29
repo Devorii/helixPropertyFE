@@ -20,7 +20,7 @@ const Select = React.forwardRef(function Select(props, ref) {
 export default function UnstyledSelectBasic({updateSelect}) {
   return (
     <Select defaultValue={'All'} onChange={updateSelect}>
-    <Option value='All'>All</Option>
+      <Option value='All'>All</Option>
       <Option value='Open'>Open</Option>
       <Option value='Processing'>Processing</Option>
       <Option value='Reviewing'>Reviewing</Option>
