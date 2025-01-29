@@ -1,13 +1,17 @@
 
 import './card.css'
 import { useIssueInformation } from '../../context/issueContext'
+import { useState } from 'react'
 
 
 
 const Card = (props) =>{
+let name=props.name.toString()
+const [activeEl, setActiveEl] = useState('selectionCards')
 const {dispatch} = useIssueInformation()
     const viewHandler = () =>{
-        dispatch({type: `${props.name}`})
+        setActiveEl('selectionCards active')
+        dispatch({type: `${name}`})
     }
 
 
@@ -16,8 +20,8 @@ const {dispatch} = useIssueInformation()
         backgroundPosition: 'center',
     }
     return(
-        <div id='selectionCards' style={style} onClick={viewHandler}>
-        {props.name}
+        <div className={`${activeEl}`} style={style} onClick={viewHandler}>
+        {name}
         </div>
     )
 }

@@ -19,17 +19,41 @@
   justify-content: center;
 }
 label{
-  font-size: x-small;
-  margin-top: 5px;
+  font-size: small;
+  margin-top: 10px;
   margin-bottom:3px;
 }
 .App {
   text-align: center;
 }
 body {
+  /* Correcting the background image syntax */
+  /* background-image: url('./artifacts/ai-house-2.jpg'); */
+  
+  /* Set the background color */
+  background-color: white;
+  /* background-color: #eaeff5; */
+  
+  /* Ensure the background image covers the body */
+  background-size: cover;
+  
+  /* Position the image to always cover the body area */
+  background-position: center;
+  
+  /* Apply blending mode to overlay the background color with the image */
+  /* background-blend-mode: overlay; */
+  
+  /* Ensure the background image fully covers the body */
+  height: 100vh;
+  margin: 0;
+  
+  /* Set font properties */
   font-family: "Merriweather Sans", sans-serif;
   font-optical-sizing: auto;
-  overflow: none;
+  
+  /* Disable any overflow from the body */
+  overflow: hidden;
+
 }
 .gcw{
   background: linear-gradient(to bottom, #000033, #000066);
@@ -47,7 +71,7 @@ button{
   background: linear-gradient(to right, #4a83dd, #5bb3e0);
   border-radius: 8px;
   color: #fff;
-  font-size: 18px;
+  font-size: small;
   cursor: pointer;
   margin-top: 20px;
   padding: 10px 0 10px 0;
@@ -56,6 +80,15 @@ button{
   border: 1px solid;
 }
 
+.img-btn{
+  width: 170px;
+  transition: all 0.3s ease;
+}
+.img-btn:hover{
+  width: 167px;
+  height: auto;
+  cursor: pointer;
+}
 
 .App-logo {
   height: 40vmin;

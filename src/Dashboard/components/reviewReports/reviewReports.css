@@ -29,9 +29,11 @@
     margin-top: 20px;
 }
 .mrgn7{
+    font-weight: 300;
     margin-top:7px;
 }
 .descriptionElement{
+    font-weight: 300;
     max-width: 600px;
     word-wrap: break-word;
     white-space: normal;
@@ -40,7 +42,7 @@
 }
 
 .labelname{
-    color: #3d8aab;
+    /* color: #3d8aab; */
 }
 
 #reportContainer{
@@ -49,4 +51,10 @@
 .closeBtn{
     background: #5bb3e0 !important;
     margin-left: 20px;
+}
+.back{
+    margin-right: 10px;
+}
+#controls-wrapper{
+    margin-top: 7%;
 }

@@ -2,9 +2,9 @@
     height: 100vh;
     width: 250px;
     /* background-color: aqua; */
-    border-width: 0px 1px 0px 0px;
+    /* border-width: 0px 1px 0px 0px;
     border-style: solid;
-    border-color: rgb(192, 203, 222);
+    border-color: rgb(192, 203, 222); */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -42,17 +42,22 @@ cursor: pointer;
     padding-left: 10px;
     flex-direction: column;
 }
+
 .navItems a{
+    font-size: small;
     text-decoration: none;
     color: black;
 
 }
 .navItems a:hover{
     cursor: pointer;
+    /* color: #4426B6; */
 }
 .navIcon{ 
     margin-right: 10px;
+    width: 20px !important;
 }
+
 .issueReport{ 
     display: flex;
     align-items: center;
@@ -62,4 +67,7 @@ cursor: pointer;
     margin-top: 30px;
     display: flex;
     align-items: center;
+}
+.signout-btn{
+    width: 140px;
 }

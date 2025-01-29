@@ -1,4 +1,4 @@
-#selectionCards{
+.selectionCards {
     width: 190px;
     height: 80px;
     border-radius: 10px;
@@ -11,16 +11,35 @@
     justify-content: center;
     align-items: center;
     color: rgb(4, 4, 89);
-    /* -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: white; */
+    transition: all 0.3s ease;  /* Smooth transition for changes */
 }
 
-#selectionCards:hover{
+.selectionCards.active {
+    width: 190px;
+    height: 80px;
+    border-radius: 10px;
+    background-color: white;
+    margin-right: 20px;
+    text-align: center;
+    font-weight: 300;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease;  /* Smooth transition for changes */
+    border: solid rgb(7, 156, 248) 1px; /* Change border color when clicked */
+    color: rgb(7, 156, 248);   /* Change text color when clicked */
+}
+
+
+
+.selectionCards:hover{
 cursor: pointer;
 border: solid rgb(7, 156, 248) 1px;
-color: rgb(4, 4, 89);
+color:  rgb(7, 156, 248);
 }
-#selctionCards:hover{
+
+
+.selctionCards:hover{
 cursor: pointer;
 }
 

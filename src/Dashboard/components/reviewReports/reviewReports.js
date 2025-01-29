@@ -6,13 +6,16 @@ import Alert from '@mui/material/Alert';
 import CheckIcon from '@mui/icons-material/Check';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import Stack from '@mui/material/Stack';
+import backSVG from './../../../artifacts/officialBackSVG.svg'
+import reOpen from './../../../artifacts/officialReOpen.svg'
 
 
-const ReviewReports = () => {
+const ReviewReports = (props) => {
     const nav = useNavigate()
-    const [cellData, setCellData] = useState(null)
     const back = () => nav(0)
+    const [cellData, setCellData] = useState(null)
     const [alertBanner, setAlertBanner] = useState(null);
+    const accountType=localStorage.getItem('userStatus')
 
     useEffect(() => {
         if (alertBanner !== null) {
@@ -84,9 +87,13 @@ const ReviewReports = () => {
 
     return (
         <>
+        
             {
                 cellData ?
                     <>
+                        <div>
+                        <p className="ntm1 labelname"><strong className="labelname">Issue: </strong>{cellData.issue}</p>
+                        </div>
                         {
                             alertBanner && // Only show the alert if alertBanner is true
                             <Stack style={{ 'marginTop': '15px' }} sx={{ width: '49%' }} spacing={9}>
@@ -99,9 +106,10 @@ const ReviewReports = () => {
                                 </Alert>
                             </Stack>
                         }
+
                         <div id="meta-header-wrapper">
                             <div id="id-container">
-                                <h4 className="labelname nmrgn">ID</h4>
+                                <h4 className="labelname nmrgn">Ticket ID</h4>
                                 <p className="mrgn7">{cellData.id}</p>
                             </div>
                             <div id="title-container">
@@ -110,24 +118,38 @@ const ReviewReports = () => {
                             </div>
 
                         </div>
-                        <div>
-                        <p className="ntm1 labelname"><strong className="labelname">Issue: </strong>{cellData.issue}</p>
-                        </div>
+
                         <div id="reportContainer">
                             <h4 style={{ marginBottom: '0px' }} className="labelname">Description</h4>
                             {/* <p className="ntm">Issue: {cellData.issue}</p> */}
                             <p className="descriptionElement mrgn7">
                                {cellData.description}
                             </p>
-                            <hr style={{ marginTop: '50px' }} />
+                            {/* <hr style={{ marginTop: '50px' }} /> */}
 
                         </div>
                         <div id="timestampCategory"></div>
                         <p style={{ fontSize: '0.8rem' }}>Created on: {cellData.date}</p>
 
                         <div id="controls-wrapper">
-                            <button onClick={back} class="back-to-reports" >Back</button>
-                            <button onClick={closeTicket} class="back-to-reports closeBtn" >Close Ticket</button>
+          
+                                <img onClick={back} class="img-btn back" src={backSVG} alt="Back Icon" />
+                              
+                            {
+                                accountType !== "OW1" && props.status === "Closed" &&
+                                ""
+                            }
+                            {
+                                accountType === "OW1" && props.status === "Closed" &&
+                                <img onClick={()=>""} class="img-btn" src={reOpen} alt="ReOpen Icon" />
+                                // <button onClick={closeTicket} class="back-to-reports closeBtn" >Reopen Ticket</button>
+                            }
+                            {
+                                accountType !== "OW1" && props.status !== "Closed" &&
+                                <button onClick={closeTicket} class="back-to-reports closeBtn" >Close Ticket</button>
+                            }
+                                
+
                         </div>
                     </>
 

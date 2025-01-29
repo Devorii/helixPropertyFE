@@ -269,7 +269,7 @@ console.log(mocLs)
       </div>
 
       <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-        <TableContainer sx={{ maxHeight: 440 }}>
+        <TableContainer sx={{ maxHeight: 440}}>
           <Table stickyHeader aria-label="sticky table">
             <TableHead>
               <TableRow>
@@ -277,7 +277,7 @@ console.log(mocLs)
                   <TableCell
                     key={column.id}
                     align={column.align}
-                    style={{ minWidth: column.minWidth }}
+                    style={{ minWidth:"50px" }}
                   >
                     {column.label}
                   </TableCell>
@@ -293,7 +293,7 @@ console.log(mocLs)
                       {columns.map((column) => {
                         const value = row[column.id];
                         return (
-                          <TableCell key={column.id} align={column.align}>
+                          <TableCell key={column.id} align={column.align} style={{ minWidth:"50px" }}>
                             {column.format && typeof value === 'number'
                               ? column.format(value)
                               : value}

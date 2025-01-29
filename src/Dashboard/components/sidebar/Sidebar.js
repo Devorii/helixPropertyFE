@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import PendingActionsIcon from '@mui/icons-material/PendingActions';
 import darklogo  from '../../../artifacts/dark-logo.png';
 import ForwardToInboxIcon from '@mui/icons-material/ForwardToInbox';
+import SignOutBtn from './../../../artifacts/Signout.svg'
 
 const Sidebar = () => {
   const userStatus=localStorage.getItem('userStatus')
@@ -55,10 +56,10 @@ const Sidebar = () => {
       </div>
 
       <div id="profile-container">
-
-        <button id="logout-btn" onClick={logout}>
-          Logout
-        </button>
+        <img onClick={logout} class="img-btn signout-btn" src={SignOutBtn} alt="SignOut Icon" />
+        {/* <button id="logout-btn" onClick={logout}>
+          Sign out
+        </button> */}
       </div>
 
     </div>

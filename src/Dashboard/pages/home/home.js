@@ -2,8 +2,6 @@ import Card from "../../components/card/card";
 import StickyHeadTable from "../../components/issues/issues";
 import Sidebar from "../../components/sidebar/Sidebar";
 import TopNav from "../../components/topNav/topNav";
-import backyard from '../../../artifacts/backyard.jpg'
-import basement from '../../../artifacts/basement.jpg'
 import mainfloor from '../../../artifacts/mainFloor.svg'
 import { useIssueInformation } from "../../context/issueContext";
 import { useReportInformation } from "../../context/reviewReportContext";
@@ -20,10 +18,10 @@ import Stack from '@mui/material/Stack';
 
 const Home = () => {
     const navigate = useNavigate()
-    const [show, setShow]=useState(null)
+    const [show, setShow] = useState(null)
 
     const change = (start, e) => {
- 
+
 
         if (![null, 1].includes(start)) {
             const selectValue = e.target.innerHTML;
@@ -56,7 +54,7 @@ const Home = () => {
                     if (response.status === 200) {
                         setShow(true)
 
-                        setTimeout(()=>{
+                        setTimeout(() => {
                             setShow(null)
                         }, 1500)
 
@@ -79,40 +77,40 @@ const Home = () => {
 
     const validateHome = async (token) => {
         try {
-          const response = await fetch(`${process.env.REACT_APP_HELIX_API}/admin/validate-home`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'x-access-token': token,
-            },
-          });
-    
-          if (response.ok) {
-            const data = await response.json();
-            console.log("Response Data:", data);
-          } else if (response.status === 403) {
-            // Redirect if 403 Forbidden response
-            navigate('/');
-          } else {
-            console.error(`Unexpected status: ${response.status}`);
-          }
+            const response = await fetch(`${process.env.REACT_APP_HELIX_API}/admin/validate-home`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'x-access-token': token,
+                },
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                console.log("Response Data:", data);
+            } else if (response.status === 403) {
+                // Redirect if 403 Forbidden response
+                navigate('/');
+            } else {
+                console.error(`Unexpected status: ${response.status}`);
+            }
         } catch (error) {
-          console.error('Error during the request:', error.message);
+            console.error('Error during the request:', error.message);
         }
-      };
-    
-      useEffect(() => {
+    };
+
+    useEffect(() => {
         // Getting the token from localStorage
         const token = localStorage.getItem('token');
-    
+
         if (!token) {
-          // If there's no token, navigate to the login page
-          navigate('/');
+            // If there's no token, navigate to the login page
+            navigate('/');
         } else {
-          // Validate the token with the backend
-          validateHome(token);
+            // Validate the token with the backend
+            validateHome(token);
         }
-      }, [navigate]);
+    }, [navigate]);
 
 
     const cellData = JSON.parse(localStorage.getItem('cellData'))
@@ -148,15 +146,6 @@ const Home = () => {
                 <div id="dash-viewer">
                     Home - Dashboard
 
-                    {/* 
-                    We need a way to identify if the user is lanlord or tenant.
-                    So that we can change the Application's behaviour to suite.
-                    For now getting it from local storage should be fine.
-    
-                    */}
-
-
-
 
                     {/* This is used to hide the header information when the user is viewing a report. */}
 
@@ -167,14 +156,7 @@ const Home = () => {
                                 :
                                 <>
                                     <h1 style={{ marginBottom: '0px' }}>Issues Reported</h1>
-                                    {/* <p id="viewReports" style={{ color: 'rgb(0 113 183)' }}></p> */}
 
-                                    {/* <div id="cardsHolder">
-                                        <Card name='Main Unit' bg={mainfloor} />
-                                        <Card name='Outdoor' bg={backyard} />
-                                        <Card name='Basement' bg={basement} />
-                                        
-                                    </div> */}
                                 </>
 
                             }
@@ -192,9 +174,9 @@ const Home = () => {
                                     <p id="viewReports" style={{ color: 'rgb(0 113 183)' }}>Create a ticket by selecting a category below.</p>
 
                                     <div id="cardsHolder">
-                                        <Card name='Main Unit' bg={mainfloor} />
-                                        <Card name='Outdoor' bg={backyard} />
-                                        <Card name='Basement' bg={basement} />
+                                        <Card name='Main Unit' />
+                                        <Card name='Outdoor' />
+                                        <Card name='Basement' />
                                         {/* <Card name='Bathroom'/> */}
                                     </div>
                                 </>
@@ -230,10 +212,10 @@ const Home = () => {
                                         {
                                             userStatus == 'OW1' && reportStatus != 'Closed' &&
                                             <div>
-                                                <p>Status</p>
+                                                <p style={{marginBottom: '4px'}}>Status</p>
                                                 {
                                                     show &&
-                                                    <Stack style={{ 'marginTop': '15px' }} sx={{ width: '236px', marginBottom:'10px' }} spacing={9}>
+                                                    <Stack style={{ 'marginTop': '15px' }} sx={{ width: '236px', marginBottom: '10px' }} spacing={9}>
                                                         <Alert
                                                             iconMapping={{
                                                                 success: <CheckCircleOutlineIcon fontSize="inherit" />,
@@ -248,18 +230,25 @@ const Home = () => {
 
                                         }
                                         {
-                                            userStatus == 'TE1' || reportStatus == 'Closed' &&
-                                            <p style={{ color: colorMap[reportStatus] }}>{reportStatus}</p>
+                                            userStatus == 'OW1' && reportStatus === 'Closed' &&
+                                            <p style={{ color: colorMap[reportStatus], margin: '0px'}}>{reportStatus}</p>
+                                        }
+                                        {
+                                            userStatus == 'TE1' && reportStatus === 'Closed' &&
+                                            <p style={{ color: colorMap[reportStatus], margin: '0px' }}>{reportStatus}</p>
+                                        }
+                                        {
+                                            userStatus == 'TE1' && reportStatus !== 'Closed' &&
+                                            <p style={{margin: '0px'}}>{reportStatus}</p>
                                         }
 
                                     </div>
 
-                                    <ReviewReports />
+                                    <ReviewReports status={reportStatus}/>
                                 </>
                                 :
                                 // if it is not a form then we want to check if report instead else just return list of reports.
                                 <>
-                                    {/* <p id="viewReports">Active Tickets</p> */}
                                     <StickyHeadTable />
                                 </>
 
