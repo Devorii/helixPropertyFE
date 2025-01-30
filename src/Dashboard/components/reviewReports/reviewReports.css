@@ -9,7 +9,7 @@
 
 #id-container{
     display: flex;
-    margin-right: 100px;
+    margin-right: 50px;
     flex-direction: column;
     text-align: left;
 }
@@ -26,27 +26,39 @@
     margin-bottom: 0px;
 }
 .ntm1{
+    font-size: 33px;
     margin-top: 20px;
+    margin-bottom: 5px;
 }
 .mrgn7{
     font-weight: 300;
     margin-top:7px;
+}
+.meta-data{
+    background-color: #f6f9fc;
+    padding: 15px;
+    border-radius: 4px;
 }
 .descriptionElement{
     font-weight: 300;
     max-width: 600px;
     word-wrap: break-word;
     white-space: normal;
+    color: #575c72;
     /* margin: 0 auto; */
     /* padding: 10px; */
 }
 
 .labelname{
-    /* color: #3d8aab; */
+    color: #4e06b8;
+    font-weight: 400;
 }
 
 #reportContainer{
-    width: 70%;
+    background-color: #f6f9fc;
+    padding: 20px;
+    border-radius: 7px;
+    width: 50%;
 }
 .closeBtn{
     background: #5bb3e0 !important;

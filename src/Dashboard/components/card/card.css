@@ -14,7 +14,7 @@
     transition: all 0.3s ease;  /* Smooth transition for changes */
 }
 
-.selectionCards.active {
+/* .selectionCards.active {
     width: 190px;
     height: 80px;
     border-radius: 10px;
@@ -25,10 +25,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: all 0.3s ease;  /* Smooth transition for changes */
-    border: solid rgb(7, 156, 248) 1px; /* Change border color when clicked */
-    color: rgb(7, 156, 248);   /* Change text color when clicked */
-}
+    transition: all 0.3s ease;  
+    border: solid rgb(7, 156, 248) 1px; 
+    color: rgb(7, 156, 248);   
+} 
+*/
 
 
 

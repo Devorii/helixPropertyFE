@@ -92,7 +92,7 @@ const ReviewReports = (props) => {
                 cellData ?
                     <>
                         <div>
-                        <p className="ntm1 labelname"><strong className="labelname">Issue: </strong>{cellData.issue}</p>
+                        <p className="ntm1 labelname" style={{color:'#575c72'}}><strong className="labelname"></strong>{cellData.issue}</p>
                         </div>
                         {
                             alertBanner && // Only show the alert if alertBanner is true
@@ -110,17 +110,17 @@ const ReviewReports = (props) => {
                         <div id="meta-header-wrapper">
                             <div id="id-container">
                                 <h4 className="labelname nmrgn">Ticket ID</h4>
-                                <p className="mrgn7">{cellData.id}</p>
+                                <p className="mrgn7 meta-data">{cellData.id}</p>
                             </div>
                             <div id="title-container">
                                 <h4 className="labelname nmrgn">Category</h4>
-                                <p className="mrgn7">{cellData.category}</p>
+                                <p className="mrgn7 meta-data">{cellData.category}</p>
                             </div>
 
                         </div>
-
+                        <h4 style={{ marginBottom: '10px', marginTop: '10px' }} className="labelname">Detail Complaint</h4>
                         <div id="reportContainer">
-                            <h4 style={{ marginBottom: '0px' }} className="labelname">Description</h4>
+                           
                             {/* <p className="ntm">Issue: {cellData.issue}</p> */}
                             <p className="descriptionElement mrgn7">
                                {cellData.description}
@@ -129,7 +129,7 @@ const ReviewReports = (props) => {
 
                         </div>
                         <div id="timestampCategory"></div>
-                        <p style={{ fontSize: '0.8rem' }}>Created on: {cellData.date}</p>
+                        <p style={{ fontSize: '0.8rem', color: '#575c72' }}>Created on: {cellData.date}</p>
 
                         <div id="controls-wrapper">
           

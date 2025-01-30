@@ -205,8 +205,11 @@ const Home = () => {
                             :
                             isReport ?
                                 <>
-
-                                    <p id="reviewReports">Status report</p>
+                                    {
+                                        reportStatus === 'Closed' &&
+                                        <p id="reviewReports">Status</p>
+                                    }
+      
                                     <div className="changeStatus">
                                         {/* <ChangeCircleIcon/> */}
                                         {

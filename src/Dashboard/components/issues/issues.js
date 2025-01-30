@@ -88,13 +88,13 @@ const StickyHeadTable = () => {
   const [endDate, setEndDate] = useState(null)
   const [startDate, setStartDate] = useState(null)
   const [status, setStatus] = useState('All')
-  const [updateSelect, setUpdateSelect] = useState(null)
+  // const [updateSelect, setUpdateSelect] = useState(null)
   const [endateMessage, setEndateMessage] = useState(null)
   const [isError, setIsError] = useState(null)
   const [isEndDateError, setIsEndDateError] = useState(null)
   const [nrows, setNRows] = useState([])
 
-  const [dateValue, _] = React.useState(null)
+  // const [dateValue, _] = React.useState(null)
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const { dispatch, state: selectState } = useReportInformation()
@@ -222,7 +222,7 @@ const statusChange = (e) =>{
     setPage(0);
   };
 
-console.log(mocLs)
+
   return (
     <>
       <p className='dt-picker-tag'>View reports</p>
@@ -293,7 +293,7 @@ console.log(mocLs)
                       {columns.map((column) => {
                         const value = row[column.id];
                         return (
-                          <TableCell key={column.id} align={column.align} style={{ minWidth:"50px" }}>
+                          <TableCell key={column.id} align={column.align} style={{ minWidth:"50px" }} >
                             {column.format && typeof value === 'number'
                               ? column.format(value)
                               : value}
