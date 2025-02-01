@@ -15,21 +15,20 @@ const ReviewReports = (props) => {
     const back = () => nav(0)
     const [cellData, setCellData] = useState(null)
     const [alertBanner, setAlertBanner] = useState(null);
+    const [ticketMsg, setTicketMsg] = useState('')
+    const username = localStorage.getItem('fullname')
     const accountType=localStorage.getItem('userStatus')
+    const token = localStorage.getItem('token')
+    const property_id = localStorage.getItem('pid')
+
 
     useEffect(() => {
         if (alertBanner !== null) {
-            // Optionally handle any side effects if needed when alertBanner changes
         }
     }, [alertBanner]);
 
 
-    // const expectedCellData={
-    //     id:'', title:'', date:'', category:'', status:'', 
-    // }
-
     useEffect(() => {
-
         if (!localStorage.getItem('cellData')) {
 
         }
@@ -42,8 +41,6 @@ const ReviewReports = (props) => {
     const closeTicket = () => {
         const close = async () => {
             // support/close-ticket
-            const token = localStorage.getItem('token')
-            const property_id = localStorage.getItem('pid')
             const title = cellData['issue']
             const author = cellData['created_by']
             const ticket_num = cellData['id']
@@ -59,7 +56,7 @@ const ReviewReports = (props) => {
                     },
                     body: JSON.stringify({
                         "title": title,
-                        "author": author,
+                        "author": username,
                         "ticket_num": ticket_num,
                         "property_id": property_id
                     })
@@ -67,6 +64,7 @@ const ReviewReports = (props) => {
 
                 // Check if the response status is 200 OK
                 if (response.status === 200) {
+                    setTicketMsg('Ticket has been closed.')
                     setAlertBanner(true)
                 }
                 // Handle other non-200 responses (optional)
@@ -79,10 +77,52 @@ const ReviewReports = (props) => {
         }
         close()
         setTimeout(() => {
+            setTicketMsg('')
             setAlertBanner(false)
             nav(0)
           }, 1500);
     }
+
+
+    const reopenTicket = () => { 
+        const reopen = async () => { 
+                const title = cellData['issue']
+                const author = cellData['created_by']
+                const ticket_num = cellData['id']
+    
+                try {
+                    const response = await fetch(`${process.env.REACT_APP_HELIX_API}/closed_ticket/re-open-ticket`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'x-access-token': token,
+                        },
+                        body: JSON.stringify({
+                            "title": title,
+                            "author": username,
+                            "ticket_num": ticket_num,
+                            "property_id": property_id
+                        })
+                    });
+    
+                    // Check if the response status is 200 OK
+                    if (response.status === 200) {
+                        setTicketMsg('Ticket was re-opened.')
+                        setAlertBanner(true)
+                    }
+                    // Handle other non-200 responses (optional)
+                    else {
+                        console.error(`Unexpected status: ${response.status}`);
+                    }
+                } catch (error) {
+                    console.error('Error during the request:', error.message);
+                }
+        }
+        reopen()
+    }
+
+
+
 
 
     return (
@@ -102,7 +142,7 @@ const ReviewReports = (props) => {
                                         success: <CheckCircleOutlineIcon fontSize="inherit" />,
                                     }}
                                 >
-                                    Ticket has been closed.
+                                    {ticketMsg}
                                 </Alert>
                             </Stack>
                         }
@@ -120,13 +160,9 @@ const ReviewReports = (props) => {
                         </div>
                         <h4 style={{ marginBottom: '10px', marginTop: '10px' }} className="labelname">Detail Complaint</h4>
                         <div id="reportContainer">
-                           
-                            {/* <p className="ntm">Issue: {cellData.issue}</p> */}
                             <p className="descriptionElement mrgn7">
                                {cellData.description}
                             </p>
-                            {/* <hr style={{ marginTop: '50px' }} /> */}
-
                         </div>
                         <div id="timestampCategory"></div>
                         <p style={{ fontSize: '0.8rem', color: '#575c72' }}>Created on: {cellData.date}</p>
@@ -141,7 +177,7 @@ const ReviewReports = (props) => {
                             }
                             {
                                 accountType === "OW1" && props.status === "Closed" &&
-                                <img onClick={()=>""} class="img-btn" src={reOpen} alt="ReOpen Icon" />
+                                <img onClick={reopenTicket} class="img-btn" src={reOpen} alt="ReOpen Icon" />
                                 // <button onClick={closeTicket} class="back-to-reports closeBtn" >Reopen Ticket</button>
                             }
                             {

@@ -68,7 +68,7 @@ const SignUp = () => {
                             variant="filled"
                             onClick={landlordSelection}>
                             <MapsHomeWorkIcon style={iconSpacing} />
-                            Landlord
+                            Admin
                         </Button>
                         <Button
                             className='signup-btn'

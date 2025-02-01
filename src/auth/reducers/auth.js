@@ -1,7 +1,7 @@
 export const AuthReducer = (state, action) =>{
     switch(action.type){
         case "Landlord":
-            return {formHeaderText:"Let's fill out your owners application.", formIdentity: "OW1"}
+            return {formHeaderText:"Let's fill out your admin application.", formIdentity: "OW1"}
         case "Tenant":
             return {formHeaderText:"Let's fill out your tenant application.", formIdentity: "TE1"}
         case "LandlordNext":

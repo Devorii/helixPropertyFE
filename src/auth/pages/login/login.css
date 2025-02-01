@@ -88,4 +88,18 @@
     transform: translateY(0);
     opacity: 1;
   }
+  .signin-btn{
+    width: 154px !important;
+    margin-top: 10px;
+  }
   
+  .inputDecorator{
+    border: 1px solid #8165c4;
+    width: 92% !important;
+    margin-left: 4px;
+    color: #575c72 !important;
+  }
+.inputLabel{
+  margin-left: 4px;
+  color: #575c72;
+}
