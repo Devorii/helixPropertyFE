@@ -56,22 +56,22 @@ export const Landlord = ({ isSubmitting, handleChange, values }) => {
           <div id="name_wrapper">
             <div className="stack_info">
               <label htmlFor="firstname">Firstname</label>
-              <Field className="nameField" onChange={handleChange} type="text" name="firstname" value={values.firstname} placeholder='Firstname'/>
+              <Field className="nameField" onChange={handleChange} type="text" name="firstname" value={values.firstname} placeholder='Firstname' />
               <ErrorMessage className='inputError' name="firstname" component="div" />
             </div>
 
             <div className="stack_info">
               <label htmlFor="lastname">Lastname</label>
-              <Field className="nameField" onChange={handleChange} id="nameField1" type="text" name="lastname" value={values.lastname} placeholder='Lastname'/>
+              <Field className="nameField" onChange={handleChange} id="nameField1" type="text" name="lastname" value={values.lastname} placeholder='Lastname' />
               <ErrorMessage className='inputError' name="lastname" component="div" />
             </div>
           </div>
           <label htmlFor="email">Email</label>
-          <Field type="email" onChange={handleChange} name="email" value={values.email} placeholder='example@gmail.com'/>
+          <Field type="email" onChange={handleChange} name="email" value={values.email} placeholder='example@gmail.com' />
           <ErrorMessage className='inputError' name="email" component="div" />
 
           <label htmlFor="phone">Phone</label>
-          <Field type="text" onChange={handleChange} name="phone" value={values.phone} placeholder='000-000-0000'/>
+          <Field type="text" onChange={handleChange} name="phone" value={values.phone} placeholder='000-000-0000' />
           <ErrorMessage className='inputError' name="phone" component="div" />
           {formIdentity != "TE1" ?
             <>
@@ -118,13 +118,13 @@ export const Landlord = ({ isSubmitting, handleChange, values }) => {
               <ErrorMessage className='inputError' name="city" component="div" />
 
               <label htmlFor="address">Address</label>
-              <Field type="text" onChange={handleChange} name="address" value={values.address} placeholder='111 address dr'/>
+              <Field type="text" onChange={handleChange} name="address" value={values.address} placeholder='111 address dr' />
               <ErrorMessage className='inputError' name="address" component="div" />
             </>
             :
             <>
               <label htmlFor="dob">Date of Birth</label>
-              <Field type="text" onChange={handleChange} name="dob" value={values.dob} placeholder='yyyy-mm-dd'/>
+              <Field type="text" onChange={handleChange} name="dob" value={values.dob} placeholder='yyyy-mm-dd' />
               <ErrorMessage className='inputError' name="dob" component="div" />
 
               <label htmlFor="occupation">Occupation</label>
@@ -168,62 +168,6 @@ export const Landlord = ({ isSubmitting, handleChange, values }) => {
         </>
         :
         <>
-
-          <div>
-            <label htmlFor="propCountry">Country</label>
-            <Field as="select"
-              name="propCountry"
-              value={values.propCountry}
-              onChange={handleChange}
-              style={{ width: "100%", padding: "8px" }}>
-              <option value="" label="Select an option" />
-              {country.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </Field>
-            <ErrorMessage className='inputError' name="propCountry" component="div" />
-          </div>
-
-
-          <div>
-            <label htmlFor="propProvince">Province</label>
-            <Field as="select"
-              name="propProvince"
-              value={values.propProvince}
-              onChange={handleChange}
-              style={{ width: "100%", padding: "8px" }}
-            >
-              <option value="" label="Select an option" />
-              {province.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </Field>
-            <ErrorMessage className='inputError' name="propProvince" component="div" />
-          </div>
-
-          <div style={{ display: "flex", flexDirection: "column" }}>
-            <label htmlFor="propCity">City</label>
-            <Field type="text" name="propCity" value={values.propCity} onChange={handleChange} />
-            <ErrorMessage className='inputError' name="propCity" component="div" />
-          </div>
-
-
-          <div style={{ display: "flex", flexDirection: "column" }}>
-            <label htmlFor="propAddress">Address</label>
-            <Field type="text" name="propAddress" value={values.propAddress} onChange={handleChange} />
-            <ErrorMessage className='inputError' name="propAddress" component="div" />
-          </div>
-
-          <div style={{ display: "flex", flexDirection: "column" }}>
-            <label htmlFor="unit">Unit #</label>
-            <Field type="text" name="unit" value={values.unit} onChange={handleChange} />
-            <ErrorMessage className='inputError' name="unit" component="div" />
-          </div>
-
           <div>
             <label htmlFor="po">Primary Owner</label>
             <Field as="select"
@@ -242,9 +186,83 @@ export const Landlord = ({ isSubmitting, handleChange, values }) => {
             <ErrorMessage className='inputError' name="po" component="div" />
           </div>
 
-          <button type="submit">
-            Submit my Application
-          </button>
+          {
+            values.po == "true" &&
+            <>
+
+              <div>
+                <label htmlFor="propCountry">Country</label>
+                <Field as="select"
+                  name="propCountry"
+                  value={values.propCountry}
+                  onChange={handleChange}
+                  style={{ width: "100%", padding: "8px" }}>
+                  <option value="" label="Select an option" />
+                  {country.map((option) => (
+                    <option key={option.value} value={option.value}>
+                      {option.label}
+                    </option>
+                  ))}
+                </Field>
+                <ErrorMessage className='inputError' name="propCountry" component="div" />
+              </div>
+
+
+              <div>
+                <label htmlFor="propProvince">Province</label>
+                <Field as="select"
+                  name="propProvince"
+                  value={values.propProvince}
+                  onChange={handleChange}
+                  style={{ width: "100%", padding: "8px" }}
+                >
+                  <option value="" label="Select an option" />
+                  {province.map((option) => (
+                    <option key={option.value} value={option.value}>
+                      {option.label}
+                    </option>
+                  ))}
+                </Field>
+                <ErrorMessage className='inputError' name="propProvince" component="div" />
+              </div>
+
+              <div style={{ display: "flex", flexDirection: "column" }}>
+                <label htmlFor="propCity">City</label>
+                <Field type="text" name="propCity" value={values.propCity} onChange={handleChange} />
+                <ErrorMessage className='inputError' name="propCity" component="div" />
+              </div>
+
+
+              <div style={{ display: "flex", flexDirection: "column" }}>
+                <label htmlFor="propAddress">Address</label>
+                <Field type="text" name="propAddress" value={values.propAddress} onChange={handleChange} />
+                <ErrorMessage className='inputError' name="propAddress" component="div" />
+              </div>
+              <div style={{ display: "flex", flexDirection: "column" }}>
+                <label htmlFor="unit">Unit</label> 
+                <Field type="text" name="unit" value={values.unit} onChange={handleChange} />
+                <ErrorMessage className='inputError' name="unit" component="div" />
+              </div>
+              <button type="submit">
+              Submit my Application
+              </button>
+            </>
+          }
+          {
+            values.po == "false" &&
+            <>
+                <div style={{ display: "flex", flexDirection: "column" }}>
+                <label htmlFor="propCodeMngmt">Enter Property Code</label>
+                <Field type="text" name="propCodeMngmt" value={values.propCodeMngmt} onChange={handleChange} />
+                <ErrorMessage className='inputError' name="propCodeMngmt" component="div" />
+              </div>
+              <button type="submit">
+              Request Access
+              </button>
+            </>
+          }
+
+
 
         </>
       }

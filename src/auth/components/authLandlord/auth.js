@@ -52,14 +52,15 @@ const AuthLandlord = () => {
     code: '',
     password: '',
     country: 'Canada',
-    province: '',
+    province: 'Enter Province',
     city: '',
     address: '',
-    unit: 0,
+    unit: 'Enter Property Unit #',
     propCountry: 'Canada',
-    propProvince: '',
-    propCity: '',
-    propAddress: '',
+    propProvince: 'Enter Province',
+    propCity: 'Enter City',
+    propAddress: 'Enter Address',
+    propCodeMngmt: 'Enter Property Code',
     po: ''
   })
 
@@ -72,6 +73,7 @@ const AuthLandlord = () => {
             initialValues={initFormState}
             validate={ values => {
               const error = {}
+
               if (!values.email) {
                 error.email = '* Required';
               } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
@@ -144,7 +146,9 @@ const AuthLandlord = () => {
                 if (!values.unit) {
                   error.unit = "Unit required"
                 }
-
+                if (!values.propCodeMngmt) {
+                  error.propCodeMngmt = "Unit required"
+                }
               }
               return error;
               }
