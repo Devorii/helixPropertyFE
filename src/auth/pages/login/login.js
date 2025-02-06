@@ -1,4 +1,4 @@
-import Logo from "../../../artifacts/logo.png";
+import Logo from "../../../artifacts/logo-light.svg";
 import SigninAdmin from './../../../artifacts/Signin.svg'
 import SigninTenant from './../../../artifacts/SigninTenant.svg'
 import Alert from '@mui/material/Alert';

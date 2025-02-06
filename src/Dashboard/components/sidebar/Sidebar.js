@@ -1,7 +1,8 @@
 import "./sidebar.css"
 import { useNavigate } from "react-router-dom";
 import PendingActionsIcon from '@mui/icons-material/PendingActions';
-import darklogo  from '../../../artifacts/dark-logo.png';
+// import darklogo  from '../../../artifacts/dark-logo.png';
+import darklogo  from '../../../artifacts/logo-dark.svg';
 import ForwardToInboxIcon from '@mui/icons-material/ForwardToInbox';
 import SignOutBtn from './../../../artifacts/Signout.svg'
 

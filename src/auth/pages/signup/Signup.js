@@ -3,7 +3,7 @@ import MapsHomeWorkIcon from '@mui/icons-material/MapsHomeWork';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import { useNavigate } from 'react-router';
 import { useFormInformation } from '../../context/authContext';
-import Logo from "../../../artifacts/logo.png"
+import Logo from "../../../artifacts/logo-light.svg"
 import "./signup.css"
 
 
