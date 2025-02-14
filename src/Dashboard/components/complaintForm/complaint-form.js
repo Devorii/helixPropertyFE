@@ -7,12 +7,14 @@ import Alert from '@mui/material/Alert';
 import CheckIcon from '@mui/icons-material/Check';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import Stack from '@mui/material/Stack';
-
+import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 
 
 const ComplaintForm = ({ lsOfCategories }) => {
   const { formName } = useIssueInformation();
   const [alertBanner, setAlertBanner] = useState(null);
+  const [images, setImages] = useState([])
+
 
   useEffect(() => {
     if (alertBanner !== null) {
@@ -40,12 +42,24 @@ const ComplaintForm = ({ lsOfCategories }) => {
         }}
 
         onSubmit={(values, { setSubmitting }) => {
-          values['category'] = `${formName} - ${values['category']}`
-          values['property_id'] = localStorage.getItem('pid')
-          values['author'] = localStorage.getItem('fullname')
-          values['author_id'] = 0
-          // alert(JSON.stringify(values, null, 2));
-          // console.log(JSON.stringify(values))
+          const formData = new FormData();
+          formData.append('category', `${formName} - ${values.category}`);
+          formData.append('property_id', localStorage.getItem('pid'));
+          formData.append('author', localStorage.getItem('fullname'));
+          formData.append('author_id', 0);
+          formData.append('description', values.description);
+          formData.append('title', values.title);
+
+          images.forEach((image, index) => {
+            formData.append('images', image); // Adds each file to FormData
+          });
+
+          // values['category'] = `${formName} - ${values['category']}`
+          // values['property_id'] = localStorage.getItem('pid')
+          // values['author'] = localStorage.getItem('fullname')
+          // values['author_id'] = 0
+          // values['images'] = images
+
 
           // Define an async function to fetch data
           const createTicket = async () => {
@@ -54,10 +68,10 @@ const ComplaintForm = ({ lsOfCategories }) => {
               const response = await fetch(`${process.env.REACT_APP_HELIX_API}/support/create-ticket`, {
                 method: 'POST',
                 headers: {
-                  'Content-Type': 'application/json',
+
                   'x-access-token': token,
                 },
-                body: JSON.stringify(values)
+                body: formData
               });
 
               // Check if the response status is 200 OK
@@ -151,6 +165,44 @@ const ComplaintForm = ({ lsOfCategories }) => {
             >
             </Field>
             {errors.description && touched.description && errors.description}
+            <h3>Upload your images (Maximum 4 Images) </h3>
+
+
+            <div className='upload-img-container'>
+              <div className='add-image-container'>
+                <input className='file-btn'
+                  name='file'
+                  type='file'
+                  accept='image/*'
+                  multiple
+                  onChange={(e) => {
+                    const files = Array.from(e.target.files);
+                    if (images.length + files.length > 4) {
+                      alert("You can only upload up to 4 images.");
+                      return;
+                    }
+                    else {
+                      setImages(prevImages => [...prevImages, ...files]);
+                    }
+                  }}
+                />
+                <AddAPhotoIcon sx={{ fontSize: 30 }} className='add-images-btn' />
+              </div>
+
+              <div className='name-container'>
+                {
+                  <div className='images-name-box'>
+                    <ul className='img-name-display'>
+                      {images.map((img, index) => (
+                        <li style={{fontSize:"small"}} key={index}>{img.name}</li>
+                      ))}
+                    </ul>
+                  </div>
+
+                }
+              </div>
+
+            </div>
 
 
 
@@ -168,7 +220,7 @@ const ComplaintForm = ({ lsOfCategories }) => {
               success: <CheckCircleOutlineIcon fontSize="inherit" />,
             }}
           >
-            This success Alert uses `iconMapping` to override the default icon.
+            Ticket successfully created. Refresh page for this beta version.
           </Alert>
         </Stack>
       }

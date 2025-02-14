@@ -76,8 +76,8 @@ const columns = [
   },
 ];
 
-function createData(id, issue, date, category, status, created_by, description) {
-  return { id, issue, date, category, status, created_by, description };
+function createData(id, issue, date, category, status, created_by, description, images) {
+  return { id, issue, date, category, status, created_by, description, images };
 }
 
 
@@ -104,7 +104,7 @@ const StickyHeadTable = () => {
     'date': 'N/A',
     'category': 'N/A',
     'status': 'N/A', 
-    'created_by':'N/A'
+    'created_by':'N/A', 
   })
   // let startDate = null
   // let endDate = null
@@ -138,11 +138,12 @@ useEffect(()=>{
           category: item.category || "N/A",              // Keep category as is
           status: item.status || "N/A",                  // Keep status as is
           created_by: item.author.toLowerCase() || "N/A", // Normalize 'author' to lowercase for 'created_by'
-          description: item.description || "N/A"
+          description: item.description || "N/A", 
+          images: item.images || "N/A"
         }));
         setMocLs(apiResp)
         const updatedRows = apiResp.map((dataSet) =>
-          createData(dataSet.id, dataSet.issue, dataSet.date, dataSet.category, dataSet.status, dataSet.created_by, dataSet.description)
+          createData(dataSet.id, dataSet.issue, dataSet.date, dataSet.category, dataSet.status, dataSet.created_by, dataSet.description, dataSet.images)
         );
         setNRows(updatedRows);
       } 
@@ -209,8 +210,7 @@ const statusChange = (e) =>{
   const OpenRowInformation = (cellData) => {
     dispatch({ type: 'review' })
     localStorage.setItem('cellData', cellData)
-    // Instead of passing data through context. 
-    // You can pass it through local storage.
+ 
   }
 
   const handleChangePage = (event, newPage) => {
@@ -235,10 +235,7 @@ const statusChange = (e) =>{
         <div id='mg-15'>
           <p>From</p>
           <DatePicker className='dt-picker' value={startDate} onChange={(e) => {
-            // console.log('start', e.utc().format('DD-MM-YYYY'), e.utc().format('DD-MM-YYYY'))
             setStartDate(dayjs(e.utc()))
-            // startDate = dayjs(e.utc())
-  
           }} />
           {isError ?
             <Stack sx={{ width: '88%' }} spacing={2}>
@@ -251,9 +248,7 @@ const statusChange = (e) =>{
         <div>
           <p>To</p>
           <DatePicker className='dt-picker' value={endDate} onChange={(e) => {
-            setEndDate(dayjs(e.utc()))
-            // endDate = dayjs(e.utc())
-            console.log('enddate', endDate)
+            setEndDate(dayjs(e.utc())) 
             change(dayjs(e.utc()))
           }
 

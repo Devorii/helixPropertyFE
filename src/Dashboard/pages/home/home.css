@@ -16,7 +16,9 @@ margin-bottom: 20px;
     background-color: white;
     border-radius: 10px;
     width: 87%;
+    height: 60%;
     padding: 70px;
+    overflow-y: scroll;
 }
 
 #cardsHolder {
