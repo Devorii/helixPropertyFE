@@ -20,3 +20,48 @@
 #reportIssueArea{
     padding: 10px;
 }
+
+.add-images-btn{
+    color: rgb(0, 106, 255);
+    position: absolute;
+    z-index: 1;
+    width: 0px;
+}
+.add-image-container{
+    display: flex;
+    width: 8%;
+    align-items: center;
+    position: relative;
+    /* margin-top: 40px; */
+    /* margin-bottom: 40px; */
+
+}
+.file-btn{
+width: 100%;
+opacity: 0;
+z-index: 999;
+position: absolute;
+}
+
+.file-btn:hover{
+    cursor: pointer;
+}
+.img-name-display{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.images-name-box{
+    width: 100%;
+    border: 1px solid black;
+    border-radius: 5px;
+    overflow-x: scroll;
+}
+.upload-img-container{
+    display: flex;
+    align-items: center;
+}
+
+.name-container{
+    width: 100%;
+}

@@ -58,7 +58,7 @@
     background-color: #f6f9fc;
     padding: 20px;
     border-radius: 7px;
-    width: 50%;
+    width: 80%;
 }
 .closeBtn{
     background: #5bb3e0 !important;
@@ -67,6 +67,41 @@
 .back{
     margin-right: 10px;
 }
-#controls-wrapper{
+/* #controls-wrapper{
     margin-top: 7%;
+} */
+.review-img{ 
+    border-radius: 5px;
+    width: 200px;
+    height: 200px;
+}
+.align-content-w-img{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.review-container-1{
+    width: 40%;
+}
+
+.review-container-2{
+    width: 60%;
+}
+
+.review-container-2 img{
+    width: 100%;
+    height: auto;
+    max-width: 600px;
+    max-height: 500px;
+}
+.report-img{
+    border-radius: 5px;
+}
+.report-img:hover{
+cursor: pointer;
+}
+
+.category{
+    width: 218%;
 }

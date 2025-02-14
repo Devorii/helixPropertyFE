@@ -171,7 +171,7 @@ const Home = () => {
 
 
                                     <h1 style={{ marginBottom: '0px' }}>Issue Reports</h1>
-                                    <p id="viewReports" style={{ color: 'rgb(0 113 183)' }}>Create a ticket by selecting a category below.</p>
+                                    <p id="viewReports" style={{ color: 'rgb(0, 106, 255)' }}>Create a ticket by selecting a category below.</p>
 
                                     <div id="cardsHolder">
                                         <Card name='Main Unit' />

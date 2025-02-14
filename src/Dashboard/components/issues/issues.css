@@ -11,6 +11,10 @@ margin-top: 17px !important;
 .dt-picker{
     width: 180px !important;
 }
+.dt-picker:hover{
+    border-radius: 5px;
+    border: 0.6px solid rgb(0, 106, 255);
+}
 
 .MuiInputBase-input.MuiOutlinedInput-input.MuiInputBase-inputAdornedEnd.css-1dune0f-MuiInputBase-input-MuiOutlinedInput-input{
     padding: 8.5px 14px !important;

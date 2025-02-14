@@ -27,6 +27,7 @@ label{
   text-align: center;
 }
 body {
+  cursor: none;
   color: #575c72;
   /* Correcting the background image syntax */
   /* background-image: url('./artifacts/ai-house-2.jpg'); */
@@ -53,7 +54,7 @@ body {
   font-optical-sizing: auto;
   
   /* Disable any overflow from the body */
-  overflow: hidden;
+  overflow-y: hidden;
 
 }
 .gcw{
@@ -116,6 +117,17 @@ button{
 .App-link {
   color: #61dafb;
 }
+.circle-cursor {
+  position: fixed;
+  width: 13px;
+  height: 13px;
+  border: 2px solid rgb(0, 106, 255); /* White border */
+  border-radius: 50%;
+  pointer-events: none; /* So it doesn't interfere with clicks */
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s linear;
+}
+
 
 @keyframes App-logo-spin {
   from {

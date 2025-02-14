@@ -19,6 +19,11 @@ const Sidebar = () => {
     <div id="sidebar-container">
       <div id="sidebar-logo">
         <img src={darklogo} alt="sidebar-logo" id="sb-logo"></img>
+        {
+          localStorage.getItem('userStatus') == "OW1" &&
+          <p>{`ID: ${localStorage.getItem('pid')}`}</p>
+        }
+  
       </div>
 
       <div className="navItems">
@@ -41,7 +46,7 @@ const Sidebar = () => {
 
         <div className="inviteTenant">
 
-        {
+        {/* {
           userStatus=='OW1' &&
           <>
           <ForwardToInboxIcon className="navIcon"/>
@@ -50,7 +55,7 @@ const Sidebar = () => {
           </a>
           </>
 
-        }
+        } */}
         </div>
 
 
