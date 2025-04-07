@@ -71,3 +71,12 @@ cursor: pointer;
 .signout-btn{
     width: 140px;
 }
+
+
+@media (max-width: 600px){
+    #sidebar-container{
+        height: 0vh;
+        width: 0px;
+        display: none;
+    }
+}

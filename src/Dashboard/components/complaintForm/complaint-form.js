@@ -116,6 +116,7 @@ const ComplaintForm = ({ lsOfCategories }) => {
               <div className='ew-c' id='categoryWrapper'>
                 <label htmlFor="category">Select a Category</label>
                 <Field as="select"
+                className="category-select"
                   name="category"
                   value={values.category}
                   onChange={handleChange}

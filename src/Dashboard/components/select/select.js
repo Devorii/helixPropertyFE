@@ -4,6 +4,7 @@ import { Select as BaseSelect, selectClasses } from '@mui/base/Select';
 import { Option as BaseOption, optionClasses } from '@mui/base/Option';
 import { styled } from '@mui/system';
 import UnfoldMoreRoundedIcon from '@mui/icons-material/UnfoldMoreRounded';
+import './select.css'
 
 const Select = React.forwardRef(function Select(props, ref) {
   const slots = {
@@ -13,7 +14,7 @@ const Select = React.forwardRef(function Select(props, ref) {
     ...props.slots,
   };
 
-  return <BaseSelect {...props} ref={ref} slots={slots} />;
+  return <BaseSelect className='statusSelector' {...props} ref={ref} slots={slots} />;
 });
 
 

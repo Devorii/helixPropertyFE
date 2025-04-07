@@ -38,3 +38,25 @@ margin-right: 15px;
     background-color: red; /* Change this color to what you prefer */
     cursor: pointer;
   }
+
+
+  @media (max-width: 600px){
+    .paper{
+        margin-bottom: 250px;
+    }
+    #arrangeDateComponents{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin-bottom: 30px;
+    }
+
+    .dt-picker{
+        width: 100% !important;
+        font-size: larger !important;
+    }
+
+    #arrangeDateComponents #mg-15 {
+        margin-right: 0px;
+    }
+  }

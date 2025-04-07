@@ -18,3 +18,34 @@
     position: absolute;
     right: 40px;
 }
+.mobile-box{
+    display:none;
+}
+
+@media (max-width: 600px){
+    #initViewer{
+        background-color:white;
+        height: 30px;
+        width: 30px;
+        border-radius: 500px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: black;
+        font-size: small;
+        position: initial;
+        right: 40px;
+    }
+    .mobile-box{
+        display:block;
+    }
+    #topNav{
+        width: 0%;
+        height: 0px;
+        /* background-color: aquamarine; */
+        display: none;
+    }
+    .mobile-nav{
+        width: 100% !important;
+    }
+}

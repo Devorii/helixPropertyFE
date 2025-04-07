@@ -44,3 +44,21 @@ color:  rgb(0, 106, 255);
 cursor: pointer;
 }
 
+@media (max-width:600px){
+    .selectionCards {
+        width: 190px;
+        height: 80px;
+        border-radius: 10px;
+        border: solid rgb(4, 4, 89) 1px;
+        background-color: white;
+        margin-right: 7px;
+        text-align: center;
+        font-weight: 300;
+        display: flex
+    ;
+        justify-content: center;
+        align-items: center;
+        color: rgb(4, 4, 89);
+        transition: all 0.3s ease;
+    }
+}

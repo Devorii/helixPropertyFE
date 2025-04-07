@@ -65,3 +65,33 @@ position: absolute;
 .name-container{
     width: 100%;
 }
+
+@media (max-width: 600px){
+    #elementsWrapper {
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+    }
+    #issueForm {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.images-name-box {
+    width: 94%;
+    border: 1px solid black;
+    border-radius: 5px;
+    overflow-x: scroll;
+    margin-left: 6%;
+}
+.ew-c {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.category-select{
+    width: 100% !important;
+}
+    
+}

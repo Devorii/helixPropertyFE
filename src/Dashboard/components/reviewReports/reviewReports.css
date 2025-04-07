@@ -18,6 +18,9 @@
     flex-direction: column;
     text-align: left;
 }
+.mobile-ntm1{
+    display: none;
+}
 
 .ntm{
     margin-top: 0px;
@@ -104,4 +107,50 @@ cursor: pointer;
 
 .category{
     width: 218%;
+}
+
+
+@media (max-width: 600px){
+    .align-content-w-img{
+        display: flex;
+        flex-direction: column-reverse;
+        width: 100%;
+    }
+    .review-container-2 {
+        width: 100%;
+        margin-top: 20px;
+    }
+    .mobile-ntm1{
+    display: block;
+    font-size: 33px;
+    margin-top: 20px;
+    margin-bottom: 5px;    
+    }
+    .ntm1-desktop{
+        display: none;
+    }
+    .review-container-1 {
+        width: 100%;
+    }
+    #reportContainer {
+        background-color: #f6f9fc;
+        padding: 20px;
+        border-radius: 7px;
+        width: 90%;
+    }
+    #meta-header-wrapper {
+        display: flex
+    ;
+        width: 100%;
+    }
+    #id-container {
+        display: flex
+    ;
+        margin-right: 9px;
+        flex-direction: column;
+        text-align: left;
+    }
+    .category {
+        width: fit-content;
+    }
 }

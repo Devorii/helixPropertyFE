@@ -12,7 +12,6 @@ const Sidebar = () => {
   const logout = () =>{
     localStorage.clear()
     nav('/')
-
   }
   
   return (
@@ -23,7 +22,7 @@ const Sidebar = () => {
           localStorage.getItem('userStatus') == "OW1" &&
           <p>{`ID: ${localStorage.getItem('pid')}`}</p>
         }
-  
+        
       </div>
 
       <div className="navItems">
@@ -63,9 +62,6 @@ const Sidebar = () => {
 
       <div id="profile-container">
         <img onClick={logout} class="img-btn signout-btn" src={SignOutBtn} alt="SignOut Icon" />
-        {/* <button id="logout-btn" onClick={logout}>
-          Sign out
-        </button> */}
       </div>
 
     </div>

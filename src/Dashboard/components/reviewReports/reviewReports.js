@@ -136,10 +136,13 @@ const ReviewReports = (props) => {
             {
                 cellData ?
                     <>
+                        <div>
+                            <p className="ntm1 labelname mobile-ntm1" style={{ color: '#575c72' }}><strong className="labelname"></strong>{cellData.issue}</p>
+                        </div>
                         <div className="align-content-w-img">
                             <div className="review-container-1">
                                 <div>
-                                    <p className="ntm1 labelname" style={{ color: '#575c72' }}><strong className="labelname"></strong>{cellData.issue}</p>
+                                    <p className="ntm1 labelname ntm1-desktop" style={{ color: '#575c72' }}><strong className="labelname"></strong>{cellData.issue}</p>
                                 </div>
                                 {
                                     alertBanner && // Only show the alert if alertBanner is true

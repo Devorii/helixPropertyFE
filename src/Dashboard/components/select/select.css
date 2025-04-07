@@ -1,0 +1,10 @@
+
+
+@media (max-width: 600px){
+
+    .statusSelector{
+        width: 100% !important;
+        font-size: larger !important;
+    }
+
+}
