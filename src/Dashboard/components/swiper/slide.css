@@ -1,0 +1,28 @@
+
+.slider-container{
+    display: none;
+
+}
+@media (max-width: 600px){
+    .mobile-slide{
+        width: 100%;
+        border-radius: 10px;
+        
+    }
+    .slider-container{
+        display: block;
+        width: 100%;
+    }
+    .mobile-img-swiper-container{
+        display: flex;
+    }
+    .swipeIcon{
+        background-color: black;
+        padding: 5px;
+        border-radius: 3px;
+        position: absolute;
+        bottom: 10px;
+        color: white;
+        left: 10px;
+    }
+}

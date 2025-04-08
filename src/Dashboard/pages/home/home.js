@@ -155,7 +155,7 @@ const Home = () => {
                                 ''
                                 :
                                 <>
-                                    <h1 style={{ marginBottom: '0px' }}>Issues Reported</h1>
+                                    <h1 style={{ marginBottom: '0px', color: 'black' }}>Issues Reported</h1>
 
                                 </>
 
@@ -170,7 +170,7 @@ const Home = () => {
                                 <>
 
 
-                                    <h1 style={{ marginBottom: '0px' }}>Issue Reports</h1>
+                                    <h1 style={{ marginBottom: '0px', color: 'black' }}>Issue Reports</h1>
                                     <p id="viewReports" style={{ color: 'rgb(0, 106, 255)' }}>Create a ticket by selecting a category below.</p>
 
                                     <div id="cardsHolder">

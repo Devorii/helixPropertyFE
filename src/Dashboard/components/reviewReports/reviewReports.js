@@ -10,7 +10,8 @@ import closeTicketSVG from './../../../artifacts/closed.svg'
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import defaultImg from './../../../artifacts/default-img.jpg'
-
+import AlignItemsList from '../comments/comments_list'
+import SwipersComp from '../swiper/swiper'
 
 const ReviewReports = (props) => {
     const nav = useNavigate()
@@ -137,12 +138,13 @@ const ReviewReports = (props) => {
                 cellData ?
                     <>
                         <div>
-                            <p className="ntm1 labelname mobile-ntm1" style={{ color: '#575c72' }}><strong className="labelname"></strong>{cellData.issue}</p>
+                            <p className="ntm1 labelname mobile-ntm1" style={{ color: '#575c72'}}><strong className="labelname"></strong>{cellData.issue}</p>
+                            <SwipersComp images={cellData['images']}/>
                         </div>
                         <div className="align-content-w-img">
                             <div className="review-container-1">
                                 <div>
-                                    <p className="ntm1 labelname ntm1-desktop" style={{ color: '#575c72' }}><strong className="labelname"></strong>{cellData.issue}</p>
+                                    <p className="ntm1 labelname ntm1-desktop" style={{ color: '#575c72', width:'80%' }}><strong className="labelname"></strong>{cellData.issue}</p>
                                 </div>
                                 {
                                     alertBanner && // Only show the alert if alertBanner is true
@@ -187,7 +189,7 @@ const ReviewReports = (props) => {
                                     </div>
 
                                 </div>
-                                <h4 style={{ marginBottom: '10px', marginTop: '10px' }} className="labelname">Detail Complaint</h4>
+                                <h4 style={{ marginBottom: '10px', marginTop: '10px' }} className="labelname mt-ra">Detail Complaint</h4>
                                 <div id="reportContainer">
                                     <p className="descriptionElement mrgn7">
                                         {cellData.description}
@@ -229,7 +231,22 @@ const ReviewReports = (props) => {
                             }
                         </div>
 
+                        {/* Add comments section */}
 
+                        {/* <hr/>
+                        <p>Notes</p>
+                        
+                        <div className="notes-section">
+                        <AlignItemsList />
+                        <form className='notes-form' action="/submit" method="POST">
+                        <label for="userInput">Your Input:</label>
+                        <textarea id="userInput" name="userInput" rows="4" cols="50"></textarea>
+                        <br/>
+                        <button type="submit">Submit</button>
+                        </form>
+
+
+                        </div> */}
 
                         <div id="controls-wrapper">
                             <img onClick={back} class="img-btn back" src={backSVG} alt="Back Icon" />
