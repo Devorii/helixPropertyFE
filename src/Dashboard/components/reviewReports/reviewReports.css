@@ -125,13 +125,77 @@ cursor: pointer;
     border-radius: 8px;
     padding: 20px;
     width: 30%;
+    height: auto;
+    max-height: 218px;
+    
 }
 .notes-section{
     display: flex;
     justify-content: space-between;
+    margin-bottom: 30px;
+}
+.comment-btn{
+    background: black !important;
 }
 
+
+
+.swipeVerticleIcon{
+
+    position: absolute;
+    bottom: 10px;
+    z-index: 1;
+    right: 10px;
+    background: black;
+    padding: 6px;
+    border-radius: 3px;
+    color: white;
+    width: 18px !important;
+    height: 18px !important;
+    animation: easeInIcon 1.3s;
+}
+
+@keyframes easeInIcon {
+    from {
+        opacity: 0;
+    }
+    to{
+        opacity: 100;
+    }
+    
+}
+
+
+
+.comments-holder{
+    position: relative;
+    width: 65%;
+    display: flex;
+flex-wrap: wrap;
+margin-right: 5%;
+}
+
+
 @media (max-width: 600px){
+    .comments-holder {
+        position: relative;
+        width: 100%;
+    }
+    .notes-form {
+        display: flex;
+        margin-top: 20px;
+        flex-direction: column;
+        border: 1px solid black;
+        border-radius: 8px;
+        padding: 20px;
+        width: 87%;
+    }
+
+    .notes-section {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 30px;
+    }
     .mt-ra{
         margin-top: -4px !important;
     }

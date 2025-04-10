@@ -12,6 +12,8 @@ import ImageListItem from '@mui/material/ImageListItem';
 import defaultImg from './../../../artifacts/default-img.jpg'
 import AlignItemsList from '../comments/comments_list'
 import SwipersComp from '../swiper/swiper'
+import SwipeVerticalIcon from '@mui/icons-material/SwipeVertical';
+
 
 const ReviewReports = (props) => {
     const nav = useNavigate()
@@ -20,17 +22,138 @@ const ReviewReports = (props) => {
     const [alertBanner, setAlertBanner] = useState(null);
     const [ticketMsg, setTicketMsg] = useState('')
     const [viewImg, setViewImg] = useState([defaultImg])
+    const [comments, setComments] = useState([{
+        initials: 'NC',
+        fullname: 'No Comment',
+        role: 'Admin',
+        comment: 'No comment was created. Be the first to comment on this ticket.',
+        date: '1913-01-01'
+
+    }])
     const username = localStorage.getItem('fullname')
     const accountType = localStorage.getItem('userStatus')
     const token = localStorage.getItem('token')
     const property_id = localStorage.getItem('pid')
 
+    const commentsMetaData = {
+        fullname: '',
+        initials: '',
+        property_id: '',
+        ticket_id: '',
+        created_date: '1913-01-01',
+        role: '',
+        notes: ''
+    }
+
+    const validateCommentArea = () => {
+        if (comments.length === 1 && comments[0].fullname === 'No Comment') {
+            return true
+        }
+        else {
+            return false
+        }
+    }
+
+
+    const submitComment = (e) => {
+        e.preventDefault()
+        const ticketData = JSON.parse(localStorage.getItem('cellData'))
+        const date = new Date()
+        const rawRole = localStorage.getItem('userStatus')
+        const fullName = localStorage.getItem('fullname')
+        const usrInitials = localStorage.getItem('userInit')
+        const propertyID = localStorage.getItem('pid')
+        const role = rawRole !== 'OW1' ? 'Tenant' : 'Admin'
+        const usrComment = e.target.userInput.value
+
+        commentsMetaData.fullname = fullName
+        commentsMetaData.initials = usrInitials
+        commentsMetaData.property_id = propertyID
+        commentsMetaData.ticket_id = ticketData['id']
+        commentsMetaData.created_date = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`
+        commentsMetaData.role = role
+        commentsMetaData.notes = usrComment
+
+        const commentListing = {
+            initials: usrInitials,
+            fullname: fullName,
+            role: role,
+            comment: usrComment,
+            date: '1913-01-01'
+        }
+
+
+
+        if (validateCommentArea() !== true) {
+            setComments([...comments, commentListing])
+        }
+        else {
+            setComments([commentListing])
+        }
+
+        const create_comment = async()=>{
+            try {
+                const response = await fetch(`${process.env.REACT_APP_HELIX_API}/comment/create-comment`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'x-access-token': token,
+                    },
+                    body: JSON.stringify(commentsMetaData)
+                });
+
+                // Check if the response status is 200 OK
+                if (response.status === 200) {
+                    console.log(response)
+                }
+                // Handle other non-200 responses (optional)
+                else {
+                    console.error(`Unexpected status: ${response.status}`);
+                }
+            } catch (error) {
+                console.error('Error during the request:', error.message);
+            }
+        }
+        create_comment()
+        // console.log(commentsMetaData)
+    }
 
 
 
     useEffect(() => {
         if (alertBanner !== null) {
         }
+        const ticket_id_raw=JSON.parse(localStorage.getItem('cellData'))
+
+        const get_comments = async() => {
+            try {
+                const response = await fetch(`${process.env.REACT_APP_HELIX_API}/comment/retrieve-comments`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'x-access-token': token,
+                    },
+                    body: JSON.stringify({
+                        property_id: localStorage.getItem('pid'),
+                        ticket_id: ticket_id_raw['id']
+                    })
+                });
+
+                // Check if the response status is 200 OK
+                if (response.status === 200) {
+                    const data = await response.json();
+                    setComments(data)
+                    console.log(data)
+                }
+                // Handle other non-200 responses (optional)
+                else {
+                    console.error(`Unexpected status: ${response.status}`);
+                }
+            } catch (error) {
+                console.error('Error during the request:', error.message);
+            }
+        }
+        get_comments()
     }, [alertBanner]);
 
 
@@ -138,13 +261,13 @@ const ReviewReports = (props) => {
                 cellData ?
                     <>
                         <div>
-                            <p className="ntm1 labelname mobile-ntm1" style={{ color: '#575c72'}}><strong className="labelname"></strong>{cellData.issue}</p>
-                            <SwipersComp images={cellData['images']}/>
+                            <p className="ntm1 labelname mobile-ntm1" style={{ color: '#575c72' }}><strong className="labelname"></strong>{cellData.issue}</p>
+                            <SwipersComp images={cellData['images']} />
                         </div>
                         <div className="align-content-w-img">
                             <div className="review-container-1">
                                 <div>
-                                    <p className="ntm1 labelname ntm1-desktop" style={{ color: '#575c72', width:'80%' }}><strong className="labelname"></strong>{cellData.issue}</p>
+                                    <p className="ntm1 labelname ntm1-desktop" style={{ color: '#575c72', width: '80%' }}><strong className="labelname"></strong>{cellData.issue}</p>
                                 </div>
                                 {
                                     alertBanner && // Only show the alert if alertBanner is true
@@ -233,20 +356,30 @@ const ReviewReports = (props) => {
 
                         {/* Add comments section */}
 
-                        {/* <hr/>
-                        <p>Notes</p>
-                        
+                        <hr />
+                        <p style={{color:'black'}}>Review notes</p>
+
                         <div className="notes-section">
-                        <AlignItemsList />
-                        <form className='notes-form' action="/submit" method="POST">
-                        <label for="userInput">Your Input:</label>
-                        <textarea id="userInput" name="userInput" rows="4" cols="50"></textarea>
-                        <br/>
-                        <button type="submit">Submit</button>
-                        </form>
+
+                            <div className="comments-holder">
+                                {
+                                    comments.length > 2 &&
+                                    <SwipeVerticalIcon className='swipeVerticleIcon' />
+                                }
+                                <AlignItemsList comments={comments} />
+                            </div>
 
 
-                        </div> */}
+
+                            <form className='notes-form' onSubmit={(e) => submitComment(e)} method="POST">
+                                <label for="userInput">Leave a comment</label>
+                                <textarea id="userInput" name="userInput" rows="4" cols="50"></textarea>
+                                <br />
+                                <button className='comment-btn' type="submit">Submit Comment</button>
+                            </form>
+
+
+                        </div>
 
                         <div id="controls-wrapper">
                             <img onClick={back} class="img-btn back" src={backSVG} alt="Back Icon" />

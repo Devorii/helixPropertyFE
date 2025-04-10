@@ -1,7 +1,38 @@
 .list-comments{
-    width: 65% !important;
+    width: 100% !important;
     border: 1px solid black;
     padding: 10px !important;
     border-radius: 8px;
-    margin-right: 5% !important;
+    /* margin-right: 5% !important; */
+    height: fit-content !important;
+    max-height: 300px !important;
+    overflow-y: auto !important;
+    position: relative;
+}
+#initials_icon{
+width: 30px;
+height: 30px;
+background: black;
+display: flex;
+justify-content: center;
+align-items: center;
+border-radius: 100px;
+color: wheat;
+font-size: small;
+}
+
+
+@media (max-width: 600px){
+    .list-comments{
+        width: 93% !important;
+        margin-right: 0px !important;
+        height: fit-content !important;
+        max-height: 480px !important;
+        overflow-y: scroll !important;
+    }
+    .initials{
+            width: 30px !important;
+            height: 30px !important;
+        
+    }
 }

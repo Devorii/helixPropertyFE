@@ -23,7 +23,7 @@ const TopNav = () => {
     const userInitials = localStorage.getItem('userInit')
     const [auth, setAuth] = React.useState(true);
     const [anchorEl, setAnchorEl] = React.useState(null);
-
+    
     useEffect(() => {
     }, [userInitials])
 
@@ -97,8 +97,9 @@ const TopNav = () => {
                                     open={Boolean(anchorEl)}
                                     onClose={handleClose}
                                 >
+                                    
                                     <MenuItem onClick={logout}>Sign out</MenuItem>
-
+                                    <MenuItem>Property Id: {localStorage.getItem('pid')}</MenuItem>
                                 </Menu>
                             </div>
                         )}
