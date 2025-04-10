@@ -32,6 +32,7 @@ const ReviewReports = (props) => {
         date: currentDate
 
     }])
+    const [textareaComment, settextareaComment] = useState("");
     const username = localStorage.getItem('fullname')
     const accountType = localStorage.getItem('userStatus')
     const token = localStorage.getItem('token')
@@ -117,6 +118,8 @@ const ReviewReports = (props) => {
             }
         }
         create_comment()
+
+        settextareaComment("")
         // console.log(commentsMetaData)
     }
 
@@ -375,7 +378,15 @@ const ReviewReports = (props) => {
 
                             <form className='notes-form' onSubmit={(e) => submitComment(e)} method="POST">
                                 <label for="userInput">Leave a comment</label>
-                                <textarea id="userInput" name="userInput" rows="4" cols="50"></textarea>
+                                <textarea 
+                                id="userInput" 
+                                name="userInput" 
+                                rows="4" 
+                                value={textareaComment} 
+                                onChange={(e) => settextareaComment(e.target.value)}
+                                cols="50">
+                                </textarea>
+
                                 <br />
                                 <button className='comment-btn' type="submit">Submit Comment</button>
                             </form>
