@@ -17,7 +17,7 @@ import SwipeVerticalIcon from '@mui/icons-material/SwipeVertical';
 
 const ReviewReports = (props) => {
     const dateObj=new Date()
-    const currentDate=`${dateObj.getFullYear()}-${dateObj.getMonth()+1}-${dateObj.getDay()}`
+    const currentDate=`${dateObj.getFullYear()}-${dateObj.getMonth()+1}-${dateObj.getDate()}`
     const nav = useNavigate()
     const back = () => nav(0)
     const [cellData, setCellData] = useState(null)
