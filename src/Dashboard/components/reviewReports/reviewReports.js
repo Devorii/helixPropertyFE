@@ -147,8 +147,10 @@ const ReviewReports = (props) => {
                 // Check if the response status is 200 OK
                 if (response.status === 200) {
                     const data = await response.json();
-                    setComments(data)
-                    console.log(data)
+                    if(data.length > 0){
+                        setComments(data)
+                    }
+                    
                 }
                 // Handle other non-200 responses (optional)
                 else {
