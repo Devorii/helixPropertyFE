@@ -16,6 +16,8 @@ import SwipeVerticalIcon from '@mui/icons-material/SwipeVertical';
 
 
 const ReviewReports = (props) => {
+    const dateObj=new Date()
+    const currentDate=`${dateObj.getFullYear()}-${dateObj.getMonth()+1}-${dateObj.getDay()}`
     const nav = useNavigate()
     const back = () => nav(0)
     const [cellData, setCellData] = useState(null)
@@ -26,8 +28,8 @@ const ReviewReports = (props) => {
         initials: 'NC',
         fullname: 'No Comment',
         role: 'Admin',
-        comment: 'No comment was created. Be the first to comment on this ticket.',
-        date: '1913-01-01'
+        note: 'No comment was created. Be the first to comment on this ticket.',
+        date: currentDate
 
     }])
     const username = localStorage.getItem('fullname')
@@ -40,7 +42,7 @@ const ReviewReports = (props) => {
         initials: '',
         property_id: '',
         ticket_id: '',
-        created_date: '1913-01-01',
+        created_date: currentDate,
         role: '',
         notes: ''
     }
@@ -78,8 +80,8 @@ const ReviewReports = (props) => {
             initials: usrInitials,
             fullname: fullName,
             role: role,
-            comment: usrComment,
-            date: '1913-01-01'
+            note: usrComment,
+            date: currentDate
         }
 
 

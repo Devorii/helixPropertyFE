@@ -1,4 +1,4 @@
-import Logo from "../../../artifacts/logo-light.svg";
+import Logo from "../../../artifacts/logo-dark.svg";
 import SigninAdmin from './../../../artifacts/Signin.svg'
 import SigninTenant from './../../../artifacts/SigninTenant.svg'
 import Alert from '@mui/material/Alert';
@@ -124,7 +124,7 @@ const LoginPage = () => {
                 </div>
                 {showLogin ? (
                     <>
-                        <p>Welcome! Let's get you signed in.</p>
+                        <p id='promptUsr' >Welcome! Let's get you signed in.</p>
                         <div className="form-wrapper">
                             <Formik
                                 initialValues={{
@@ -158,14 +158,14 @@ const LoginPage = () => {
                                             <ErrorMessage  className='inputError' name="password" component="div" />
                                         </div>
                                         <div className="form-buttons">
-                                        <img onClick={() => signInAsOwner(values)} class="img-btn signin-btn" src={SigninAdmin} alt="SignIn Admin Icon" />
-                                            {/* <button type="button" onClick={() => signInAsOwner(values)}>
+                                        {/* <img onClick={() => signInAsOwner(values)} class="img-btn signin-btn" src={SigninAdmin} alt="SignIn Admin Icon" /> */}
+                                            <button type="button" onClick={() => signInAsOwner(values)}>
                                                 Sign in as Owner
-                                            </button> */}
-                                        <img onClick={() => signInAsTenant(values)} class="img-btn signin-btn" src={SigninTenant} alt="SignIn Tenant Icon" />
-                                            {/* <button type="button" onClick={() => signInAsTenant(values)}>
+                                            </button>
+                                        {/* <img onClick={() => signInAsTenant(values)} class="img-btn signin-btn" src={SigninTenant} alt="SignIn Tenant Icon" /> */}
+                                            <button type="button" onClick={() => signInAsTenant(values)}>
                                                 Sign in as Tenant
-                                            </button> */}
+                                            </button>
                                         </div>
                                         <div className="form-links">
                                             <a href="#">Terms & Conditions</a>

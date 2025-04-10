@@ -94,7 +94,8 @@
   }
   
   .inputDecorator{
-    border: 1px solid #8165c4;
+    /* border: 1px solid #8165c4; */
+    border: 1px solid black;
     width: 92% !important;
     margin-left: 4px;
     color: #575c72 !important;
@@ -102,4 +103,7 @@
 .inputLabel{
   margin-left: 4px;
   color: #575c72;
+}
+#promptUsr{
+  color: black;
 }
