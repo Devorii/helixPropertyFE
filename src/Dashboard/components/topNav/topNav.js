@@ -16,9 +16,13 @@ import FormGroup from '@mui/material/FormGroup';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import { useNavigate } from "react-router-dom";
+import { SimpleTreeView } from '@mui/x-tree-view/SimpleTreeView';
+import { TreeItem } from '@mui/x-tree-view/TreeItem';
+
 
 
 const TopNav = () => {
+    const themeColor=process.env.REACT_APP_THEME_COLOR
     const nav = useNavigate()
     const userInitials = localStorage.getItem('userInit')
     const [auth, setAuth] = React.useState(true);
@@ -42,12 +46,20 @@ const TopNav = () => {
         localStorage.clear()
         nav('/')
     }
-
+    const homeNav = () => { 
+        nav('/')
+    }
+  const navigateToContractors = () => {
+    nav('/contractors-information')
+  }
+  const navigateToExpenses = () => {
+    nav('/transaction-expenses')
+  }
 
     return (
         <div className="mobile-nav">
             <Box sx={{ flexGrow: 1, width: "100%" }} className='mobile-box'>
-                <AppBar position="static" style={{ backgroundColor: 'black' }}>
+                <AppBar position="static" style={{ backgroundColor: "black" }}>
                     <Toolbar>
 
                         <IconButton
@@ -97,8 +109,28 @@ const TopNav = () => {
                                     open={Boolean(anchorEl)}
                                     onClose={handleClose}
                                 >
-                                    
+                                    <MenuItem onClick={homeNav}>Home</MenuItem>
                                     <MenuItem onClick={logout}>Sign out</MenuItem>
+                                                  <Box>
+                                                    <SimpleTreeView>
+                                                      <TreeItem itemId="grid" label="Contacts">
+                                                        <TreeItem itemId="grid-Info" label="Tenants Info" onClick={navigateToContractors} />
+                                                        {/* <TreeItem itemId="grid-contractors-info" label="Contractors Info"/> */}
+                                                      </TreeItem>
+                                                    </SimpleTreeView>
+                                    
+                                                    <SimpleTreeView>
+                                                      <TreeItem itemId="grid" label="Transactions">
+                                                        <TreeItem itemId="grid-Info" label="Expenses" onClick={navigateToExpenses} />
+                                                      </TreeItem>
+                                                    </SimpleTreeView>
+                                    
+                                                    {/* <SimpleTreeView>
+                                                      <TreeItem itemId="grid" label="Billing">
+                                                        <TreeItem itemId="grid-pro" label="Invoices" />
+                                                      </TreeItem>
+                                                    </SimpleTreeView> */}
+                                                  </Box>
                                     <MenuItem>Property Id: {localStorage.getItem('pid')}</MenuItem>
                                 </Menu>
                             </div>
@@ -110,7 +142,7 @@ const TopNav = () => {
             {/* Desktop below */}
             <div id="topNav">
                 {/* More navigation can go here in the future */}
-                <div id="initViewer">
+                <div id="initViewer" style={{ backgroundColor: themeColor }}>
                     {userInitials ? userInitials : "~"}
                 </div>
             </div>

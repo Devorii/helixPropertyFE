@@ -98,8 +98,10 @@
 } */
 
 .review-container-2 {
+    /* background: whitesmoke; */
     width: 50%;
-    padding: 26px 40px 0px 40px;
+    padding: 26px 40px 40px 40px;
+    border-radius: 10px;
 }
 
 .review-container-2 img{
@@ -210,6 +212,9 @@ margin-right: 5%;
         margin-top: 20px;
         padding: 0px; */
     }
+    .review-container-1 {
+        width: 100%;
+    }
     .mobile-ntm1{
     display: block;
     font-size: 27px;
@@ -220,9 +225,7 @@ margin-right: 5%;
     .ntm1-desktop{
         display: none;
     }
-    .review-container-1 {
-        width: 100%;
-    }
+
     #reportContainer {
         background-color: #f6f9fc;
         padding: 20px;

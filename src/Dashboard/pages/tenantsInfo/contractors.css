@@ -1,0 +1,24 @@
+.dash-viewer{
+    background-color: white;
+    border-radius: 10px;
+    width: auto;
+    margin-left: 250px;
+    /* height: 42%; */
+    padding: 70px;
+    overflow-y: scroll;
+}
+.review-container{ 
+    width: 100%;
+}
+
+@media (max-width: 600px){
+    .dash-viewer{
+    background-color: white;
+    border-radius: 10px;
+    width: auto;
+    margin-left: 0px;
+    /* height: 42%; */
+    padding: 25px;
+    overflow-y: scroll;
+}
+}

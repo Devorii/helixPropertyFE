@@ -10,6 +10,7 @@ import './comments.css'
 
 
 export default function AlignItemsList({comments}) {
+  const themeColor=process.env.REACT_APP_THEME_COLOR
   return (
     <div className='list-comments'>
     {
@@ -21,6 +22,7 @@ export default function AlignItemsList({comments}) {
                       <div id='initials_icon'>{items.initials}</div> {/* initals */}
                   </ListItemAvatar>
                   <ListItemText
+                    style={{color: themeColor}}
                     primary={items.fullname} /* Name */
                     secondary={
                       <React.Fragment>

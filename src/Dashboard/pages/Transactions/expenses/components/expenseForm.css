@@ -1,0 +1,175 @@
+.fieldContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.marginContainer {
+    margin-left: 10px;
+}
+
+.form-filters {
+    display: flex;
+    width: 100%;
+}
+
+.expenseDate {
+    height: 20px !important;
+}
+
+.itemHolder {
+    max-width: 100%;
+    width: 100%;
+    margin-top: 50px;
+}
+
+.totalContainer {
+    max-width: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.content-holder {
+    display: flex;
+}
+
+.l-content {
+    margin-right: 30px;
+    text-align: end;
+}
+
+.mod-grid {
+    text-align: right !important;
+}
+
+.adjust-item-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.input-item {
+    padding-left: 10px;
+    padding-top: 10px;
+    height: 20px !important;
+    max-height: 25px !important;
+}
+
+.input-item.desc {
+    height: 25px !important;
+}
+
+.totalAmountInput {
+    text-align: end;
+    border: none;
+}
+
+.total-input-label {
+    margin-top: 25px !important;
+}
+
+.AddnewItem-btm {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 10px 10px 10px;
+}
+
+.addIcon {
+    width: 17px !important;
+    height: 17px !important;
+    padding-right: 10px !important;
+}
+
+.r-content {
+    text-align: end;
+}
+
+.couple-delete-amount {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+
+}
+
+.delete-icon:hover {
+    cursor: pointer;
+}
+
+.form-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.mobile-hr {
+    display: none;
+    border: 0;
+    border-top: 1px solid #ccc;
+    /* adjust color/weight as needed */
+    margin: 20px 0;
+    /* spacing above/below */
+}
+
+
+@media (max-width: 600px) {
+    .mobile-hr {
+        display: block;
+    }
+
+    .vendorSelect {
+        width: 100% !important;
+    }
+
+    .form-filters {
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .fieldContainer.marginContainer {
+        margin-left: 0px !important;
+        width: 100% !important;
+    }
+
+    .poso {
+        width: 95% !important;
+    }
+
+    .billnum {
+        width: 95% !important;
+    }
+
+    .input-item {
+        padding: 7px;
+        height: 20px !important;
+        max-height: 25px !important;
+        max-width: 100% !important;
+        width: 100% !important;
+    }
+
+    .input-item.desc {
+        height: auto !important;
+        /* let content determine height */
+        min-height: 5em !important;
+        /* approx 5 lines */
+        max-height: none !important;
+        resize: vertical;
+        /* optional: user can resize */
+    }
+
+    .adjust-item-container {
+        display: block !important;
+        /* stack all grid items */
+        width: 98% !important;
+        margin-bottom: 3px;
+        /* optional spacing between items */
+    }
+    .form-header {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+margin-bottom: 20px;
+}
+
+}

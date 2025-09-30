@@ -1,0 +1,94 @@
+.totalAmount{
+    font-size: 50px;
+}
+
+.totalamount-header{
+    margin-top: 50px !important;
+    display: flex;
+}
+.payment-header{
+    margin-left: 30px;
+}
+
+.header-info{
+    display: flex;
+}
+.left-header-info{
+    width: 50%;
+}
+.right-header-info{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    text-align: right;
+    /* border: 1px solid black;
+    border-radius: 5px; */
+    padding: 20px;
+}
+.vendorInfo{
+    display: flex;
+    flex-direction: column;
+}
+#make_call{ 
+    color: rgb(231, 109, 91);
+    font-size: medium;
+    margin-top: 10px;
+}
+#make_call:hover{ 
+cursor: pointer;
+text-decoration: underline;
+}
+.kp-mbl{
+    display: none;
+}
+
+
+@media (max-width: 600px){
+.rmv-mbl{
+    display: none !important;
+}
+.kp-mbl{
+    margin-top: 20px;
+    display: flex;
+}
+#billingInfoTitle{
+    margin-bottom: 3px;
+}
+#totalExpenseTitle{
+    margin-bottom: 3px;
+    margin-top: 50px;
+}
+.totalamount-header{
+    margin-top: 10px !important;
+    display: flex;
+}
+.header-info {
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+.right-header-info{
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    text-align: left;
+    padding: 0px;
+    /* border: 1px solid black;
+    border-radius: 5px; */
+ 
+}
+.left-header-info{
+    width: 100%;
+}
+
+.reportActions{
+    display: flex;
+    justify-content: start;
+    margin-left: 0px !important;
+    padding-left: 0px !important;
+    width: inherit;
+}
+}
+

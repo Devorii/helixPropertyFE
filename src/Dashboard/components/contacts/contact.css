@@ -1,0 +1,25 @@
+#moreIcon, .mb-container{
+cursor: pointer;
+}
+
+
+.mb-bg:hover {
+    cursor: pointer;
+    background-color: #e76e5b15;
+}
+.mb-bg:hover .rm-bg {
+    background-color: transparent; /* or any desired color */
+}
+
+@media (max-width: 600px){
+    .rm-mobile{ 
+        display: none;
+    }
+    .mb-container{ 
+        width: 100% !important;
+        justify-content: space-between;
+    }
+    .mb-name {
+        width: 50% !important;
+    }
+}

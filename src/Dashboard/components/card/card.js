@@ -1,7 +1,8 @@
 
 import './card.css'
+
 import { useIssueInformation } from '../../context/issueContext'
-import { useState } from 'react'
+import React, { useState } from 'react'
 
 
 

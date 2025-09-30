@@ -1,5 +1,5 @@
 
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import AuthLandlord from "../../components/authLandlord/auth";
 import "./userInfo.css"
@@ -23,7 +23,7 @@ const UserInformation = () => {
   
   
   }, []);
-  document.querySelector('.form-bgs')?.classList.add('show-form');
+  // document.querySelector('.form-bgs')?.classList.add('show-form');
   return (
     <div className="gcw stack">
       <div className="logo-wrapper">
@@ -31,7 +31,7 @@ const UserInformation = () => {
       </div>
     <div id="loginCard">
       <div id="formWrapper">
-      <div className='form-bgs'>
+      <div className='form-bgs show-form'>
       <AuthLandlord />
       </div>
       </div>

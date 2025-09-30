@@ -73,6 +73,15 @@ cursor: pointer;
     width: 140px;
 }
 
+#menu-no-dd{
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif; 
+}
+.css-1kk8xoz-MuiTreeItem-content.Mui-selected {
+    background-color: none !important;
+}
+.css-1kk8xoz-MuiTreeItem-content.Mui-selected {
+    background: none !important;
+}
 
 @media (max-width: 600px){
     #sidebar-container{

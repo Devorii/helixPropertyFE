@@ -7,7 +7,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import "./login.css";
-
+import React from 'react';
 const LoginPage = () => {
     const [showLogin, setShowLogin] = useState(true);
     const [popUpErrorState, setPopUpErrorState] = useState(false)
@@ -21,6 +21,7 @@ const LoginPage = () => {
               'Content-Type': 'application/json',
               'x-access-token': token,
             },
+            mode: 'cors'
           });
     
           if (response.ok) {
@@ -62,7 +63,8 @@ const LoginPage = () => {
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify(values)
+                    body: JSON.stringify(values),
+                    mode: 'cors'
                 });
                 if (!response.ok) {
                     const errorDetail = await response.json();

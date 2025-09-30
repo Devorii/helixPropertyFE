@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router';
 import { useFormInformation } from '../../context/authContext';
 import Logo from "../../../artifacts/logo-light.svg"
 import "./signup.css"
+import React from 'react';
 
 
 const SignUp = () => {

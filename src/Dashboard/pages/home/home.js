@@ -1,3 +1,4 @@
+
 import Card from "../../components/card/card";
 import StickyHeadTable from "../../components/issues/issues";
 import Sidebar from "../../components/sidebar/Sidebar";
@@ -17,6 +18,7 @@ import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import Stack from '@mui/material/Stack';
 
 const Home = () => {
+    const themeColor=process.env.REACT_APP_THEME_COLOR
     const navigate = useNavigate()
     const [show, setShow] = useState(null)
 
@@ -144,7 +146,7 @@ const Home = () => {
                 {/* Navigation bar can go here */}
                 <TopNav />
                 <div id="dash-viewer">
-                    Home - Dashboard
+                    <div style={{color: themeColor}}>Home - Dashboard</div>
 
 
                     {/* This is used to hide the header information when the user is viewing a report. */}

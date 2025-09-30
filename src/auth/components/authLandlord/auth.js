@@ -1,5 +1,5 @@
 import { Formik, Form } from "formik";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Landlord } from "./formHooks";
 import { useFormInformation } from "../../context/authContext";
@@ -34,7 +34,7 @@ const AuthLandlord = () => {
     else {
       dispatch({ type: "Landlord" })
     }
-    document.querySelector('.intro-message')?.classList.add('show-msg');
+    // document.querySelector('.intro-message')?.classList.add('show-msg');
     // need to validate the formIdentity and if not null do nothing else navigate back to home.
   }, [])
 
@@ -67,7 +67,7 @@ const AuthLandlord = () => {
   return (
     <div>
       <div>
-        <h4 className="intro-message">{formHeaderText} </h4>
+        <h4 className="intro-message show-msg">{formHeaderText} </h4>
         <div>
           <Formik
             initialValues={initFormState}

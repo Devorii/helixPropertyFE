@@ -1,0 +1,89 @@
+.contract-view-container{
+    width: 100%;
+
+}
+.contact-header{
+    width: 100%;
+    height: 170px;
+    /* background: black; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid #575c72;
+}
+#contact-avatar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: x-large;
+    width: 70px;
+    height: 70px;
+    border-radius: 80px;
+    background: #e2ebf0;
+    margin-right: 10px;
+}
+.info-container{
+    display: flex;
+    height: 60px;
+    align-items: center;
+}
+.header-info{
+    margin: 0px;
+}
+.header-info h3{
+    margin: 0px;
+}
+.gm{
+    font-size: small;
+}
+.input-container{
+    width: 100%;
+    display: flex
+;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 31px;
+}
+.input-wrapper{
+    display: flex;
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+.input-wrapper-long{
+    display: flex;
+    width: 90%;
+    display: flex;
+   flex-direction: column;
+    margin-top: 30px;
+}
+
+.input-bus{
+    width: 46%;
+    padding: 10px 0px 10px 10px;
+}
+
+.input-bus-long{
+    padding: 10px 0px 10px 10px;
+}
+
+.adjust-column{
+    display: flex;
+    flex-direction: column;
+    width: 49%;
+}
+/* .input-stretch{
+    width: 100%;
+} */
+.submit-contact-btn{
+    width: 90%;
+}
+
+ .contact-btn{
+    width: 100%;
+    padding: 15px;
+    margin-top: 40px;
+}  

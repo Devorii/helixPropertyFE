@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import './reviewReports.css'
 import Alert from '@mui/material/Alert';
@@ -16,6 +16,7 @@ import SwipeVerticalIcon from '@mui/icons-material/SwipeVertical';
 
 
 const ReviewReports = (props) => {
+    const secondaryThemeColor=process.env.REACT_APP_SECONDARY_THEME_COLOR
     const dateObj=new Date()
     const currentDate=`${dateObj.getFullYear()}-${dateObj.getMonth()+1}-${dateObj.getDate()}`
     const nav = useNavigate()
@@ -311,16 +312,16 @@ const ReviewReports = (props) => {
                                 <div id="meta-header-wrapper">
                                     <div id="id-container">
                                         <h4 className="labelname nmrgn">Ticket ID</h4>
-                                        <p className="mrgn7 meta-data">{cellData.id}</p>
+                                        <p style={{backgroundColor: secondaryThemeColor}} className="mrgn7 meta-data">{cellData.id}</p>
                                     </div>
                                     <div id="title-container">
                                         <h4 className="labelname nmrgn">Category</h4>
-                                        <p className="mrgn7 meta-data category">{cellData.category}</p>
+                                        <p style={{backgroundColor: secondaryThemeColor}} className="mrgn7 meta-data category">{cellData.category}</p>
                                     </div>
 
                                 </div>
                                 <h4 style={{ marginBottom: '10px', marginTop: '10px' }} className="labelname mt-ra">Detail Complaint</h4>
-                                <div id="reportContainer">
+                                <div id="reportContainer" style={{backgroundColor: secondaryThemeColor}}>
                                     <p className="descriptionElement mrgn7">
                                         {cellData.description}
                                     </p>
