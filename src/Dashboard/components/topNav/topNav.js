@@ -27,6 +27,7 @@ const TopNav = () => {
     const userInitials = localStorage.getItem('userInit')
     const [auth, setAuth] = React.useState(true);
     const [anchorEl, setAnchorEl] = React.useState(null);
+    const permissions = localStorage.getItem('userStatus')
     
     useEffect(() => {
     }, [userInitials])
@@ -111,7 +112,10 @@ const TopNav = () => {
                                 >
                                     <MenuItem onClick={homeNav}>Home</MenuItem>
                                     <MenuItem onClick={logout}>Sign out</MenuItem>
-                                                  <Box>
+
+                                    {
+                                        permissions=='OW1'?
+                                                                                          <Box>
                                                     <SimpleTreeView>
                                                       <TreeItem itemId="grid" label="Contacts">
                                                         <TreeItem itemId="grid-Info" label="Tenants Info" onClick={navigateToContractors} />
@@ -131,6 +135,10 @@ const TopNav = () => {
                                                       </TreeItem>
                                                     </SimpleTreeView> */}
                                                   </Box>
+                                                  :
+                                                  ''
+                                    }
+
                                     <MenuItem>Property Id: {localStorage.getItem('pid')}</MenuItem>
                                 </Menu>
                             </div>
