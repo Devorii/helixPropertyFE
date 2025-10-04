@@ -10,6 +10,7 @@ import ExpenseTable from "./expenseTable";
 import CancelIcon from '@mui/icons-material/Cancel';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import ExpenseForm from "./components/ExpenseForm";
+import './expenseReport.css'
 
 const TransactionExpenses = () => {
     const themeColor = process.env.REACT_APP_THEME_COLOR
@@ -24,7 +25,7 @@ const TransactionExpenses = () => {
                 <div className='align-content-w-img'>
                     <div className='review-container' >
                         <div style={{ color: themeColor }}>Transactions - Expenses</div>
-                        <h1>Expense Report</h1>                            
+                        <h1>Expense Report</h1>
                         {/* 
                             TEMPORARY DISABLING THE ANALYTICS FOR THIS APPLICATION
                             NOT NEEDED FOR THIS MVP AT THIS TIME. 
@@ -37,40 +38,6 @@ const TransactionExpenses = () => {
                         </div> */}
 
 
-                        <div className="reportNavigation">
-                            <div className="rprt reportTitle">
-                                <span></span>
-                            </div>
-                            <div className="rprt reportActions">
-                                <Stack direction="row" spacing={2}>
-                                    {
-                                        switchPage ?
-                                            ""
-
-                                            :
-                                            <>
-                                                                                        <Button
-                                                variant="outlined" s
-                                                startIcon={<AddIcon />}
-                                                onClick={() => setSwichPage(!switchPage)}
-                                                sx={{
-                                                    color: "black",
-                                                    border: "1px solid black"
-                                                }}
-                                            >
-                                                Create Expense
-                                            </Button>
-                                            
-                                            </>
-
-                                    }
-
-                                </Stack>
-                            </div>
-                        </div>
-
-
-
 
                         <div className="exp-data-container">
                             {
@@ -81,6 +48,42 @@ const TransactionExpenses = () => {
                             }
 
                         </div>
+
+                        <div className="reportNavigation">
+                            {/* <div className="rprt reportTitle">
+                                <span></span>
+                            </div> */}
+                  
+                     
+                                    {
+                                        switchPage ?
+                                            ""
+
+                                            :
+                                            <>
+                                                <Button
+                                             
+                                                    variant="outlined"
+                                                    startIcon={<AddIcon />}
+                                                    onClick={() => setSwichPage(!switchPage)}
+                                                        sx={{
+                                                            width: {xs: '100%', sm: '180px', color: 'black', border:"1px solid black" } // full width on xs (mobile), auto on sm+ (desktop)
+                                                            }}
+                                                >
+                                                    Create Expense
+                                                </Button>
+
+                                            </>
+
+                                    }
+
+                            
+                    
+                        </div>
+
+
+
+
                     </div>
                     {/* <div className='review-container-2'>
                     <ContractorView />

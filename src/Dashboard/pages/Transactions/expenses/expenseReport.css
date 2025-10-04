@@ -1,0 +1,12 @@
+.desktop-create-exp {
+    color: black !important;
+    border: 1px solid black !important;
+    width: 180px !important;
+}
+
+@media (max-width: 600px) {
+    .desktop-create-exp {
+        width: 100% !important;
+         flex-grow: 1;
+    }
+}

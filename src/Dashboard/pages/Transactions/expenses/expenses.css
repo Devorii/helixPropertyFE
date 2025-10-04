@@ -2,7 +2,7 @@
 width: 100%;
 height: 50px;
 display: flex;
-flex-direction: row;
+justify-content: end;
 margin-top:20px;
 }
 .reportTitle, .reportActions{ 
@@ -34,7 +34,6 @@ margin-top: 20px;
     width: 100%;
     height: 50px;
     display: flex;
-    flex-direction: row-reverse;
     margin-top: 20px;
 }
 

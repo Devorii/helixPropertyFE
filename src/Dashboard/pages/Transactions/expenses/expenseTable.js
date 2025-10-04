@@ -20,6 +20,9 @@ import dayjs from 'dayjs';
 import { parseISO } from 'date-fns';
 import dayjsPluginUTC from 'dayjs-plugin-utc'
 import { useNavigate } from 'react-router-dom';
+import ExpenseReviewCard from '../../../components/card/mobile_items_card/expenseCard';
+import RecipeReviewCard from '../../../components/card/collapsable_card/collapseCard';
+
  
 dayjs.extend(dayjsPluginUTC)
 
@@ -259,13 +262,10 @@ const change = (eventDate) => {
   };
 
 
-
-  return (
-    <>
-
-      <div id='arrangeDateComponents'>
+   const filters = (
+          <div id='arrangeDateComponents'>
         <div>
-          <p>Vendors</p>
+          <p style={{marginTop:'0px', paddingTop:'0px'}}>Vendors</p>
           <UnstyledSelectBasic vendorList={listOfVendors} status={status}  updateSelect={(e) => statusChange(e)} />
 
         </div>
@@ -309,7 +309,21 @@ const change = (eventDate) => {
           }
           </button>
         </div>
+      </div>)
+
+  return (
+    <>
+
+      <div className='filter-mobile'>
+        <RecipeReviewCard filters={filters} />
       </div>
+
+      <div className='filter-desktop'>
+        {
+          filters
+        }
+      </div>
+
 
       <Paper className='paper' sx={{ width: '100%', overflow: 'hidden' }}>
         <TableContainer sx={{ maxHeight: 524}}>
@@ -360,6 +374,43 @@ const change = (eventDate) => {
         />
         {/* <p>{dateValue}</p> */}
       </Paper>
+
+                <div className='mobileCardContainer'>
+                        <div style={{
+                          display: 'flex',
+                          flexDirection: 'row'
+                        }}>
+                          <div style={{ display: 'flex', justifyContent: 'start', width: "50%" }}>
+                            <h5>Reported issues</h5>
+                          </div>
+
+                        </div>
+                
+                        {
+                          nrows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+                              const expensePayload = {
+                                vendor: row.vendor,
+                                category: row.category,
+                                total: row.total
+                              }
+                              console.log(row)
+                              // const rc_data = {
+                              //   id: row.id,
+                              //   name: row.created_by,
+                              //   status: row.status,
+                              //   issue: row.issue
+                              // }
+                
+                              return <ExpenseReviewCard
+                                dataRow={row}
+                                rowData={expensePayload}
+                                click={OpenRowInformation}
+                              />
+                            })
+                        }
+                
+                      </div>
+
     </>
 
   );
