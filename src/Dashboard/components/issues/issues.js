@@ -19,7 +19,11 @@ import UnstyledSelectBasic from '../select/select';
 import dayjs from 'dayjs';
 import { parseISO } from 'date-fns';
 import dayjsPluginUTC from 'dayjs-plugin-utc'
- 
+import RecipeReviewCard from '../card/collapsable_card/collapseCard'
+import ReviewCard from '../card/mobile_items_card/collapseCard';
+import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+
 dayjs.extend(dayjsPluginUTC)
 
 
@@ -103,114 +107,121 @@ const StickyHeadTable = () => {
     'issue': 'N/A',
     'date': 'N/A',
     'category': 'N/A',
-    'status': 'N/A', 
-    'created_by':'N/A', 
+    'status': 'N/A',
+    'created_by': 'N/A',
   })
   // let startDate = null
   // let endDate = null
 
+  const permissions = localStorage.getItem('userStatus')
+  const [openCount, setOpenCount] = useState(0);
+  const [closedCount, setClosedCount] = useState(0);
 
 
 
 
-useEffect(()=>{
-  const token = localStorage.getItem('token')
-  const property_id=localStorage.getItem('pid')
 
-  const getCellData = async () => {
-    try {
-      const response = await fetch(`${process.env.REACT_APP_HELIX_API}/support/all-tickets`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'x-access-token': token,
-        },
-        body: JSON.stringify({"property_id":property_id})
-      });
+  useEffect(() => {
+    const token = localStorage.getItem('token')
+    const property_id = localStorage.getItem('pid')
 
-      // Check if the response status is 200 OK
-      if (response.status === 200) {
-        const data = await response.json();  // Parse response body as JSON
-        const apiResp  = data.map(item => ({
-          id: item.ticket_num.toString() || "N/A",               // Convert id to string
-          issue: item.title || "N/A",                    // Rename 'title' to 'issue'
-          date: item.created_date || "N/A",     // Use created_date, default to "N/A" if null
-          category: item.category || "N/A",              // Keep category as is
-          status: item.status || "N/A",                  // Keep status as is
-          created_by: item.author.toLowerCase() || "N/A", // Normalize 'author' to lowercase for 'created_by'
-          description: item.description || "N/A", 
-          images: item.images || "N/A"
-        }));
-        setMocLs(apiResp)
-        const updatedRows = apiResp.map((dataSet) =>
-          createData(dataSet.id, dataSet.issue, dataSet.date, dataSet.category, dataSet.status, dataSet.created_by, dataSet.description, dataSet.images)
-        );
-        setNRows(updatedRows);
-      } 
+    const getCellData = async () => {
+      try {
+        const response = await fetch(`${process.env.REACT_APP_HELIX_API}/support/all-tickets`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-access-token': token,
+          },
+          body: JSON.stringify({ "property_id": property_id })
+        });
 
-      // Handle other non-200 responses (optional)
-      else {
-        console.error(`Unexpected status: ${response.status}`);
+        // Check if the response status is 200 OK
+        if (response.status === 200) {
+          const data = await response.json();  // Parse response body as JSON
+          const apiResp = data.map(item => ({
+            id: item.ticket_num.toString() || "N/A",               // Convert id to string
+            issue: item.title || "N/A",                    // Rename 'title' to 'issue'
+            date: item.created_date || "N/A",     // Use created_date, default to "N/A" if null
+            category: item.category || "N/A",              // Keep category as is
+            status: item.status || "N/A",                  // Keep status as is
+            created_by: item.author.toLowerCase() || "N/A", // Normalize 'author' to lowercase for 'created_by'
+            description: item.description || "N/A",
+            images: item.images || "N/A"
+          }));
+          setMocLs(apiResp)
+
+
+          const open = apiResp.filter(item => item.status === "Open").length;
+          const closed = apiResp.filter(item => item.status === "Closed").length;
+
+          setOpenCount(open);
+          setClosedCount(closed);
+          const updatedRows = apiResp.map((dataSet) =>
+            createData(dataSet.id, dataSet.issue, dataSet.date, dataSet.category, dataSet.status, dataSet.created_by, dataSet.description, dataSet.images)
+          );
+          setNRows(updatedRows);
+        }
+
+        // Handle other non-200 responses (optional)
+        else {
+          console.error(`Unexpected status: ${response.status}`);
+        }
+      } catch (error) {
+        console.error('Error during the request:', error.message);
       }
-    } catch (error) {
-      console.error('Error during the request:', error.message);
-    }
-  };
+    };
 
-  // Call the async function
-  getCellData();
-},[])
+    // Call the async function
+    getCellData();
+  }, [])
 
 
 
-const statusChange = (e) =>{
-  let data = null
-  if (e?.target?.textContent === 'All' ||
-    e?.target?.textContent === 'Open' ||
-    e?.target?.textContent === 'Processing' ||
-    e?.target?.textContent === 'Reviewing' ||
-    e?.target?.textContent === 'Closed') {
+
+  const statusChange = (e) => {
+    let data = null
+    if (e?.target?.textContent === 'All' ||
+      e?.target?.textContent === 'Open' ||
+      e?.target?.textContent === 'Processing' ||
+      e?.target?.textContent === 'Reviewing' ||
+      e?.target?.textContent === 'Closed') {
       setStatus(e.target.textContent)
 
-  if (!startDate && !endDate){
-    data =  e.target.textContent === 'All' ?  mocLs : mocLs.filter(items => (items.status === e.target.textContent))
-  }
-  else if((startDate, endDate) && e?.target?.textContent === 'All'){
-    data = mocLs.filter(items => (dayjs(items.date).isBetween(startDate, endDate)))
-  }
-  else{
-    data = mocLs.filter(items => (items.status === e.target.textContent) && (dayjs(items.date).isBetween(startDate, endDate)))
+      if (!startDate && !endDate) {
+        data = e.target.textContent === 'All' ? mocLs : mocLs.filter(items => (items.status === e.target.textContent))
+      }
+      else if ((startDate, endDate) && e?.target?.textContent === 'All') {
+        data = mocLs.filter(items => (dayjs(items.date).isBetween(startDate, endDate)))
+      }
+      else {
+        data = mocLs.filter(items => (items.status === e.target.textContent) && (dayjs(items.date).isBetween(startDate, endDate)))
+      }
+
+      setNRows(data)
+    }
   }
 
-     setNRows(data)
-  }
-}
 
-  
   const change = (eventDate) => {
-    let filteredData=null
+    let filteredData = null
     if (startDate && status !== "All") {
-      console.log(status,'status no ALL')
-        filteredData = mocLs.filter(items => (dayjs(items.date).isBetween(startDate, eventDate)) && (items.status==status));
-      }
-      else if(startDate && status === "All"){
-        console.log(status,'status ALL')
-        filteredData = mocLs.filter(items => dayjs(items.date).isBetween(startDate, eventDate));
-      }
-      setNRows(filteredData)
+      console.log(status, 'status no ALL')
+      filteredData = mocLs.filter(items => (dayjs(items.date).isBetween(startDate, eventDate)) && (items.status == status));
+    }
+    else if (startDate && status === "All") {
+      console.log(status, 'status ALL')
+      filteredData = mocLs.filter(items => dayjs(items.date).isBetween(startDate, eventDate));
+    }
+    setNRows(filteredData)
   }
-
-
-
-
-
 
 
 
   const OpenRowInformation = (cellData) => {
     dispatch({ type: 'review' })
-    localStorage.setItem('cellData', cellData)
- 
+    const pass_data = JSON.stringify(cellData)
+    localStorage.setItem('cellData', pass_data)
   }
 
   const handleChangePage = (event, newPage) => {
@@ -223,48 +234,62 @@ const statusChange = (e) =>{
   };
 
 
+  const filters = (
+    <div id='arrangeDateComponents'>
+      <div>
+        <p style={{ marginTop: '0px' }}>Status</p>
+        <UnstyledSelectBasic updateSelect={(e) => statusChange(e)} />
+
+      </div>
+      <div id='mg-15'>
+        <p>From</p>
+        <DatePicker className='dt-picker' value={startDate} onChange={(e) => {
+          setStartDate(dayjs(e.utc()))
+        }} />
+        {isError ?
+          <Stack sx={{ width: '88%' }} spacing={2}>
+            <Alert severity='error'>Can't exceed today.</Alert>
+          </Stack>
+          :
+          ''
+        }
+      </div>
+      <div>
+        <p>To</p>
+        <DatePicker className='dt-picker' value={endDate} onChange={(e) => {
+          setEndDate(dayjs(e.utc()))
+          change(dayjs(e.utc()))
+        }
+
+        } />
+        {isEndDateError ?
+          <Stack sx={{ width: '88%' }} spacing={2}>
+            <Alert severity='error'>{endateMessage}</Alert>
+          </Stack>
+          :
+          ''
+        }
+      </div>
+    </div>)
+
+
   return (
     <>
       <p className='dt-picker-tag'>View reports</p>
-      <div id='arrangeDateComponents'>
-        <div>
-          <p>Status</p>
-          <UnstyledSelectBasic updateSelect={(e) => statusChange(e)} />
-
-        </div>
-        <div id='mg-15'>
-          <p>From</p>
-          <DatePicker className='dt-picker' value={startDate} onChange={(e) => {
-            setStartDate(dayjs(e.utc()))
-          }} />
-          {isError ?
-            <Stack sx={{ width: '88%' }} spacing={2}>
-              <Alert severity='error'>Can't exceed today.</Alert>
-            </Stack>
-            :
-            ''
-          }
-        </div>
-        <div>
-          <p>To</p>
-          <DatePicker className='dt-picker' value={endDate} onChange={(e) => {
-            setEndDate(dayjs(e.utc())) 
-            change(dayjs(e.utc()))
-          }
-
-          } />
-          {isEndDateError ?
-            <Stack sx={{ width: '88%' }} spacing={2}>
-              <Alert severity='error'>{endateMessage}</Alert>
-            </Stack>
-            :
-            ''
-          }
-        </div>
+      <div className='filter-mobile'>
+        <RecipeReviewCard filters={filters} />
       </div>
 
+      <div className='filter-desktop'>
+        {
+          filters
+        }
+      </div>
+
+
+
       <Paper className='paper' sx={{ width: '100%', overflow: 'hidden' }}>
-        <TableContainer sx={{ maxHeight: 524}}>
+        <TableContainer sx={{ maxHeight: 524 }}>
           <Table stickyHeader aria-label="sticky table">
             <TableHead>
               <TableRow>
@@ -272,7 +297,7 @@ const statusChange = (e) =>{
                   <TableCell
                     key={column.id}
                     align={column.align}
-                    style={{ minWidth:"50px" }}
+                    style={{ minWidth: "50px" }}
                   >
                     {column.label}
                   </TableCell>
@@ -284,11 +309,11 @@ const statusChange = (e) =>{
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row) => {
                   return (
-                    <TableRow id='rows' onClick={() => OpenRowInformation(JSON.stringify(row))} hover role="checkbox" tabIndex={-1} key={row.code}>
+                    <TableRow id='rows' onClick={() => OpenRowInformation(row)} hover role="checkbox" tabIndex={-1} key={row.code}>
                       {columns.map((column) => {
                         const value = row[column.id];
                         return (
-                          <TableCell key={column.id} align={column.align} style={{ minWidth:"50px" }} >
+                          <TableCell key={column.id} align={column.align} style={{ minWidth: "50px" }} >
                             {column.format && typeof value === 'number'
                               ? column.format(value)
                               : value}
@@ -312,6 +337,49 @@ const statusChange = (e) =>{
         />
         {/* <p>{dateValue}</p> */}
       </Paper>
+
+
+
+      <div className='mobileCardContainer'>
+        <div style={{
+          display: 'flex',
+          flexDirection: 'row'
+        }}>
+          <div style={{ display: 'flex', justifyContent: 'start', width: "50%" }}>
+            <h5>Reported issues</h5>
+          </div>
+          <div style={{ display: 'flex', justifyContent: 'end', width: "50%" }}>
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', color: 'red', marginRight:'10px' }}>
+ 
+              <h6>[{openCount}] Open</h6>
+            </div>
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', color: 'green' }}>
+      
+              <h6>[{closedCount}] Closed</h6>
+            </div>
+
+          </div>
+        </div>
+
+        {
+          nrows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+            .map((row) => {
+              const rc_data = {
+                id: row.id,
+                name: row.created_by,
+                status: row.status,
+                issue: row.issue
+              }
+
+              return <ReviewCard
+                dataRow={row}
+                rowData={rc_data}
+                click={OpenRowInformation}
+              />
+            })
+        }
+
+      </div>
     </>
 
   );

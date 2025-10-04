@@ -41,10 +41,35 @@ margin-right: 15px;
     background-color: red; /* Change this color to what you prefer */
     cursor: pointer;
   }
+.mobileCardContainer{
+    display: none;
+}
 
-
+.filter-mobile{
+        display: None;
+    }
   @media (max-width: 600px){
+    .mobileCardContainer{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        /* background-color: #e76e5b; */
+        border-radius: 10px;
+        margin-top: 20px;
+    }
+    .dt-picker{
+        background-color: white;
+    }
+    .filter-mobile{
+        display: block;
+        background-color:rgba(195, 169, 169, 0.162);
+        border-radius: 10px;
+    }
+    .filter-desktop{
+        display: None;
+    }
     .paper{
+        display: none;
         margin-bottom: 250px;
     }
     #arrangeDateComponents{

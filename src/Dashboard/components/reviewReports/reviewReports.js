@@ -170,7 +170,7 @@ const ReviewReports = (props) => {
 
         }
         else {
-            setCellData(JSON.parse(localStorage.getItem('cellData')))
+            setCellData(JSON.parse(localStorage.getItem('cellData') || '{}'))
         }
     }, [])
 

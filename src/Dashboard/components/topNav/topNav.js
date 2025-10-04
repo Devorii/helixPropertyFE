@@ -60,7 +60,8 @@ const TopNav = () => {
     return (
         <div className="mobile-nav">
             <Box sx={{ flexGrow: 1, width: "100%" }} className='mobile-box'>
-                <AppBar position="static" style={{ backgroundColor: "black" }}>
+                 {/* <AppBar position="static" style={{ backgroundColor: "black" }}></AppBar> */}
+                <AppBar position="static" style={{ backgroundColor: "#da8484" }}>
                     <Toolbar>
 
                         <IconButton
