@@ -265,13 +265,28 @@ const change = (eventDate) => {
    const filters = (
           <div id='arrangeDateComponents'>
         <div>
-          <p style={{marginTop:'0px', paddingTop:'0px'}}>Vendors</p>
-          <UnstyledSelectBasic vendorList={listOfVendors} status={status}  updateSelect={(e) => statusChange(e)} />
+          <p style={{ marginTop: '12px', marginBottom:'3px' }}>Vendors</p>
+          <UnstyledSelectBasic 
+          vendorList={listOfVendors} 
+          status={status}  
+          updateSelect={(e) => statusChange(e)} 
+          />
 
         </div>
         <div id='mg-15'>
-          <p>From</p>
-          <DatePicker className='dt-picker' value={startDate} onChange={(e) => {
+          <p style={{ marginTop: '12px', marginBottom:'3px' }}>From</p>
+          <DatePicker 
+          className='dt-picker' 
+          value={startDate} 
+            sx={{
+    '& .MuiInputBase-input': {
+      fontSize: '12px', // adjust as needed
+    },
+    '& .MuiOutlinedInput-root': {
+      height: '32px', // optional: reduce height to match smaller font
+    },
+  }}
+          onChange={(e) => {
             setStartDate(dayjs(e.utc()))
           }} />
           {isError ?
@@ -283,8 +298,19 @@ const change = (eventDate) => {
           }
         </div>
         <div>
-          <p>To</p>
-          <DatePicker className='dt-picker' value={endDate} onChange={(e) => {
+          <p style={{ marginTop: '12px', marginBottom:'3px' }}>To</p>
+          <DatePicker 
+          className='dt-picker' 
+          value={endDate} 
+            sx={{
+    '& .MuiInputBase-input': {
+      fontSize: '12px', // adjust as needed
+    },
+    '& .MuiOutlinedInput-root': {
+      height: '32px', // optional: reduce height to match smaller font
+    },
+  }}
+          onChange={(e) => {
             setEndDate(dayjs(e.utc())) 
             change(dayjs(e.utc()))
           }

@@ -4,7 +4,7 @@
 
     .statusSelector{
         width: 100% !important;
-        font-size: larger !important;
+        font-size: small !important;
     }
 
 }
