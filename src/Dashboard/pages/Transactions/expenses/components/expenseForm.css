@@ -113,6 +113,13 @@
 
 
 @media (max-width: 600px) {
+    .AddnewItem-btm {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 10px 10px 10px;
+    background-color: rgb(180 82 82);
+}
     .mobile-hr {
         display: block;
     }

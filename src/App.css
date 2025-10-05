@@ -142,6 +142,11 @@ button{
 
 
 @media (max-width:600px){
+  .img-btn{
+  width: 170px;
+  transition: all 0.3s ease;
+  background-color: rgb(180 82 82);
+}
   body {
     /* cursor: none; */
     color: #575c72;

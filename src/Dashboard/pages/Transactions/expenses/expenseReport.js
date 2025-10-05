@@ -49,7 +49,7 @@ const TransactionExpenses = () => {
 
                         </div>
 
-                        <div className="reportNavigation">
+                        <div className="create_nav_btn">
                             {/* <div className="rprt reportTitle">
                                 <span></span>
                             </div> */}
@@ -62,12 +62,14 @@ const TransactionExpenses = () => {
                                             :
                                             <>
                                                 <Button
-                                             
                                                     variant="outlined"
                                                     startIcon={<AddIcon />}
                                                     onClick={() => setSwichPage(!switchPage)}
                                                         sx={{
-                                                            width: {xs: '100%', sm: '180px', color: 'black', border:"1px solid black" } // full width on xs (mobile), auto on sm+ (desktop)
+                                                            width: {xs: '100%', sm: '180px'}, 
+                                                            color: 'white', 
+                                                            backgroundColor: { xs: 'rgb(180 82 82)', sm: 'black' } ,     
+                                                            border: 'none' // full width on xs (mobile), auto on sm+ (desktop)
                                                             }}
                                                 >
                                                     Create Expense

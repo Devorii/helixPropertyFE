@@ -13,12 +13,12 @@ import defaultImg from './../../../artifacts/default-img.jpg'
 import AlignItemsList from '../comments/comments_list'
 import SwipersComp from '../swiper/swiper'
 import SwipeVerticalIcon from '@mui/icons-material/SwipeVertical';
-
+import Button from '@mui/material/Button'
 
 const ReviewReports = (props) => {
-    const secondaryThemeColor=process.env.REACT_APP_SECONDARY_THEME_COLOR
-    const dateObj=new Date()
-    const currentDate=`${dateObj.getFullYear()}-${dateObj.getMonth()+1}-${dateObj.getDate()}`
+    const secondaryThemeColor = process.env.REACT_APP_SECONDARY_THEME_COLOR
+    const dateObj = new Date()
+    const currentDate = `${dateObj.getFullYear()}-${dateObj.getMonth() + 1}-${dateObj.getDate()}`
     const nav = useNavigate()
     const back = () => nav(0)
     const [cellData, setCellData] = useState(null)
@@ -95,7 +95,7 @@ const ReviewReports = (props) => {
             setComments([commentListing])
         }
 
-        const create_comment = async()=>{
+        const create_comment = async () => {
             try {
                 const response = await fetch(`${process.env.REACT_APP_HELIX_API}/comment/create-comment`, {
                     method: 'POST',
@@ -129,9 +129,9 @@ const ReviewReports = (props) => {
     useEffect(() => {
         if (alertBanner !== null) {
         }
-        const ticket_id_raw=JSON.parse(localStorage.getItem('cellData'))
+        const ticket_id_raw = JSON.parse(localStorage.getItem('cellData'))
 
-        const get_comments = async() => {
+        const get_comments = async () => {
             try {
                 const response = await fetch(`${process.env.REACT_APP_HELIX_API}/comment/retrieve-comments`, {
                     method: 'POST',
@@ -148,10 +148,10 @@ const ReviewReports = (props) => {
                 // Check if the response status is 200 OK
                 if (response.status === 200) {
                     const data = await response.json();
-                    if(data.length > 0){
+                    if (data.length > 0) {
                         setComments(data)
                     }
-                    
+
                 }
                 // Handle other non-200 responses (optional)
                 else {
@@ -312,22 +312,22 @@ const ReviewReports = (props) => {
                                 <div id="meta-header-wrapper">
                                     <div id="id-container">
                                         <h4 className="labelname nmrgn">Ticket ID</h4>
-                                        <p style={{backgroundColor: secondaryThemeColor}} className="mrgn7 meta-data">{cellData.id}</p>
+                                        <p style={{ backgroundColor: 'rgba(253, 239, 239, 0.39)' }} className="mrgn7 meta-data">{cellData.id}</p>
                                     </div>
                                     <div id="title-container">
                                         <h4 className="labelname nmrgn">Category</h4>
-                                        <p style={{backgroundColor: secondaryThemeColor}} className="mrgn7 meta-data category">{cellData.category}</p>
+                                        <p style={{ backgroundColor: 'rgba(253, 239, 239, 0.39)' }} className="mrgn7 meta-data category">{cellData.category}</p>
                                     </div>
 
                                 </div>
                                 <h4 style={{ marginBottom: '10px', marginTop: '10px' }} className="labelname mt-ra">Detail Complaint</h4>
-                                <div id="reportContainer" style={{backgroundColor: secondaryThemeColor}}>
+                                <div id="reportContainer" style={{ backgroundColor: 'rgba(253, 239, 239, 0.39)' }}>
                                     <p className="descriptionElement mrgn7">
                                         {cellData.description}
                                     </p>
                                 </div>
                                 <div id="timestampCategory"></div>
-                                <p style={{ fontSize: '0.8rem', color: '#575c72' }}>Created on: {cellData.date}</p>
+                                <p style={{ fontSize: '0.8rem', color: '#575c72' }}>Created on: {cellData.date.split("T")[0]}</p>
                             </div>
 
                             {
@@ -365,15 +365,15 @@ const ReviewReports = (props) => {
                         {/* Add comments section */}
 
                         <hr />
-                        <p style={{color:'black'}}>Review notes</p>
+                        <p style={{ color: 'black' }}>Review notes</p>
 
                         <div className="notes-section">
 
                             <div className="comments-holder">
-                                {
+                                {/* {
                                     comments.length > 2 &&
                                     <SwipeVerticalIcon className='swipeVerticleIcon' />
-                                }
+                                } */}
                                 <AlignItemsList comments={comments} />
                             </div>
 
@@ -381,13 +381,13 @@ const ReviewReports = (props) => {
 
                             <form className='notes-form' onSubmit={(e) => submitComment(e)} method="POST">
                                 <label for="userInput">Leave a comment</label>
-                                <textarea 
-                                id="userInput" 
-                                name="userInput" 
-                                rows="4" 
-                                value={textareaComment} 
-                                onChange={(e) => settextareaComment(e.target.value)}
-                                cols="50">
+                                <textarea
+                                    id="userInput"
+                                    name="userInput"
+                                    rows="4"
+                                    value={textareaComment}
+                                    onChange={(e) => settextareaComment(e.target.value)}
+                                    cols="50">
                                 </textarea>
 
                                 <br />
@@ -398,15 +398,44 @@ const ReviewReports = (props) => {
                         </div>
 
                         <div id="controls-wrapper">
-                            <img onClick={back} class="img-btn back" src={backSVG} alt="Back Icon" />
+                            {/* <img onClick={back} class="img-btn back" src={backSVG} alt="Back Icon" /> */}
+                            <Button
 
+                                class="img-btn back"
+                                variant="contained"
+                                onClick={back}
+                            // sx={{
+                            //     border: '1px solid black',
+                            //     backgroundColor: 'white',
+                            //     color: 'black',
+                            //     '&:hover': { backgroundColor: '#fff8f5ff' },
+                            // }}
+                            >
+                                Back
+                            </Button>
                             {
                                 accountType !== "OW1" && props.status === "Closed" &&
                                 ""
                             }
                             {
                                 accountType === "OW1" && props.status === "Closed" &&
-                                <img onClick={reopenTicket} class="img-btn" src={reOpen} alt="ReOpen Icon" />
+                                // <img onClick={reopenTicket} class="img-btn" src={reOpen} alt="ReOpen Icon" />
+
+                                <Button
+
+                                class="img-btn"
+                                variant="contained"
+                                onClick={reopenTicket}
+                                // sx={{
+                                //     border: '1px solid black',
+                                //     backgroundColor: 'white',
+                                //     color: 'black',
+                                //     '&:hover': { backgroundColor: '#fff8f5ff' },
+                                // }}
+                                >
+                                Re-open Ticket
+                            </Button>
+
                                 // <button onClick={closeTicket} class="back-to-reports closeBtn" >Reopen Ticket</button>
                             }
                             {

@@ -57,13 +57,13 @@ const DeleteDialog = () => {
   return (
     <React.Fragment>
       <Button
+      className='img-btn'
         variant="contained"
         onClick={handleClickOpen}
         sx={{
-            border: '1px solid black',
-          backgroundColor: 'white',
-          color: 'black',
-          '&:hover': { backgroundColor: '#fff8f5ff' },
+  
+          backgroundColor: 'rgb(180 82 82)',
+          color: 'white',
         }}
       >
         Delete Report

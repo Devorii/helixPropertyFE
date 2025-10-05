@@ -202,15 +202,16 @@ const ExpenseViewer = () => {
                 </div>
 
                                             <div className="rprt reportActions kp-mbl">
-                                <Stack direction="row" spacing={2}>
+                                <Stack style={{width: "100%", display: "flex", justifyContent: "space-between"}} direction="row" spacing={2}>
                                     <Button
+                                        className="img-btn"
                                         variant="contained"
                                         onClick={()=>navigate('/transaction-expenses')}
                                         sx={{
-                                            border: '1px solid black',
-                                            backgroundColor: 'white',
-                                            color: 'black',
-                                            '&:hover': { backgroundColor: '#fff8f5ff' },
+                                            // border: '1px solid black',
+                                            backgroundColor: 'rgb(180 82 82)',
+                                            color: 'white',
+                                            
                                         }}
                                     >
                                         Back

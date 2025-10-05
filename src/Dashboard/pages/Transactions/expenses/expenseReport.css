@@ -5,6 +5,7 @@
 }
 
 @media (max-width: 600px) {
+
     .desktop-create-exp {
         width: 100% !important;
          flex-grow: 1;

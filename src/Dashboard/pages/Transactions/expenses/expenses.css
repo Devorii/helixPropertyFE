@@ -1,4 +1,4 @@
-.reportNavigation{
+.create_nav_btn, .reportNavigation{
 width: 100%;
 height: 50px;
 display: flex;
@@ -31,6 +31,13 @@ margin-top: 20px;
 
 @media (max-width: 600px){
 .reportNavigation {
+    display: none;
+    /* width: 100%;
+    height: 50px;
+    display: flex;
+    margin-top: 20px; */
+}
+.create_nav_btn{
     width: 100%;
     height: 50px;
     display: flex;

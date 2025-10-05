@@ -25,6 +25,10 @@
 .item-value-container{
     width: 50%;
     text-align: right;
+      word-wrap: break-word;  /* allow long words to break and wrap */
+  overflow-wrap: break-word; /* modern alternative to word-wrap */
+  white-space: normal;    /* allow normal wrapping */
+  word-break: break-word; /* ensures wrapping for very long words */
 }
 .title-container{
     width: 50%;

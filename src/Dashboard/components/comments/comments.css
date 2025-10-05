@@ -21,14 +21,24 @@ color: wheat;
 font-size: small;
 }
 
-
+.mobileComments{
+    display: none;
+}
 @media (max-width: 600px){
+    .mobileComments{
+    display: block;
+}
     .list-comments{
-        width: 93% !important;
-        margin-right: 0px !important;
-        height: fit-content !important;
-        max-height: 480px !important;
-        overflow-y: scroll !important;
+        display: none;
+    width: 92% !important;
+    border: none;
+    padding: 10px !important;
+    border-radius: 8px;
+    /* margin-right: 5% !important; */
+    height: auto !important;
+    max-height:fit-content !important;
+    overflow-y:hidden !important;
+    position: relative;
     }
     .initials{
             width: 30px !important;

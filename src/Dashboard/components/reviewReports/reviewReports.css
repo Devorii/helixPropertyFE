@@ -179,15 +179,29 @@ margin-right: 5%;
 
 
 @media (max-width: 600px){
+    #userInput{
+        border: 1px solid #e1c0c0;
+    }
+    .comment-btn{
+    background: rgb(180 82 82) !important;
+}
+
+    .labelname{
+    color: black;
+    font-weight: 300;
+    /* color: #4e06b8; */
+    /* font-weight: 400; */
+}
     .comments-holder {
         position: relative;
+        display: block;
         width: 100%;
     }
     .notes-form {
         display: flex;
         margin-top: 20px;
         flex-direction: column;
-        border: 1px solid black;
+        border: 1px solid #e1c0c0;
         border-radius: 8px;
         padding: 20px;
         width: 87%;
@@ -217,10 +231,13 @@ margin-right: 5%;
     }
     .mobile-ntm1{
     display: block;
-    font-size: 27px;
+    /* font-size: 27px; */
+    font-size: 23px;
     margin-top: 20px;
     margin-bottom: 5px;   
     color: black !important; 
+    font-weight: 300;
+    margin-bottom: 19px;
     }
     .ntm1-desktop{
         display: none;
@@ -231,7 +248,7 @@ margin-right: 5%;
         padding: 20px;
         border-radius: 7px;
         width: 86%;
-        border: 1px solid #0000008f;
+        /* border: 1px solid #0000008f; */
     }
     #meta-header-wrapper {
         display: flex;
