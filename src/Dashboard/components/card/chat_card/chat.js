@@ -86,7 +86,7 @@ export default function ChatCard({ rowData }) {
     }
     const dateAlignment = {
         fontSize:'10px', 
-        margin: "-8px 0px 40px 47",
+        margin: "-8px 0px 40px 47px",
         textAlign: 'start'
     }
 

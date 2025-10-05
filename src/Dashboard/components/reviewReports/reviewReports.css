@@ -179,6 +179,13 @@ margin-right: 5%;
 
 
 @media (max-width: 600px){
+    .ctrl-btn{
+        width: 150px;
+    }
+    #controls-wrapper{
+    display: flex;
+    justify-content: space-between;
+    }
     #userInput{
         border: 1px solid #e1c0c0;
     }

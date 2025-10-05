@@ -400,8 +400,7 @@ const ReviewReports = (props) => {
                         <div id="controls-wrapper">
                             {/* <img onClick={back} class="img-btn back" src={backSVG} alt="Back Icon" /> */}
                             <Button
-
-                                class="img-btn back"
+                                class="img-btn back ctrl-btn"
                                 variant="contained"
                                 onClick={back}
                             // sx={{
@@ -423,15 +422,9 @@ const ReviewReports = (props) => {
 
                                 <Button
 
-                                class="img-btn"
+                                class="img-btn ctrl-btn"
                                 variant="contained"
                                 onClick={reopenTicket}
-                                // sx={{
-                                //     border: '1px solid black',
-                                //     backgroundColor: 'white',
-                                //     color: 'black',
-                                //     '&:hover': { backgroundColor: '#fff8f5ff' },
-                                // }}
                                 >
                                 Re-open Ticket
                             </Button>
@@ -440,7 +433,17 @@ const ReviewReports = (props) => {
                             }
                             {
                                 accountType !== "OW1" && props.status !== "Closed" &&
-                                <img onClick={closeTicket} class="img-btn" src={closeTicketSVG} alt="Close Icon" />
+                                <Button
+
+                                class="img-btn ctrl-btn"
+                                variant="contained"
+                                onClick={closeTicket}
+                                sx={{
+                                    width: "30px"
+                                }}
+                                >
+                                Close Ticket
+                            </Button>
                             }
                         </div>
                     </>
