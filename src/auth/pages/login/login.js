@@ -28,12 +28,15 @@ const LoginPage = () => {
             navigateTo('/home')
           } else if (response.status === 403) {
             // Redirect if 403 Forbidden response
+            localStorage.clear()
             navigateTo('/');
           } else {
             console.error(`Unexpected status: ${response.status}`);
+            localStorage.clear()
           }
         } catch (error) {
           console.error('Error during the request:', error.message);
+          localStorage.clear()
         }
       };
     
@@ -92,8 +95,6 @@ const LoginPage = () => {
                 localStorage.setItem('userInit', data['user_initials'])
                 localStorage.setItem('c_loc', findLocationById(data['property_metadata'], data['property_id']))
                 localStorage.setItem('a_loc', JSON.stringify(data['property_metadata']))
-
-
                 navigateTo('/home')
     
             } catch (error) {
