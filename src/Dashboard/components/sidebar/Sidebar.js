@@ -14,6 +14,8 @@ import React from "react";
 
 const Sidebar = () => {
   const userStatus = localStorage.getItem('userStatus')
+  const raw_pid = localStorage.getItem('raw_pid')
+  const selected_pid = localStorage.getItem('pid')
   const nav = useNavigate()
   const logout = () => {
     localStorage.clear()
@@ -37,9 +39,8 @@ const Sidebar = () => {
         <img src={darklogo} alt="sidebar-logo" id="sb-logo"></img>
         {
           localStorage.getItem('userStatus') == "OW1" &&
-          <p>{`ID: ${localStorage.getItem('pid')}`}</p>
+          <p style={{marginBottom:'0px'}}>Id: {localStorage.getItem('pid')}</p>
         }
-
       </div>
 
       <div className="navItems">

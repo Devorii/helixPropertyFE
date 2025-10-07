@@ -18,19 +18,20 @@ import Menu from '@mui/material/Menu';
 import { useNavigate } from "react-router-dom";
 import { SimpleTreeView } from '@mui/x-tree-view/SimpleTreeView';
 import { TreeItem } from '@mui/x-tree-view/TreeItem';
-
+import Collapse from '@mui/material/Collapse';
 
 
 const TopNav = () => {
-    const themeColor=process.env.REACT_APP_THEME_COLOR
+    const themeColor = process.env.REACT_APP_THEME_COLOR
     const nav = useNavigate()
     const userInitials = localStorage.getItem('userInit')
+    const pid = localStorage.getItem('pid')
     const [auth, setAuth] = React.useState(true);
     const [anchorEl, setAnchorEl] = React.useState(null);
     const permissions = localStorage.getItem('userStatus')
-    
+    const current_location = localStorage.getItem('c_loc') || "Select a Property"
     useEffect(() => {
-    }, [userInitials])
+    }, [userInitials, pid])
 
     const handleChange = (event) => {
         setAuth(event.target.checked);
@@ -47,20 +48,28 @@ const TopNav = () => {
         localStorage.clear()
         nav('/')
     }
-    const homeNav = () => { 
+    const homeNav = () => {
         nav('/')
     }
-  const navigateToContractors = () => {
-    nav('/contractors-information')
-  }
-  const navigateToExpenses = () => {
-    nav('/transaction-expenses')
-  }
+    const navigateToContractors = () => {
+        nav('/contractors-information')
+    }
+    const navigateToExpenses = () => {
+        nav('/transaction-expenses')
+    }
+    const changeLocation = (data, loc) => {
+        localStorage.setItem('pid', data)
+        localStorage.setItem('c_loc', loc)
+        window.location.reload()
+    }
+
+    const property_options = JSON.parse(localStorage.getItem('a_loc'))
+
 
     return (
         <div className="mobile-nav">
             <Box sx={{ flexGrow: 1, width: "100%" }} className='mobile-box'>
-                 {/* <AppBar position="static" style={{ backgroundColor: "black" }}></AppBar> */}
+                {/* <AppBar position="static" style={{ backgroundColor: "black" }}></AppBar> */}
                 <AppBar position="static" style={{ backgroundColor: "#da8484" }}>
                     <Toolbar>
 
@@ -115,32 +124,50 @@ const TopNav = () => {
                                     <MenuItem onClick={logout}>Sign out</MenuItem>
 
                                     {
-                                        permissions=='OW1'?
-                                                                                          <Box>
-                                                    <SimpleTreeView>
-                                                      <TreeItem itemId="grid" label="Contacts">
+                                        permissions == 'OW1' ?
+                                            <Box>
+                                                <SimpleTreeView>
+                                                    <TreeItem itemId="grid" label="Contacts">
                                                         <TreeItem itemId="grid-Info" label="Tenants Info" onClick={navigateToContractors} />
                                                         {/* <TreeItem itemId="grid-contractors-info" label="Contractors Info"/> */}
-                                                      </TreeItem>
-                                                    </SimpleTreeView>
-                                    
-                                                    <SimpleTreeView>
-                                                      <TreeItem itemId="grid" label="Transactions">
+                                                    </TreeItem>
+                                                </SimpleTreeView>
+
+                                                <SimpleTreeView>
+                                                    <TreeItem itemId="grid" label="Transactions">
                                                         <TreeItem itemId="grid-Info" label="Expenses" onClick={navigateToExpenses} />
-                                                      </TreeItem>
-                                                    </SimpleTreeView>
-                                    
-                                                    {/* <SimpleTreeView>
+                                                    </TreeItem>
+                                                </SimpleTreeView>
+                                                <SimpleTreeView>
+                                                    <TreeItem itemId="grid" label={current_location}>
+                                                        {
+                                                            property_options.map((loc, index) => (
+                                                                loc[1] !== pid &&
+                                                                <TreeItem
+                                                                    key={index}
+                                                                    value={loc[1]}
+                                                                    label={loc[0]}
+                                                                    onClick={() => { changeLocation(loc[1], loc[0]) }}
+                                                                />
+                                                            ))
+                                                            //    property_options.map(((loc, id)) => {
+                                                            //          console.log(loc, id)
+                                                            //     })
+                                                        }
+                                                    </TreeItem>
+                                                </SimpleTreeView>
+                                                {/* <SimpleTreeView>
                                                       <TreeItem itemId="grid" label="Billing">
                                                         <TreeItem itemId="grid-pro" label="Invoices" />
                                                       </TreeItem>
                                                     </SimpleTreeView> */}
-                                                  </Box>
-                                                  :
-                                                  ''
+                                            </Box>
+                                            :
+                                            ''
                                     }
 
                                     <MenuItem>Property Id: {localStorage.getItem('pid')}</MenuItem>
+
                                 </Menu>
                             </div>
                         )}
@@ -151,6 +178,40 @@ const TopNav = () => {
             {/* Desktop below */}
             <div id="topNav">
                 {/* More navigation can go here in the future */}
+                <Box
+                    className='property-selector'
+                    sx={{
+                        "& .MuiCollapse-root": {
+                            height: "0px !important",
+                        }
+                    }}
+                >
+
+                    {
+                        permissions === 'OW1' &&
+                        (
+                            <SimpleTreeView>
+                                <TreeItem itemId="grid" label={current_location}>
+                                    {
+                                        property_options.map((loc, index) => (
+                                            loc[1] !== pid &&
+                                            <TreeItem
+                                                key={index}
+                                                value={loc[1]}
+                                                label={loc[0]}
+                                                onClick={() => { changeLocation(loc[1], loc[0]) }}
+                                            />
+                                        ))
+                                        //    property_options.map(((loc, id)) => {
+                                        //          console.log(loc, id)
+                                        //     })
+                                    }
+                                </TreeItem>
+                            </SimpleTreeView>
+                        )
+                    }
+
+                </Box>
                 <div id="initViewer" style={{ backgroundColor: themeColor }}>
                     {userInitials ? userInitials : "~"}
                 </div>

@@ -4,6 +4,11 @@
     /* background-color: aquamarine; */
     display: flex;
     align-items: center;
+    justify-content: end;
+}
+
+.property-selector{
+    margin-right: 100px;
 }
 #initViewer{
     /* background-color: black; */

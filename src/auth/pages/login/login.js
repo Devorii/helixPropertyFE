@@ -54,6 +54,15 @@ const LoginPage = () => {
         navigateTo("/sign-up");
     };
 
+    function findLocationById(list, id) {
+  for (const [address, uid] of list) {
+    if (uid === id) {
+      return address;
+    }
+  }
+  return null; // return null if not found
+}
+
     const signIn = async (values) => {
 
         const run_signin = async () => {
@@ -77,10 +86,14 @@ const LoginPage = () => {
                 // If response is okay (status code 200), proceed with parsing response
                 setPopUpErrorState(false)
                 const data = await response.json();
-                localStorage.setItem('token', data['token'])
                 localStorage.setItem('pid', data['property_id'])
+                localStorage.setItem('token', data['token'])
                 localStorage.setItem('fullname', data['name'])
                 localStorage.setItem('userInit', data['user_initials'])
+                localStorage.setItem('c_loc', findLocationById(data['property_metadata'], data['property_id']))
+                localStorage.setItem('a_loc', JSON.stringify(data['property_metadata']))
+
+
                 navigateTo('/home')
     
             } catch (error) {
