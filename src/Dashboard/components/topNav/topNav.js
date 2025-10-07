@@ -150,17 +150,11 @@ const TopNav = () => {
                                                                     onClick={() => { changeLocation(loc[1], loc[0]) }}
                                                                 />
                                                             ))
-                                                            //    property_options.map(((loc, id)) => {
-                                                            //          console.log(loc, id)
-                                                            //     })
+                                 
                                                         }
                                                     </TreeItem>
                                                 </SimpleTreeView>
-                                                {/* <SimpleTreeView>
-                                                      <TreeItem itemId="grid" label="Billing">
-                                                        <TreeItem itemId="grid-pro" label="Invoices" />
-                                                      </TreeItem>
-                                                    </SimpleTreeView> */}
+            
                                             </Box>
                                             :
                                             ''
