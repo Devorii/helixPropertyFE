@@ -63,7 +63,7 @@ const TopNav = () => {
         window.location.reload()
     }
 
-    const property_options = JSON.parse(localStorage.getItem('a_loc'))
+    const property_options = JSON.parse(localStorage.getItem('a_loc')) || []
 
 
     return (
@@ -196,9 +196,6 @@ const TopNav = () => {
                                                 onClick={() => { changeLocation(loc[1], loc[0]) }}
                                             />
                                         ))
-                                        //    property_options.map(((loc, id)) => {
-                                        //          console.log(loc, id)
-                                        //     })
                                     }
                                 </TreeItem>
                             </SimpleTreeView>
