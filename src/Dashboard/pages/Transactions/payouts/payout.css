@@ -1,0 +1,14 @@
+
+.balance-mobile{
+    display: none;
+}
+
+
+@media(max-width: 600px){
+    .balance-mobile{
+    display: flex;
+}
+    .balance-dsktop{
+        display: none;
+    }
+}

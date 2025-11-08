@@ -57,6 +57,12 @@ const TopNav = () => {
     const navigateToExpenses = () => {
         nav('/transaction-expenses')
     }
+    const navigateToPayouts = () => {
+        nav('/payout-view')
+    }
+    const navigateToRentPayment = () => {
+        nav('/rent-view')
+    }
     const changeLocation = (data, loc) => {
         localStorage.setItem('pid', data)
         localStorage.setItem('c_loc', loc)
@@ -120,26 +126,23 @@ const TopNav = () => {
                                     open={Boolean(anchorEl)}
                                     onClose={handleClose}
                                 >
-                                    <MenuItem onClick={homeNav}>Home</MenuItem>
-                                    <MenuItem onClick={logout}>Sign out</MenuItem>
+                                    <MenuItem>Property Id: {localStorage.getItem('pid')}</MenuItem>
+
 
                                     {
                                         permissions == 'OW1' ?
                                             <Box>
                                                 <SimpleTreeView>
-                                                    <TreeItem itemId="grid" label="Contacts">
-                                                        <TreeItem itemId="grid-Info" label="Tenants Info" onClick={navigateToContractors} />
+                                                    <TreeItem itemId="grid-Info72" label="Home" onClick={homeNav} />
+                                                    <TreeItem itemId="grid1" label="Contacts">
+                                                        <TreeItem itemId="grid-Info2" label="Tenants Info" onClick={navigateToContractors} />
                                                         {/* <TreeItem itemId="grid-contractors-info" label="Contractors Info"/> */}
                                                     </TreeItem>
-                                                </SimpleTreeView>
-
-                                                <SimpleTreeView>
                                                     <TreeItem itemId="grid" label="Transactions">
-                                                        <TreeItem itemId="grid-Info" label="Expenses" onClick={navigateToExpenses} />
+                                                        <TreeItem itemId="grid-Inf4o" label="Expenses" onClick={navigateToExpenses} />
+                                                        <TreeItem itemId="grid-Info3" label="Balance" onClick={navigateToPayouts} />
                                                     </TreeItem>
-                                                </SimpleTreeView>
-                                                <SimpleTreeView>
-                                                    <TreeItem itemId="grid" label={current_location}>
+                                                    <TreeItem itemId="grid3" label={current_location}>
                                                         {
                                                             property_options.map((loc, index) => (
                                                                 loc[1] !== pid &&
@@ -150,17 +153,27 @@ const TopNav = () => {
                                                                     onClick={() => { changeLocation(loc[1], loc[0]) }}
                                                                 />
                                                             ))
-                                 
+
                                                         }
                                                     </TreeItem>
+                                                    <TreeItem itemId="grid-Info29" label="Sign out" onClick={logout} />
                                                 </SimpleTreeView>
-            
+
+
                                             </Box>
                                             :
-                                            ''
+                                            <Box style={{ marginTop: '20px' }}>
+                                                <SimpleTreeView>
+                                                    <TreeItem itemId="grid-Info72" label="Home" onClick={homeNav} />
+                                                    <TreeItem itemId="grid" label="Financials">
+                                                        <TreeItem itemId="grid-Info" label="Rent Payment" onClick={navigateToRentPayment} />
+                                                    </TreeItem>
+                                                           <TreeItem itemId="grid-Info29" label="Sign out" onClick={logout} />
+                                                </SimpleTreeView>
+                                            </Box>
                                     }
 
-                                    <MenuItem>Property Id: {localStorage.getItem('pid')}</MenuItem>
+
 
                                 </Menu>
                             </div>

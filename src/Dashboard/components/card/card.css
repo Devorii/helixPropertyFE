@@ -2,7 +2,7 @@
     width: 190px;
     height: 80px;
     border-radius: 10px;
-    border: solid rgb(4, 4, 89) 1px;
+    border: solid rgb(231, 109, 91) 1px;
     background-color: white;
     margin-right: 20px;
     text-align: center;
@@ -10,7 +10,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    color: rgb(4, 4, 89);
+    color: rgb(231, 109, 91);;
     transition: all 0.3s ease;  /* Smooth transition for changes */
 }
 
@@ -35,8 +35,8 @@
 
 .selectionCards:hover{
 cursor: pointer;
-border: solid rgb(0, 106, 255) 1px;
-color:  rgb(0, 106, 255);
+border: solid rgb(208, 92, 74);
+color:  rgb(208, 92, 74);
 }
 
 

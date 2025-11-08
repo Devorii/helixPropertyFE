@@ -26,14 +26,6 @@ const Item = styled(Paper)(({ theme }) => ({
 
 
 
-
-
-
-
-
-
-
-
 export default function ListViewEdit() {
   const [open, setOpen] = React.useState(false);
   const [modalData, setModalData] = useState({})
@@ -104,7 +96,8 @@ const themeColor=process.env.REACT_APP_THEME_COLOR
               company: item.company, 
               occupation: item.occupation,
               dob: item.dob, 
-              age: item.age
+              age: item.age,
+              rental_price: item.rental_price
             })
           }}>
 

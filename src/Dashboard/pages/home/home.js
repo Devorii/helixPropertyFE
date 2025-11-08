@@ -16,6 +16,7 @@ import UnstyledSelectBasic from '../../../Dashboard/components/select/editSelect
 import Alert from '@mui/material/Alert';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import Stack from '@mui/material/Stack';
+import EmbeddedDashboard from "../../components/stripe/viewDash";
 
 const Home = () => {
     const themeColor=process.env.REACT_APP_THEME_COLOR
@@ -173,7 +174,7 @@ const Home = () => {
 
 
                                     <h1 style={{ marginBottom: '0px', color: 'black' }}>Issue Reports</h1>
-                                    <p id="viewReports" style={{ color: 'rgb(0, 106, 255)' }}>Create a ticket by selecting a category below.</p>
+                                    <p id="viewReports" style={{ color: 'rgb(231, 109, 91)' }}>Create a ticket by selecting a category below.</p>
 
                                     <div id="cardsHolder">
                                         <Card name='Main Unit' />
@@ -202,7 +203,7 @@ const Home = () => {
                             <>
                                 <p id="formTitle">{`Report a ${formName} Issue`}</p>
                                 {test}
-                                <p id="BacktoReports" onClick={viewReports}><KeyboardBackspaceIcon />Back to Reports</p>
+                                <button id="BacktoReports" onClick={viewReports}><KeyboardBackspaceIcon />Back to Reports</button>
                             </>
                             :
                             isReport ?
@@ -249,11 +250,13 @@ const Home = () => {
 
                                     </div>
 
+                                    
                                     <ReviewReports status={reportStatus}/>
                                 </>
                                 :
                                 // if it is not a form then we want to check if report instead else just return list of reports.
                                 <>
+                                    {/* <EmbeddedDashboard /> */}
                                     <StickyHeadTable />
                                 </>
 

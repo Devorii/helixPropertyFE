@@ -1,0 +1,35 @@
+.copy-wrapper {
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    background-color: rgb(231, 109, 91);
+    color: white;
+    border-radius: 5px;
+    padding: 20px;
+}
+
+.copy-wrapper:hover {
+    cursor: pointer;
+}
+
+.copy-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media(max-width: 600px) {
+    .copy-wrapper {
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    background-color: rgb(231, 109, 91);
+    color: white;
+    border-radius: 5px;
+    padding: 15px;
+}
+    .interact-copy-wrapper {
+        display: flex;
+        justify-content: center;
+    }
+}

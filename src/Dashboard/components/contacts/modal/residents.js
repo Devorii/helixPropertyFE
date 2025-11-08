@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState } from 'react';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
@@ -8,6 +9,7 @@ import MailIcon from '@mui/icons-material/Mail';
 import BusinessIcon from '@mui/icons-material/Business';
 import WorkOutlineIcon from '@mui/icons-material/WorkOutline';
 import DeleteIcon from '@mui/icons-material/Delete';
+import PaidIcon from '@mui/icons-material/Paid';
 import './resident.css'
 
 
@@ -25,34 +27,34 @@ const style = {
     px: 4,
     pb: 3,
 };
-  const deleteTenantsInfo = async (token, uid) => {
+const deleteTenantsInfo = async (token, uid) => {
     try {
-      const response = await fetch(`${process.env.REACT_APP_HELIX_API}/tenant/remove`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'x-access-token': token,
-        },
-        body: JSON.stringify({
-          uid: uid
-        })
-      });
+        const response = await fetch(`${process.env.REACT_APP_HELIX_API}/tenant/remove`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'x-access-token': token,
+            },
+            body: JSON.stringify({
+                uid: uid
+            })
+        });
 
-      if (response.ok) {
-        const data = await response.json();
-        console.log("Response Data:", data);
-      } else if (response.status === 403) {
-        // Redirect if 403 Forbidden response
+        if (response.ok) {
+            const data = await response.json();
+            console.log("Response Data:", data);
+        } else if (response.status === 403) {
+            // Redirect if 403 Forbidden response
 
-      } else {
-        console.error(`Unexpected status: ${response.status}`);
-      }
+        } else {
+            console.error(`Unexpected status: ${response.status}`);
+        }
     } catch (error) {
-      console.error('Error during the request:', error.message);
+        console.error('Error during the request:', error.message);
     }
-  };
+};
 
-function ChildModal({uid, name, childModal, setChildModal}) {
+function ChildModal({ uid, name, childModal, setChildModal }) {
 
     const deleteHandler = () => {
         // Convert the id to base64
@@ -63,13 +65,13 @@ function ChildModal({uid, name, childModal, setChildModal}) {
         window.location.reload()
     };
 
-    const cancelClose = () => { 
+    const cancelClose = () => {
         setChildModal(false)
     }
 
     return (
         <React.Fragment>
-  
+
             <Modal
                 open={childModal}
                 onClose={cancelClose}
@@ -77,7 +79,7 @@ function ChildModal({uid, name, childModal, setChildModal}) {
                 aria-describedby="child-modal-description"
             >
                 <Box sx={{ ...style, width: 200 }}>
-                    <h4 id="child-modal-title" style={{color: 'red'}}>Want to delete {name}?</h4>
+                    <h4 id="child-modal-title" style={{ color: 'red' }}>Want to delete {name}?</h4>
                     <p id="child-modal-description">
                         Deleting your contact is a perminant action.
                     </p>
@@ -90,11 +92,68 @@ function ChildModal({uid, name, childModal, setChildModal}) {
 }
 
 export default function NestedModal({ open, setOpen, data }) {
-    const themeColor=process.env.REACT_APP_THEME_COLOR
-    const [childModal,setChildModal] = React.useState(false)
+    const themeColor = process.env.REACT_APP_THEME_COLOR
+    const [childModal, setChildModal] = React.useState(false)
+    const [rent, setRent] = useState(null)
+    const [updateRentView, setUpdateRentView] = useState(false)
+    const tenant_uid = data.uid
+    const propID = localStorage.getItem('pid')
+    const token = localStorage.getItem('token')
+    const time = new Date().toISOString();
+
     const handleClose = () => {
         setOpen(false);
     };
+
+    const saveRentInfo = () => {
+        const payload = {
+            'prop_id': propID,
+            'tenant_id': tenant_uid,
+            'amount': rent,
+            'created_on': time
+        }
+
+
+        if (rent == 0 || rent == null) {
+            setUpdateRentView(!updateRentView)
+        }
+        else {
+            const updateRentInfo = async () => {
+                try {
+                    const response = await fetch(`${process.env.REACT_APP_HELIX_API}/rent/update`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'x-access-token': token,
+                        },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (response.ok) {
+                        const data = await response.json();
+                        setUpdateRentView(!updateRentView)
+                        console.log("Response Data:", data.message);
+                    }
+                    else {
+                        console.error(`Unexpected status: ${response.status}`);
+                    }
+                } catch (error) {
+                    console.error('Error during the request:', error.message);
+                }
+            };
+            updateRentInfo()
+        }
+    }
+
+    const selectUpdateRent = () => {
+        setUpdateRentView(!updateRentView)
+    }
+
+    const updateRent = (e) => {
+        e.preventDefault()
+        setRent(e.target.value)
+    }
+
 
     return (
         <div id='modal-wrapper'>
@@ -115,14 +174,31 @@ export default function NestedModal({ open, setOpen, data }) {
                                 <h3 style={{ marginBottom: '0px' }} id="parent-modal-title">{data.name}</h3>
                                 <p id='header-occupation' style={{ marginTop: '0px' }}>{data.occupation ? data.occupation : ""}</p>
                             </div>
-
-
                         </div>
+                        <hr />
+                        <div className='pairIconInfo'>
+                            <PaidIcon style={{ color: themeColor }} className='icon-size' />
+                            {
+                                updateRentView &&
+                                <p
+                                    style={{ color: themeColor, marginRight: '20px' }}
+                                    onClick={saveRentInfo}
+                                    className='icon-title delete'>Save Rent</p>
 
-                        <hr/>
-                        <div className='pairIconInfo' onClick={() => setChildModal(true)}>
-                        <DeleteIcon style={{color: themeColor}} className='icon-size delete-icon'/>
-                        <p style={{color: themeColor}} className='icon-title delete'>Delete</p>
+                            }
+                            {
+                                !updateRentView &&
+                                <p
+                                    style={{ color: themeColor, marginRight: '20px' }}
+                                    onClick={selectUpdateRent}
+                                    className='icon-title delete'>Update Rent</p>
+                            }
+
+                            <span className='pairIconInfo' onClick={() => setChildModal(true)}>
+                                <DeleteIcon style={{ color: themeColor }} className='icon-size delete-icon' />
+                                <p style={{ color: themeColor }} className='icon-title delete'>Remove Tenant</p>
+                            </span>
+
                         </div>
 
 
@@ -134,7 +210,28 @@ export default function NestedModal({ open, setOpen, data }) {
                     <div className='contact-body-container'>
                         <div className='pairIconInfo'>
                             <div className='pairIconInfo title-container'>
-                                <ContactPhoneIcon style={{color: themeColor}} className='icon-size'/>
+                                <ContactPhoneIcon style={{ color: themeColor }} className='icon-size' />
+                                <p className='icon-title'>Due Rent:</p>
+                            </div>
+                            <div className='item-value-container'>
+                                {
+                                    updateRentView &&
+                                    <input style={{ width: '138px' }} type='number' onChange={(e) => updateRent(e)} />
+                                }
+                                {
+                                    !updateRentView &&
+                                    <p className='item-value parent-modal-description'>
+                                        ${rent || Number(data.rental_price).toLocaleString()}
+                                    </p>
+                                }
+
+
+                            </div>
+                        </div>
+
+                        <div className='pairIconInfo'>
+                            <div className='pairIconInfo title-container'>
+                                <ContactPhoneIcon style={{ color: themeColor }} className='icon-size' />
                                 <p className='icon-title'>Phone:</p>
                             </div>
                             <div className='item-value-container'>
@@ -147,7 +244,7 @@ export default function NestedModal({ open, setOpen, data }) {
 
                         <div className='pairIconInfo'>
                             <div className='pairIconInfo title-container'>
-                                <MailIcon style={{color: themeColor}} className='icon-size'/>
+                                <MailIcon style={{ color: themeColor }} className='icon-size' />
                                 <p className='icon-title'>Email:</p>
                             </div>
                             <div className='item-value-container'>
@@ -160,7 +257,7 @@ export default function NestedModal({ open, setOpen, data }) {
 
                         <div className='pairIconInfo'>
                             <div className='pairIconInfo title-container'>
-                                <DateRangeIcon style={{color: themeColor}} className='icon-size'/>
+                                <DateRangeIcon style={{ color: themeColor }} className='icon-size' />
                                 <p className='icon-title'>D.O.B:</p>
                             </div>
                             <div className='item-value-container'>
@@ -177,7 +274,7 @@ export default function NestedModal({ open, setOpen, data }) {
                     <div className='contact-body-container'>
                         <div className='pairIconInfo'>
                             <div className='pairIconInfo title-container'>
-                                <WorkOutlineIcon style={{color: themeColor}} className='icon-size'/>
+                                <WorkOutlineIcon style={{ color: themeColor }} className='icon-size' />
                                 <p className='icon-title'>Occupation:</p>
                             </div>
                             <div className='item-value-container'>
@@ -189,7 +286,7 @@ export default function NestedModal({ open, setOpen, data }) {
 
                         <div className='pairIconInfo'>
                             <div className='pairIconInfo title-container'>
-                                <BusinessIcon style={{color: themeColor}} className='icon-size'/>
+                                <BusinessIcon style={{ color: themeColor }} className='icon-size' />
                                 <p className='icon-title'>Company:</p>
                             </div>
                             <div className='item-value-container'>
@@ -202,7 +299,7 @@ export default function NestedModal({ open, setOpen, data }) {
                     </div>
 
 
-                    <ChildModal uid={data.uid} name={data.name} childModal={childModal} setChildModal={setChildModal}/>
+                    <ChildModal uid={data.uid} name={data.name} childModal={childModal} setChildModal={setChildModal} />
                 </Box>
             </Modal>
         </div>

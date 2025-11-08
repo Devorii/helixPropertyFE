@@ -1,0 +1,46 @@
+.copy-box {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(231, 109, 91);
+  color: white;
+  border-radius: 5px;
+  padding: 20px;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.2s ease;
+}
+
+.copy-box:hover {
+  background-color: rgb(210, 85, 70);
+}
+
+.copy-value {
+  margin-left: 5px;
+  font-weight: 600;
+}
+
+.copied-popup {
+  position: absolute;
+  bottom: 100%; /* position above the box */
+  left: 50%;
+  transform: translateX(-50%) translateY(-10px);
+  background-color: #22c55e;
+  color: white;
+  font-size: 0.875rem; /* text-sm */
+  padding: 4px 12px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  pointer-events: none;
+  z-index: 10;
+
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* visible state */
+.copied-popup.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
