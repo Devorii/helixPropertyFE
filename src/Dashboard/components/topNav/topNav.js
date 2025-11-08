@@ -19,11 +19,12 @@ import { useNavigate } from "react-router-dom";
 import { SimpleTreeView } from '@mui/x-tree-view/SimpleTreeView';
 import { TreeItem } from '@mui/x-tree-view/TreeItem';
 import Collapse from '@mui/material/Collapse';
-
+import SettingsMenuPopup from "./../sidebar/settings"
 
 const TopNav = () => {
     const themeColor = process.env.REACT_APP_THEME_COLOR
     const nav = useNavigate()
+    const token = localStorage.getItem('token')
     const userInitials = localStorage.getItem('userInit')
     const pid = localStorage.getItem('pid')
     const [auth, setAuth] = React.useState(true);
@@ -69,6 +70,82 @@ const TopNav = () => {
         window.location.reload()
     }
 
+    const cleanupOverlay = () => {
+        const appContent = document.getElementById("sidebar-container");
+        if (appContent) {
+            appContent.style.filter = "";
+            appContent.style.pointerEvents = "";
+        }
+        const overlay = document.getElementById("loading-overlay");
+        if (overlay) overlay.remove();
+    };
+    const makeStripeAccount = () => {
+        const createAccount = async () => {
+            // 1️⃣ Add a wrapper to blur everything behind the overlay
+            const appContent = document.getElementById("sidebar-container"); // your main app container
+            if (appContent) {
+                appContent.style.filter = "blur(3px) brightness(0.8)";
+                appContent.style.pointerEvents = "none"; // block interactions
+            }
+
+            // 2️⃣ Add overlay
+            const overlay = document.createElement("div");
+            overlay.id = "loading-overlay";
+            overlay.style.position = "fixed";
+            overlay.style.top = "0";
+            overlay.style.left = "0";
+            overlay.style.width = "100vw";
+            overlay.style.height = "100vh";
+            overlay.style.background = "rgba(255, 255, 255, 0.95)";
+            overlay.style.display = "flex";
+            overlay.style.justifyContent = "center";
+            overlay.style.alignItems = "center";
+            overlay.style.zIndex = "9999";
+            overlay.style.flexDirection = "column";
+            overlay.style.textAlign = "center";
+            overlay.style.fontSize = "1.2rem";
+            overlay.innerHTML = `
+      <p>Have your photo ID ready. We're almost there!</p>
+      <div style="margin-top: 20px; display: flex; flex-direction: column; gap: 10px;">
+        <div style="height: 60px; width: 300px; background: #eee; animation: pulse 1.5s infinite;"></div>
+        <div style="height: 60px; width: 300px; background: #eee; animation: pulse 1.5s infinite;"></div>
+        <div style="height: 60px; width: 300px; background: #eee; animation: pulse 1.5s infinite;"></div>
+      </div>
+    `;
+            document.body.appendChild(overlay);
+
+            // 3️⃣ Keyframes for pulse
+            const styleTag = document.createElement("style");
+            styleTag.innerHTML = `
+      @keyframes pulse {
+        0% { background-color: #eee; }
+        50% { background-color: #ddd; }
+        100% { background-color: #eee; }
+      }
+    `;
+            document.head.appendChild(styleTag);
+
+            try {
+                const response = await fetch(`${process.env.REACT_APP_HELIX_API}/stripe/create-account`, {
+                    method: "POST",
+                    headers: { "x-access-token": token },
+                });
+
+                if (response.status === 200) {
+                    const data = await response.json();
+                    setTimeout(() => { window.location.href = data.onboarding_url; }, 15);
+                } else {
+                    console.error(`Unexpected status: ${response.status}`);
+                    cleanupOverlay();
+                }
+            } catch (error) {
+                console.error(error);
+                cleanupOverlay();
+            }
+        };
+
+        createAccount();
+    };
     const property_options = JSON.parse(localStorage.getItem('a_loc')) || []
 
 
@@ -140,7 +217,12 @@ const TopNav = () => {
                                                     </TreeItem>
                                                     <TreeItem itemId="grid" label="Transactions">
                                                         <TreeItem itemId="grid-Inf4o" label="Expenses" onClick={navigateToExpenses} />
-                                                        <TreeItem itemId="grid-Info3" label="Balance" onClick={navigateToPayouts} />
+                                                        {
+                                                            localStorage.getItem('fncacc') ?
+                                                                ""
+                                                                :
+                                                                <TreeItem itemId="grid-Info321" label="Balance" onClick={navigateToPayouts} />
+                                                        }
                                                     </TreeItem>
                                                     <TreeItem itemId="grid3" label={current_location}>
                                                         {
@@ -156,7 +238,8 @@ const TopNav = () => {
 
                                                         }
                                                     </TreeItem>
-                                                    <TreeItem itemId="grid-Info29" label="Sign out" onClick={logout} />
+                                                    {/* <TreeItem itemId="grid-Info29" label="Sign out" onClick={logout} /> */}
+                                                    <SettingsMenuPopup signOut={logout} regPayment={makeStripeAccount} />
                                                 </SimpleTreeView>
 
 
@@ -168,7 +251,8 @@ const TopNav = () => {
                                                     <TreeItem itemId="grid" label="Financials">
                                                         <TreeItem itemId="grid-Info" label="Rent Payment" onClick={navigateToRentPayment} />
                                                     </TreeItem>
-                                                           <TreeItem itemId="grid-Info29" label="Sign out" onClick={logout} />
+                                                    {/* <TreeItem itemId="grid-Info29" label="Sign out" onClick={logout} /> */}
+                                                    <SettingsMenuPopup signOut={logout} regPayment={makeStripeAccount} />
                                                 </SimpleTreeView>
                                             </Box>
                                     }
