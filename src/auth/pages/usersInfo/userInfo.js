@@ -26,9 +26,9 @@ const UserInformation = () => {
   // document.querySelector('.form-bgs')?.classList.add('show-form');
   return (
     <div className="gcw stack">
-      <div className="logo-wrapper">
+      {/* <div className="logo-wrapper">
         <img className="logo" src={Logo} alt="logo"></img>
-      </div>
+      </div> */}
     <div id="loginCard">
       <div id="formWrapper">
       <div className='form-bgs show-form'>
@@ -36,7 +36,7 @@ const UserInformation = () => {
       </div>
       </div>
     </div>
-    <p className="footer-txt">2024 © Helix Property Management. All rights reserved. </p>
+    <p className="footer-txt">2025 © PeachStreet.io All rights reserved. </p>
     </div>
 
   )

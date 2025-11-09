@@ -24,6 +24,7 @@
   }
   
   .form-wrapper .field-wrapper input {
+    border: 1px solid #eb6d5b;
     border-radius: 4px;
     padding: 8px;
     font-size: 14px; /* Reduced font size */
@@ -96,6 +97,7 @@
   
   .inputDecorator{
     /* border: 1px solid #8165c4; */
+    border: 1px solid #eb6d5b;
     border: none;
     width: 92% !important;
     margin-left: 4px;

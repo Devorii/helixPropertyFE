@@ -1,4 +1,5 @@
 import { Formik, Form } from "formik";
+import Logo from './../../../artifacts/logo.svg'
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Landlord } from "./formHooks";
@@ -66,6 +67,9 @@ const AuthLandlord = () => {
 
   return (
     <div>
+                <div id="logo-wrapper">
+                    <img className="logo" src={Logo} alt="logo" />
+                </div>
       <div>
         <h4 className="intro-message show-msg">{formHeaderText} </h4>
         <div>
