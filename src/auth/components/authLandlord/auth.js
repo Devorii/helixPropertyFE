@@ -67,9 +67,9 @@ const AuthLandlord = () => {
 
   return (
     <div>
-                <div id="logo-wrapper">
+                {/* <div id="logo-wrapper">
                     <img className="logo" src={Logo} alt="logo" />
-                </div>
+                </div> */}
       <div>
         <h4 className="intro-message show-msg">{formHeaderText} </h4>
         <div>

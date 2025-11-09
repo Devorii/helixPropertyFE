@@ -53,6 +53,13 @@
         width: 80%;
         background: #e76d5b !important;
     }
+#info-container {
+    width: 600px;
+    height: 100vh;
+    text-align: center;
+    margin-bottom: 10rem;
+    padding-top: 40%;
+}
 
     /* .accountType-arrange {
         width: 80%;

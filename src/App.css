@@ -69,6 +69,9 @@ body {
   justify-content: center;
   align-items: center;
 }
+
+
+
 button{
   font-family: "Merriweather Sans", sans-serif !important;
   font-optical-sizing: auto !important;
@@ -144,6 +147,17 @@ button{
 
 
 @media (max-width:600px){
+  .gcw{
+  /* background: linear-gradient(to bottom, #000033, #000066); */
+  /* background: #d6dee9ab; */
+  background: rgba(253, 239, 239, 0.39);
+  color:white;
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
   .img-btn{
   width: 170px;
   transition: all 0.3s ease;
