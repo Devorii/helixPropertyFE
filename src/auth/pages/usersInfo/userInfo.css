@@ -4,17 +4,18 @@
 }
 #loginCard{
     
-    width: 30vw;
-    height: fit-content;
+    /* width: 30vw;
+    height: fit-content; */
     /* background: linear-gradient(to bottom, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.5)); */
-    border-radius: 20px;
-    padding: 30px;
+    /* border-radius: 20px; */
+    /* padding: 30px; */
     display: flex;
     justify-content: center;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    
 }
 
 .form-bgs{ 
+    margin-top: 13px;
     background-color: white;
     height: fit-content;
     width: auto;

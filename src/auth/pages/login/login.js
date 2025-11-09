@@ -1,4 +1,4 @@
-import Logo from "../../../artifacts/logo-dark.svg";
+import Logo from "../../../artifacts/logo.svg";
 import SigninAdmin from './../../../artifacts/Signin.svg'
 import SigninTenant from './../../../artifacts/SigninTenant.svg'
 import Alert from '@mui/material/Alert';
@@ -140,7 +140,7 @@ const LoginPage = () => {
                 </div>
                 {showLogin ? (
                     <>
-                        <p id='promptUsr' >Welcome! Let's get you signed in.</p>
+                        <p id='promptUsr' >Welcome to PeachStreet.io!</p>
                         <div className="form-wrapper">
                             <Formik
                                 initialValues={{
@@ -184,8 +184,8 @@ const LoginPage = () => {
                                             </button>
                                         </div>
                                         <div className="form-links">
-                                            <a href="#">Terms & Conditions</a>
-                                            <a onClick={signup}>Create an Account</a>
+                                            <a style={{color: '#e76d5b'}} href="#">Terms & Conditions</a>
+                                            <a style={{color: '#e76d5b'}} onClick={signup}>Create an Account</a>
                                         </div>
                                     </Form>
                                 )}

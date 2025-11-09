@@ -3,7 +3,7 @@ import MapsHomeWorkIcon from '@mui/icons-material/MapsHomeWork';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import { useNavigate } from 'react-router';
 import { useFormInformation } from '../../context/authContext';
-import Logo from "../../../artifacts/logo-light.svg"
+import Logo from "../../../artifacts/logo.svg"
 import "./signup.css"
 import React from 'react';
 
@@ -12,29 +12,15 @@ const SignUp = () => {
     const navigate = useNavigate()
     const { dispatch } = useFormInformation()
 
-    const headerStyle = {
-        width: "100%",
-        height: "80vh",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        textAlign: "center"
-    }
-
     const spaceFromHeader = {
-        marginTop: "5rem",
-        marginBottom: "2rem"
+        marginTop: "1rem",
+        marginBottom: "2rem",
+        color: '#847171'
     }
     const iconSpacing = {
         marginRight: "0.6rem"
     }
-    const btnWrapper = { 
-        width: "65%", 
-        display: "flex", 
-        flexDirection: "row", 
-        justifyContent: "space-around",
-        marginBottom: "8rem" 
-    }
+
 
 
 
@@ -57,24 +43,28 @@ const SignUp = () => {
                 <div id='logo-wrapper'>
                 <img className="logo" src={Logo} alt="logo"></img>    
                 </div>
-                <p style={spaceFromHeader}>Welcome! Let's get you started.
+                <p style={spaceFromHeader}> Choose your account type.
                 </p>
                 <div style={{ width: "100%", display: "flex", justifyContent: "center" }}>
-                    <div style={btnWrapper}>
+                    <div className='accountType-arrange'>
                         <Button    
                             className='signup-btn'                             
                             value='OW1'
-                            color="primary"
                             size="large"
                             variant="filled"
                             onClick={landlordSelection}>
                             <MapsHomeWorkIcon style={iconSpacing} />
-                            Admin
+                            Mgmt
                         </Button>
+                        <div className='orDiv'>
+                            <div className='vl'/>
+                            <p className='or'>or</p>
+                            <div className='vl'/>
+
+                        </div>
                         <Button
                             className='signup-btn'
                             value='TE1'
-                            color="primary"
                             size="large"
                             variant="filled"
                             onClick={tenantSelection}>

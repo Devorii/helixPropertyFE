@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import AuthLandlord from "../../components/authLandlord/auth";
 import "./userInfo.css"
-import Logo  from "../../../artifacts/logo-light.svg"
+import Logo  from "../../../artifacts/logo.svg"
 
 
 

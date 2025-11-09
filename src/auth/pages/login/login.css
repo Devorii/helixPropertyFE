@@ -37,6 +37,7 @@
   
 
   .form-wrapper .form-buttons button {
+    background-color: #e76d5b;
     flex-grow: 1; /* Allow buttons to grow and fill the space */
     padding: 8px 16px; /* Reduced padding */
     margin-top: 10px; /* Reduced margin */
@@ -95,7 +96,7 @@
   
   .inputDecorator{
     /* border: 1px solid #8165c4; */
-    border: 1px solid black;
+    border: none;
     width: 92% !important;
     margin-left: 4px;
     color: #575c72 !important;
