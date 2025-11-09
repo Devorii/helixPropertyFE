@@ -92,7 +92,7 @@ const Routing = () => {
     <>
       <BrowserRouter>
         <StripeProvider>
-          <div class="circle-cursor"></div>
+          <div className="circle-cursor"></div>
           <Routes>
             <Route path='/' element={<LoginPage />} />
             <Route path='/home' element={<Home />} />

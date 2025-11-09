@@ -16,6 +16,7 @@ const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHED_KEY);
 const RentViewer = () => {
   const themeColor = process.env.REACT_APP_THEME_COLOR;
   const { getCheckoutSession, checkoutClientSecret, paymentEmail } = useStripeContext();
+  const [eTransferEmail, setETransferEmail] = useState(paymentEmail)
   const [clientSecret, setClientSecret] = useState(checkoutClientSecret);
   const [paymentView, setPaymentView] = useState(null);
   const [stripeAvailable, setStripeAvailable] = useState(true);
@@ -48,6 +49,35 @@ const RentViewer = () => {
           setStripeAvailable(false);
         });
     }
+
+    if (!paymentEmail){
+        const token = localStorage.getItem('token')
+        const get_email = async () => { 
+                try {
+                    const response = await fetch(`${process.env.REACT_APP_HELIX_API}/rent/e-transfer-email`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'x-access-token': token,
+                        },
+                        body: JSON.stringify({property_id: localStorage.getItem('pid')})
+                    });
+
+                    if (!response.ok) {
+                        setETransferEmail('unidentified')
+                        console.error(`Unexpected status: ${response.status}`);
+                    }
+                    else {
+                        const result = await response.json()
+                       setETransferEmail(result.email)
+                    }
+                } catch (error) {
+                    console.error('Error during the request:', error.message);
+                }
+        }
+        get_email()
+    }
+
   }, [property_id]);
 
   return (
@@ -98,7 +128,7 @@ const RentViewer = () => {
                 {paymentView === "interact" && (
                   <div className="align-interact-payments">
                     <div className="interac-dk-selection">
-                      <InteractCopyUserInfo label="Email" value={paymentEmail} />
+                      <InteractCopyUserInfo label="Email" value={eTransferEmail} />
                       <p>Then select your vendor below.</p>
                       <BankGrid />
                     </div>
