@@ -1,0 +1,82 @@
+#map-container {
+    height: 400px;
+    /* Or 100vh for full screen */
+    width: 100%;
+    margin-top: 30px;
+    border-radius: 10px;
+}
+
+@media(max-width: 600px) {
+    .sidebar-mobile-display {
+        display: none;
+    }
+
+    .mobile-map-position {
+        left: 0;
+        top: 0;
+        width: 100% !important;
+        height: 100%;
+    }
+
+    .mobile-map-position-canvas-container {
+        height: 100%;
+        width: 100%;
+    }
+
+    .canvasMobileSize {
+        width: 100% !important;
+    }
+
+    /* .mobile-canvas-margin-top{
+    margin-top: -57px;
+} */
+
+    .mobileInformaitonContainer {
+        background-color: rgba(255, 255, 255, 0.74);
+        width: 100%;
+        position: absolute;
+        z-index: 999;
+        bottom: 0px;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+        transition: height 0.8s ease-in-out, transform 0.8s ease-in-out;
+        overflow: hidden;
+    }
+
+    .mobileInformaitonContainer.collapsed {
+        background-color: white;
+        height: 30px;
+        transform: translateY(0);
+    }
+
+    .mobileInformaitonContainer.expanded {
+        height: 400px;
+        /* transform: translateY(0); */
+    }
+
+    .mobile-vendor-header {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .collapse-tab {
+        position: absolute;
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 40px;
+        height: 5px;
+        background-color: #9ca3af;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: background-color 0.9s ease;
+    }
+
+    .collapse-tab:hover {
+        background-color: #6b7280;
+    }
+
+    .mobile-content {
+        padding: 30px 20px 20px 20px;
+    }
+}

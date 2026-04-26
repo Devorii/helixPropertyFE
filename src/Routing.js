@@ -10,6 +10,7 @@ import TransactionExpenses from './Dashboard/pages/Transactions/expenses/expense
 import ExpenseViewer from './Dashboard/pages/Transactions/expenses/expenseView';
 import PayoutViewer from './Dashboard/pages/Transactions/payouts/payout';
 import RentViewer from './Dashboard/pages/rent/rent';
+import Vendors from './Dashboard/pages/vendors/vendors';
 import { loadConnectAndInitialize } from '@stripe/connect-js';
 import { ConnectComponentsProvider } from "@stripe/react-connect-js";
 import { EmbeddedCheckoutProvider } from '@stripe/react-stripe-js';
@@ -104,6 +105,7 @@ const Routing = () => {
             <Route path='/expense-view' element={<ExpenseViewer />} />
             <Route path='/payout-view' element={<PayoutViewer />} />
             <Route path="/rent-view" element={<RentViewer />} />
+            <Route path="/vendor-view" element={<Vendors />} />
           </Routes>
         </StripeProvider>
       </BrowserRouter>

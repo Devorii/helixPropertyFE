@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import PendingActionsIcon from '@mui/icons-material/PendingActions';
 // import darklogo  from '../../../artifacts/dark-logo.png';
-import darklogo from '../../../artifacts/logo-dark.svg';
+import darklogo from '../../../artifacts/logo.svg';
 import ForwardToInboxIcon from '@mui/icons-material/ForwardToInbox';
 import SignOutBtn from './../../../artifacts/Signout.svg'
 import { SimpleTreeView } from '@mui/x-tree-view/SimpleTreeView';
@@ -45,6 +45,10 @@ const Sidebar = () => {
   }
   const navigateToRentPayment = () => {
     nav('/rent-view')
+  }
+
+  const navigateToVendors = () => {
+    nav('/vendor-view')
   }
 
   const makeStripeAccount = () => {
@@ -202,7 +206,7 @@ const Sidebar = () => {
 
               <Box style={{marginTop:'20px'}}>
                 <SimpleTreeView>
-                  <TreeItem itemId="grid-Info1" label="Ticket Overview" onClick={navigateToHome} />
+                  <TreeItem itemId="grid-Info1" label="Tickets" onClick={navigateToHome} />
                   <TreeItem itemId="grid" label="Financials">
                     <TreeItem itemId="grid-Info" label="Rent Payment" onClick={navigateToRentPayment} />
                   </TreeItem>
@@ -232,9 +236,10 @@ const Sidebar = () => {
           </a> */}
               <Box>
                 <SimpleTreeView>
-                  <TreeItem itemId="grid-Info1" label="Ticket Overview" onClick={navigateToHome} />
+                  <TreeItem itemId="grid-Info1" label="Tickets" onClick={navigateToHome} />
                   <TreeItem itemId="grid" label="Contacts">
-                    <TreeItem itemId="grid-Info3" label="Tenants Info" onClick={navigateToContractors} />
+                    <TreeItem itemId="grid-Info3" label="Tenants" onClick={navigateToContractors} />
+                    <TreeItem itemId="grid-Info2" label="Vendors" onClick={navigateToVendors} />
                     {/* <TreeItem itemId="grid-contractors-info" label="Contractors Info"/> */}
                   </TreeItem>
                     <TreeItem itemId="grid5" label="Transactions">

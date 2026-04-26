@@ -1,0 +1,58 @@
+
+.slider-container{
+    display: none;
+
+}
+@media (max-width: 600px){
+    .mobile-slide{
+        width: 100%;
+        border-radius: 10px;
+        
+    }
+    .slider-container{
+        display: block;
+        width: 100%;
+    }
+    .mobile-img-swiper-container{
+        display: flex;
+        margin-top: 0px;
+
+    }
+    .swipeIcon{
+        background-color: black;
+        padding: 5px;
+        border-radius: 3px;
+        position: absolute;
+        bottom: 10px;
+        color: white;
+        right: 10px;
+    }
+
+    .vndr-card-btn{
+        padding: 5px 15px 5px 15px;
+        margin-top: 0px;
+    }
+.card-soft {
+    width: 100%;
+    background-color: #ffffff;
+    border-radius: 20px;
+    padding: 32px;
+    box-shadow: 8px 8px 16px rgba(163, 177, 198, 0.3), 
+                -8px -8px 16px rgba(255, 255, 255, 0.7);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: none;
+}
+
+.card-soft:hover {
+    box-shadow: 12px 12px 24px rgba(163, 177, 198, 0.4), 
+                -12px -12px 24px rgba(255, 255, 255, 0.8);
+    transform: translateY(-4px);
+}
+.vendor-name{
+    font-size: 20px;
+    line-height: 27px;
+}
+.vText{
+    font-size: 13px;
+}
+}
