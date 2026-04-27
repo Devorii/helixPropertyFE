@@ -20,9 +20,6 @@ FROM node:18-alpine
 
 WORKDIR /app
 
-# Install dumb-init to handle signals properly
-RUN apk add --no-cache dumb-init
-
 # Install serve to run the application
 RUN npm install -g serve
 
@@ -43,9 +40,6 @@ HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
 # Add metadata labels
 LABEL maintainer="info@devorii.com"
 LABEL version="1.0"
-
-# Use dumb-init to handle signals
-ENTRYPOINT ["/usr/sbin/dumb-init", "--"]
 
 # Start the application
 CMD ["serve", "-s", "build", "-l", "3000"]

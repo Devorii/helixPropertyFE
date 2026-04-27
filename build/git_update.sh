@@ -62,6 +62,6 @@ else
     echo "Current commit already tagged with $NEEDS_TAG. No new tag created."
 fi
 
-echo ::set-output name=git-tag::$NEW_TAG
+echo "git-tag=$NEW_TAG" >> $GITHUB_OUTPUT
 
 exit 0
