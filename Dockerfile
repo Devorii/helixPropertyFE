@@ -45,7 +45,7 @@ LABEL maintainer="info@devorii.com"
 LABEL version="1.0"
 
 # Use dumb-init to handle signals
-ENTRYPOINT ["/sbin/dumb-init", "--"]
+ENTRYPOINT ["/usr/sbin/dumb-init", "--"]
 
 # Start the application
 CMD ["serve", "-s", "build", "-l", "3000"]
