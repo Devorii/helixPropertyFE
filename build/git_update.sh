@@ -15,7 +15,7 @@ git fetch --prune --unshallow 2>/dev/null
 CURRENT_VERSION=`git describe --abbrev=0 --tags 2>/dev/null`
 
 
-if [[ $CURRENT_VERSION == '']]
+if [[ -z $CURRENT_VERSION ]]
 then
     CURRENT_VERSION='v0.1.0'
 fi
@@ -29,7 +29,7 @@ VNUMB1=${CURRENT_VERSION_PARTS[0]}
 VNUMB2=${CURRENT_VERSION_PARTS[1]}
 VNUMB3=${CURRENT_VERSION_PARTS[2]}
 
-if [[ $VERSION =='major']]
+if [[ $VERSION == 'major' ]]
 then
     VNUMB1=$((VNUMB1 + 1))
     VNUMB2=0
