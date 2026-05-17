@@ -1,0 +1,37 @@
+{
+  "files": {
+    "main.css": "./static/css/main.a610bcba.css",
+    "main.js": "./static/js/main.0af65a38.js",
+    "static/js/488.761256dd.chunk.js": "./static/js/488.761256dd.chunk.js",
+    "static/media/mastercard.png": "./static/media/mastercard.73dc776363865422c5ce.png",
+    "static/media/nutmeg.gif": "./static/media/nutmeg.d90b8dad85238b859ea0.gif",
+    "static/media/nbc.png": "./static/media/nbc.7627381a92ca6c55716d.png",
+    "static/media/cibc.png": "./static/media/cibc.feeb2a50cccb968e83db.png",
+    "static/media/3dPayment.png": "./static/media/3dPayment.0e32496601048f07a4d1.png",
+    "static/media/rbc.png": "./static/media/rbc.6cb211e4c24ba6261c60.png",
+    "static/media/tang.png": "./static/media/tang.1a55f65e79ed16ac3dd5.png",
+    "static/media/desj.png": "./static/media/desj.2666de22b719cd1083bf.png",
+    "static/media/mainFloor.svg": "./static/media/mainFloor.06bf38dafec7141b56c8089a5dce022e.svg",
+    "static/media/interac.png": "./static/media/interac.5504c4582e359dffc87c.png",
+    "static/media/bmo.png": "./static/media/bmo.b374d98f7aa2a31cc6e4.png",
+    "static/media/SigninTenant.svg": "./static/media/SigninTenant.e9d6a3dd7c55302def7b7f3d4d0c9c65.svg",
+    "static/media/logo.svg": "./static/media/logo.0a59994ed6f1c37985b7f9aa94d3f957.svg",
+    "static/media/officialBackSVG.svg": "./static/media/officialBackSVG.a3c1a55f63ad751fef52f1bd941f4816.svg",
+    "static/media/Signin.svg": "./static/media/Signin.b4d077f66ac7cec37f79f06ce2491de2.svg",
+    "static/media/officialReOpen.svg": "./static/media/officialReOpen.bf36bd35ccf4e3fafee5ed04becd1687.svg",
+    "static/media/closed.svg": "./static/media/closed.2bd4434616d29b29b1ffdec42830d0d2.svg",
+    "static/media/Signout.svg": "./static/media/Signout.521fe2ff274072201cc6c66178747bce.svg",
+    "static/media/scotia.svg": "./static/media/scotia.9c20ae787b65a8168a453af03ff58fc0.svg",
+    "static/media/simplii.svg": "./static/media/simplii.4702692b0fc058768a50c6eecc5fee0e.svg",
+    "index.html": "./index.html",
+    "static/media/maPin.svg": "./static/media/maPin.fcf8e23952881a3f51e9e03f673534bb.svg",
+    "static/media/red-pin.svg": "./static/media/red-pin.fac173929fc47e83b273a8175e2384dc.svg",
+    "main.a610bcba.css.map": "./static/css/main.a610bcba.css.map",
+    "main.0af65a38.js.map": "./static/js/main.0af65a38.js.map",
+    "488.761256dd.chunk.js.map": "./static/js/488.761256dd.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a610bcba.css",
+    "static/js/main.0af65a38.js"
+  ]
+}
