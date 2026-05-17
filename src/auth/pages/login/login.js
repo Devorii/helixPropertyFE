@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import "./login.css";
 import React from 'react';
+import { API_BASE, OWNER_ACC, TENANT_ACC } from '../../../config/runtimeEnv';
 const LoginPage = () => {
     const [showLogin, setShowLogin] = useState(true);
     const [popUpErrorState, setPopUpErrorState] = useState(false)
@@ -15,7 +16,7 @@ const LoginPage = () => {
     const navigateTo = useNavigate();
     const validateHome = async (token) => {
         try {
-          const response = await fetch(`${process.env.REACT_APP_HELIX_API}/admin/validate-home`, {
+          const response = await fetch(`${API_BASE}/admin/validate-home`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -70,7 +71,7 @@ const LoginPage = () => {
 
         const run_signin = async () => {
             try {
-                const response = await fetch(`${process.env.REACT_APP_HELIX_API}/admin/login`, {
+                const response = await fetch(`${API_BASE}/admin/login`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -114,7 +115,7 @@ const LoginPage = () => {
     // Function to handle sign in as owner
     const signInAsOwner = (values) => {
         localStorage.setItem('userStatus', 'OW1')
-        values["account"] = process.env.REACT_APP_OWNER_ACC
+        values["account"] = OWNER_ACC
         signIn(values)
 
     };
@@ -122,7 +123,7 @@ const LoginPage = () => {
     // Function to handle sign in as tenant
     const signInAsTenant = (values) => {
         localStorage.setItem('userStatus', 'TE1')
-        values["account"] = process.env.REACT_APP_TENANT_ACC
+        values["account"] = TENANT_ACC
         signIn(values)
 
     };

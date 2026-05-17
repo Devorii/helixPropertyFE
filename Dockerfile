@@ -25,6 +25,9 @@ RUN npm install -g serve
 
 # Copy built app from build stage
 COPY --from=build /app/build ./build
+COPY entrypoint.sh ./entrypoint.sh
+
+RUN chmod +x ./entrypoint.sh
 
 # Create non-root user for security
 RUN addgroup -g 1001 -S nodejs && adduser -S nodejs -u 1001
@@ -42,5 +45,6 @@ LABEL maintainer="info@devorii.com"
 LABEL version="1.0"
 
 # Start the application
+ENTRYPOINT ["/app/entrypoint.sh"]
 CMD ["serve", "-s", "./build", "-l", "3000"]
 
