@@ -43,3 +43,4 @@ LABEL version="1.0"
 
 # Start the application
 CMD ["serve", "-s", "./build", "-l", "3000"]
+
