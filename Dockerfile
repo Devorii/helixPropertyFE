@@ -24,7 +24,7 @@ WORKDIR /app
 RUN npm install -g serve
 
 # Copy built app from build stage
-COPY --from=build /app/build ./
+COPY --from=build /app/build ./build
 
 # Create non-root user for security
 RUN addgroup -g 1001 -S nodejs && adduser -S nodejs -u 1001
@@ -42,4 +42,4 @@ LABEL maintainer="info@devorii.com"
 LABEL version="1.0"
 
 # Start the application
-CMD ["serve", "-s", ".", "-l", "3000"]
+CMD ["serve", "-s", "./build", "-l", "3000"]
