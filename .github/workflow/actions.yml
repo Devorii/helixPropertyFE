@@ -79,7 +79,7 @@ jobs:
             --build-arg REACT_APP_STRIPE_PUBLISHED_KEY="$REACT_APP_STRIPE_PUBLISHED_KEY" \
             --build-arg REACT_APP_TENANT_ACC="$REACT_APP_TENANT_ACC" \
             --build-arg REACT_APP_THE_COLOR="$REACT_APP_THE_COLOR" \
-          --no-cache -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+            --no-cache -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
 
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
