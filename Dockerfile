@@ -41,7 +41,6 @@ RUN npm install -g serve
 # Copy built app from build stage
 COPY --from=build /app/build ./build
 
-
 # Create non-root user for security
 RUN addgroup -g 1001 -S nodejs && adduser -S nodejs -u 1001
 USER nodejs
