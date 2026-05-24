@@ -18,21 +18,19 @@ import CancelIcon from '@mui/icons-material/Cancel';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import { useNavigate } from 'react-router-dom';
 
-const Datepicker = ({ field, form }) => {
+const Datepicker = ({ field, form, className }) => {
   const value = field.value || null;
 
   return (
     <DatePicker
-      className='dt-picker'
+      className={className}
       value={value}
       onChange={(date) => {
         form.setFieldValue(field.name, date);
       }}
       slotProps={{
         textField: {
-          InputProps: {
-            sx: { height: "36px" },
-          },
+          sx: { width: "160px", height: "36px" },
         },
       }}
     />
@@ -244,7 +242,7 @@ const ExpenseForm = () => {
             // Check if the response status is 200 OK
             if (response.ok) {
               console.log('Submission successful:', payload);
-              window.location.reload()
+              // window.location.reload()
 
             }
             // Handle other non-200 responses (optional)
@@ -270,7 +268,7 @@ const ExpenseForm = () => {
             <div className='formHeader'>
               <div className='form-header'>
                 <div>
-                  <h1>Activity</h1>
+                  <h2 style={{ color: "rgb(231, 109, 91)", marginBottom: "10px" }}>Create Expense Report</h2>
                 </div>
                 <div className='save-btn-container'>
                   <>
@@ -306,7 +304,7 @@ const ExpenseForm = () => {
                     {({ field, form }) => (
                       <select
                         {...field} // this binds Formik value and onChange
-                        style={{ width: "100%", padding: "8px" }}
+                        className="fixed-width-field"
                         onChange={(e) => {
                           const categoryId = e.target.value;
 
@@ -333,9 +331,8 @@ const ExpenseForm = () => {
                 <div className='fieldContainer marginContainer'>
                   <label htmlFor='vendorSelect'>Choose a Vendor</label>
                   <Field as="select"
-                    className="vendorSelect"
+                    className="vendorSelect fixed-width-field"
                     name="vendorSelect"
-                    style={{ width: "140px", padding: "8px" }}
                   >
                     <option value="">--</option>
                     {
@@ -352,9 +349,8 @@ const ExpenseForm = () => {
                 <div className='fieldContainer marginContainer'>
                   <label htmlFor='vendorSelect'>Currency</label>
                   <Field as="select"
-                    className="vendorSelect"
+                    className="vendorSelect fixed-width-field"
                     name="currency"
-                    style={{ width: "140px", padding: "8px" }}
                   >
                     <option value="">--</option>
                     {
@@ -369,10 +365,9 @@ const ExpenseForm = () => {
                 <div className='fieldContainer marginContainer'>
                   <label htmlFor='epx-date'>Due date</label>
                   <Field
-                    className="exp-date"
+                    className="exp-date fixed-width-field"
                     name="Date"
                     component={Datepicker}
-                    style={{ width: "140px", padding: "8px" }}
                   >
                   </Field>
                 </div>
@@ -385,18 +380,17 @@ const ExpenseForm = () => {
                   <label htmlFor='poso'>P.O/S.O</label>
                   <Field
                     as="input"
-                    className="poso"
+                    className="poso fixed-width-field"
                     name="poso"
-                    style={{ width: "140px", padding: "8px" }}
                   >
                   </Field>
                 </div>
                 <div className='fieldContainer marginContainer'>
                   <label htmlFor='billnum'>Bill #</label>
                   <Field
-                    className="billnum"
+                    as="input"
+                    className="billnum fixed-width-field"
                     name="billnum"
-                    style={{ width: "140px", padding: "8px" }}
                   >
                   </Field>
                 </div>
@@ -416,9 +410,10 @@ const ExpenseForm = () => {
 
                   <Grid className='create-exp-container adjust-item-container' container spacing={{ xs: 1, sm: 3, md: 6 }}>
                     <hr className="mobile-hr" />
+                    
                     <Grid className='mod-grid adjust-item-container' item xs={12} sm={2}>
                       <Item><strong>Item</strong></Item>
-                      <input className="input-item"
+                      <input className="input-item adjust-padding-items"
                         type='text' name="item"
                         placeholder="Create an Item"
                         value={item.item || ''}
@@ -448,7 +443,7 @@ const ExpenseForm = () => {
                     <Grid className='rm-mobile mod-grid adjust-item-container' item sm={1}>
                       <Item><strong>Quantity</strong></Item>
                       <input
-                        className="input-item"
+                        className="input-item adjust-padding-items"
                         type='number'
                         name="quantity"
                         min="0"
@@ -472,7 +467,7 @@ const ExpenseForm = () => {
                     <Grid className='rm-mobile mod-grid adjust-item-container' item sm={1}>
                       <Item><strong>Price</strong></Item>
                       <input
-                        className="input-item"
+                        className="input-item adjust-padding-items fixed-width-field"
                         type="number"
                         min="0.00"
                         max="10000.00"
@@ -555,13 +550,13 @@ const ExpenseForm = () => {
                 <p>SubTotal:</p>
                 <p className='total-input-label'>Tax %:</p>
                 <p className='total-input-label'>Total:</p>
-                <p style={{ marginTop: "27px" }}>Total Paid:</p>
-                <p style={{ marginTop: "20px" }}>Amount Due:</p>
+                <p className='total-input-label'>Total Paid:</p>
+                <p className='total-input-label'>Amount Due:</p>
               </div>
               <div className='r-content'>
                 <p>${finalCalcObj.subtotal.toFixed(2)}</p>
                 <input
-                  className="input-item tax-input"
+                  className="input-item tax-input balance-space fixed-width-field"
                   type='number'
                   name="tax"
                   placeholder="0"
@@ -573,9 +568,9 @@ const ExpenseForm = () => {
                     setFinalCalcObj(prev => ({ ...prev, tax: e.target.value }))
                   }}
                 ></input>
-                <p>${total.toFixed(2)}</p>
+                <p className="balance-space">${total.toFixed(2)}</p>
                 <input
-                  className="input-item tax-input"
+                  className="input-item tax-input balance-space fixed-width-field"
                   type='number'
                   name="totalPaid"
                   placeholder="0.00"
@@ -588,7 +583,7 @@ const ExpenseForm = () => {
                   }}
                 />
 
-                <p>${amountDue.toFixed(2)}</p>
+                <p className="balance-space">${amountDue.toFixed(2)}</p>
               </div>
             </div>
 

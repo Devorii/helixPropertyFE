@@ -1,6 +1,22 @@
+.balance-space {
+    margin-top: 28px !important;
+}
+
+.adjust-padding-items{
+    padding: 8px !important;
+}
+
 .fieldContainer {
     display: flex;
     flex-direction: column;
+}
+
+.fixed-width-field {
+    width: 160px !important;
+    max-width: 160px !important;
+    min-width: 160px !important;
+    /* padding: 8px !important; */
+    box-sizing: border-box !important;
 }
 
 .marginContainer {
@@ -51,8 +67,11 @@
 .input-item {
     padding-left: 10px;
     padding-top: 10px;
-    height: 20px !important;
-    max-height: 25px !important;
+}
+
+.input-item.fixed-width-field {
+    height: 40px !important;
+    max-height: 40px !important;
 }
 
 .input-item.desc {
@@ -114,12 +133,13 @@
 
 @media (max-width: 600px) {
     .AddnewItem-btm {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 10px 10px 10px;
-    background-color: rgb(180 82 82);
-}
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 10px 10px 10px;
+        background-color: rgb(180 82 82);
+    }
+
     .mobile-hr {
         display: block;
     }
@@ -132,19 +152,37 @@
         display: flex;
         width: 100%;
         flex-direction: column;
+        padding: 0 10px;
+        box-sizing: border-box;
+    }
+
+    .fieldContainer {
+        width: 100% !important;
+        margin-bottom: 12px !important;
+        box-sizing: border-box;
     }
 
     .fieldContainer.marginContainer {
         margin-left: 0px !important;
         width: 100% !important;
+        margin-bottom: 12px !important;
+    }
+
+    .fixed-width-field {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 100% !important;
+        box-sizing: border-box !important;
     }
 
     .poso {
-        width: 95% !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
     }
 
     .billnum {
-        width: 95% !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
     }
 
     .input-item {
@@ -153,6 +191,17 @@
         max-height: 25px !important;
         max-width: 100% !important;
         width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    input[name="quantity"] {
+        height: 40px !important;
+        max-height: 40px !important;
+    }
+
+    input[name="item"] {
+        height: 40px !important;
+        max-height: 40px !important;
     }
 
     .input-item.desc {
@@ -168,15 +217,35 @@
     .adjust-item-container {
         display: block !important;
         /* stack all grid items */
-        width: 98% !important;
-        margin-bottom: 3px;
+        width: 100% !important;
+        padding: 0 4px !important;
+        margin-bottom: 12px;
+        box-sizing: border-box !important;
         /* optional spacing between items */
     }
+
     .form-header {
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-margin-bottom: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        margin-bottom: 20px;
+    }
 }
 
+.couple-delete-amount {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    margin-top: 10px;
+}
+
+.total-input-label {
+    margin-top: 35px !important;
+}
+.totalContainer {
+    max-width: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 45px;
 }
