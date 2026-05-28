@@ -35,8 +35,8 @@ const VendorMap = () => {
 
         mapRef.current = new mapboxgl.Map({
             container: mapContainerRef.current,
-            center: [-79.3832, 43.6532],
-            zoom: 10.12,
+            center: [-81.5000, 40.0000],
+            zoom: 5,
             config: {
                 basemap: { theme: 'faded' }
             }

@@ -55,6 +55,9 @@ const TopNav = () => {
     const navigateToContractors = () => {
         nav('/contractors-information')
     }
+    const navigateToVendors = () => {
+        nav('/vendor-view')
+    }
     const navigateToExpenses = () => {
         nav('/transaction-expenses')
     }
@@ -212,8 +215,8 @@ const TopNav = () => {
                                                 <SimpleTreeView>
                                                     <TreeItem itemId="grid-Info72" label="Home" onClick={homeNav} />
                                                     <TreeItem itemId="grid1" label="Contacts">
-                                                        <TreeItem itemId="grid-Info2" label="Tenants Info" onClick={navigateToContractors} />
-                                                        {/* <TreeItem itemId="grid-contractors-info" label="Contractors Info"/> */}
+                                                        <TreeItem itemId="grid-Info2" label="Tenants" onClick={navigateToContractors} />
+                                                        <TreeItem itemId="grid-contractors-info" onClick={navigateToVendors} label="Vendors"/>
                                                     </TreeItem>
                                                     <TreeItem itemId="grid" label="Transactions">
                                                         <TreeItem itemId="grid-Inf4o" label="Expenses" onClick={navigateToExpenses} />
